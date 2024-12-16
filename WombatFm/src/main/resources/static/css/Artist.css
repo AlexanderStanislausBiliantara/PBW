@@ -1,0 +1,248 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: white;
+}
+
+/* Scroll-Bar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+  
+::-webkit-scrollbar-track {
+    background: #121212; 
+}
+   
+::-webkit-scrollbar-thumb {
+    background: #2a2a2a; 
+}
+  
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+.header-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+    overflow: hidden;
+}
+
+div p{
+    margin-left: 100px;
+    overflow: hidden;
+}
+
+div h3{
+    overflow: hidden;
+}
+
+.search-section {
+    display: flex;
+    align-items: center;
+    margin: 0 20px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #333;
+    padding: 5px 10px;
+    border-radius: 20px;
+    color: #888;
+}
+
+.search-icon {
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+}
+
+.search-bar input {
+    flex: none;
+    width: 300px; 
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 14px;
+}
+
+.icon-right img {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+}
+
+.right-section {
+    align-items: center;
+    overflow:unset;
+}
+
+.addSetlist {
+    background-color: white;
+    color: black;
+    padding: 5px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.login {
+    background-color: white;
+    color: black;
+    padding: 5px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.login:hover {
+    background-color: #ddd;
+}
+
+.addSetlist:hover {
+    background-color: #ddd;
+}
+
+
+
+.artist-menu {
+    padding: 20px;
+}
+
+.artist-menu h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.artist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.artist-card {
+    text-align: center;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    padding: 10px;
+    transition: transform 0.3s ease;
+}
+
+.artist-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.artist-card:hover {
+    transform: scale(1.05);
+}
+
+.artist-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.artist-role {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #aaa;
+}
+
+footer .companydescription{
+    margin-left: 100px;
+    margin-right: 100px;
+    color: grey;
+    text-align: center;
+}
+
+footer a{
+    color: grey;
+}
+
+footer p{
+    color: grey;
+    text-align: center;
+}
+footer hr{
+    color: grey;
+    opacity: 50%;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+footer img{
+    display: flex;
+    margin-top: 25px;
+    height: 81px;
+    width: 81px;
+    justify-self: center;
+}
+
+footer a img {
+    height: 30px;
+    width: 30px;
+}
+
+.footer-container{
+    display: flex;
+    color: grey;
+}
+
+.footer-container div{
+    margin-left: 45px;
+}
+
+footer .socialmedia{
+    
+}
+
+footer .socialmedia .image-container{
+    display: flex;
+    margin-top: -30px;
+    margin-left: -5px;
+}
+
+footer .footer-container .information, .socialmedia{
+    justify-self: right;
+}
+
+.information{
+    padding-left: 160px;
+}
+
+.socialmedia{
+    padding-left: 400px;
+}
+
+.address-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.socialmedia{
+    justify-self: right;
+}

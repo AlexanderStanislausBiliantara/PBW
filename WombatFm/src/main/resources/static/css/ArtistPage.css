@@ -1,0 +1,400 @@
+/* Global Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(180deg, #295f2b, #121212);
+    color: white;
+    min-height: 100vh;
+}
+
+/* Scroll-Bar */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #121212; 
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background: #2a2a2a; 
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
+/*header*/
+.header-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+    overflow: hidden;
+}
+
+div p{
+    margin-left: 100px;
+    overflow: hidden;
+}
+
+div h3{
+    overflow: hidden;
+}
+
+.search-section {
+    display: flex;
+    align-items: center;
+    margin: 0 20px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #333;
+    padding: 5px 10px;
+    border-radius: 20px;
+    color: #888;
+}
+
+.search-icon {
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+}
+
+.search-bar input {
+    flex: none;
+    width: 300px; 
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 14px;
+}
+
+.icon-right img {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+}
+
+.right-section {
+    align-items: center;
+    overflow:unset;
+}
+
+.addSetlist {
+    background-color: white;
+    color: black;
+    padding: 5px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.login {
+    background-color: white;
+    color: black;
+    padding: 5px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.login:hover {
+    background-color: #ddd;
+}
+
+.addSetlist:hover {
+    background-color: #ddd;
+}
+
+.artist-page {
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Header Section */
+.artist-header {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.artist-image-container {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid white;
+}
+
+.content-section{
+    display: flex;
+}
+
+.artist-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.artist-details {
+    margin-top: 10px;
+}
+
+.artist-details h1 {
+    font-size: 28px;
+    margin: 10px 0;
+}
+
+.actions {
+    margin-top: 15px;
+}
+
+.setlist-container {
+    width: 800px;
+    margin: 0 auto;
+    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+
+.setlist-container h2 {
+    font-size: 24px;
+    color: #f1f1f1;
+    border-bottom: 2px solid #444;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.setlist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.setlist li {
+    display: flex;
+    align-items: center;
+    padding: 15px 10px;
+    border-bottom: 1px solid #444;
+    transition: background-color 0.3s;
+}
+
+.setlist li:hover {
+    background-color: #333;
+}
+
+.setlist .date {
+    margin-right: 15px;
+    text-align: center;
+    color: #bbb;
+    font-size: 14px;
+}
+
+.setlist .date .month {
+    font-weight: bold;
+    color: #f39c12;
+}
+
+.setlist .date .day {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.setlist .date .year {
+    font-size: 12px;
+}
+
+.setlist .info {
+    flex: 1;
+}
+
+.setlist .info .artist {
+    color: #1db954;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.setlist .info .artist:hover {
+    text-decoration: underline;
+}
+
+.setlist .info p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #ddd;
+}
+
+.event-container {
+    max-width: 300px;
+    margin: 0 auto;
+    background-color: transparent; 
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    padding: 20px;
+}
+
+.event-container h2 {
+    font-size: 24px;
+    color: white;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #444;
+    padding-bottom: 10px;
+}
+
+.event-container .setlist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.event-container .setlist li {
+    display: flex;
+    align-items: center;
+    padding: 15px 10px;
+    border-bottom: 1px solid #444;
+    transition: background-color 0.3s;
+}
+
+.event-container .setlist li:hover {
+    background-color: #333;
+    cursor: pointer;
+}
+
+.event-container .date {
+    text-align: center;
+    margin-right: 20px;
+    color: #ff9800;
+    font-size: 14px;
+    width: 60px;
+}
+
+.event-container .date .month {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.event-container .date .day {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.event-container .date .year {
+    font-size: 12px;
+}
+
+.event-container .info {
+    flex: 1;
+}
+
+.event-container .artist {
+    font-size: 16px;
+    color: #4caf50;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.event-container .artist:hover {
+    text-decoration: underline;
+}
+
+.event-container .info p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #bbb;
+}
+
+footer .companydescription{
+    margin-left: 100px;
+    margin-right: 100px;
+    color: grey;
+    text-align: center;
+}
+
+footer a{
+    color: grey;
+}
+
+footer p{
+    color: grey;
+    text-align: center;
+}
+footer hr{
+    color: grey;
+    opacity: 50%;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+footer img{
+    display: flex;
+    margin-top: 25px;
+    height: 81px;
+    width: 81px;
+    justify-self: center;
+}
+
+footer a img {
+    height: 30px;
+    width: 30px;
+}
+
+.footer-container{
+    display: flex;
+    color: grey;
+}
+
+.footer-container div{
+    margin-left: 45px;
+}
+
+footer .socialmedia{
+    
+}
+
+footer .socialmedia .image-container{
+    display: flex;
+    margin-top: -30px;
+    margin-left: -5px;
+}
+
+footer .footer-container .information, .socialmedia{
+    justify-self: right;
+}
+
+.information{
+    padding-left: 160px;
+}
+
+.socialmedia{
+    padding-left: 400px;
+}
+
+.address-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.socialmedia{
+    justify-self: right;
+}

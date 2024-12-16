@@ -1,0 +1,255 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+/* Scroll-Bar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+  
+::-webkit-scrollbar-track {
+    background: #121212; 
+}
+   
+::-webkit-scrollbar-thumb {
+    background: #2a2a2a; 
+}
+  
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+/*Header Section*/
+.header-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+    overflow: hidden;
+}
+
+div p{
+    margin-left: 100px;
+    overflow: hidden;
+}
+
+div h3{
+    overflow: hidden;
+}
+
+.search-section {
+    display: flex;
+    align-items: center;
+    margin: 0 20px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #333;
+    padding: 5px 10px;
+    border-radius: 20px;
+    color: #888;
+}
+
+.search-icon {
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+}
+
+.search-bar input {
+    flex: none;
+    width: 300px; 
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 14px;
+}
+
+.icon-right img {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+}
+
+.right-section {
+    align-items: center;
+    overflow:unset;
+}
+
+.addSetlist {
+    background-color: white;
+    color: black;
+    padding: 5px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.login {
+    background-color: white;
+    color: black;
+    padding: 5px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.login:hover {
+    background-color: #ddd;
+}
+
+.addSetlist:hover {
+    background-color: #ddd;
+}
+
+
+
+.artist-name {
+    padding: 20px;
+    text-align: left;
+}
+
+.artist-name h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+.container {
+    padding: 20px;
+    display: flex;
+}
+
+.setlist-info {
+    margin-bottom: 30px;
+    margin-left: 20px;
+}
+
+.setlist-info h2 {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+}
+
+.setlist-info p {
+    margin: 5px 0;
+}
+
+.song-section h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.song-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 800px;
+}
+
+.song-list li {
+    background: #282828;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.song-list li:hover {
+    background: white;
+    color: #121212;
+}
+
+footer .companydescription{
+    margin-left: 100px;
+    margin-right: 100px;
+    color: grey;
+    text-align: center;
+}
+
+footer a{
+    color: grey;
+}
+
+footer p{
+    color: grey;
+    text-align: center;
+}
+footer hr{
+    color: grey;
+    opacity: 50%;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+footer img{
+    display: flex;
+    margin-top: 25px;
+    height: 81px;
+    width: 81px;
+    justify-self: center;
+}
+
+footer a img {
+    height: 30px;
+    width: 30px;
+}
+
+.footer-container{
+    display: flex;
+    color: grey;
+}
+
+.footer-container div{
+    margin-left: 45px;
+}
+
+footer .socialmedia{
+    
+}
+
+footer .socialmedia .image-container{
+    display: flex;
+    margin-top: -30px;
+    margin-left: -5px;
+}
+
+footer .footer-container .information, .socialmedia{
+    justify-self: right;
+}
+
+.information{
+    padding-left: 160px;
+}
+
+.socialmedia{
+    padding-left: 400px;
+}
+
+.address-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.socialmedia{
+    justify-self: right;
+}
