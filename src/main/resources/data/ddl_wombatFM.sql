@@ -1,20 +1,20 @@
 --DROP TABLE--
-DROP TABLE IF EXISTS shows
-DROP TABLE IF EXISTS artist
-DROP TABLE IF EXISTS gallery
-DROP TABLE IF EXISTS songs
-DROP TABLE IF EXISTS setlists
-DROP TABLE IF EXISTS review
-DROP TABLE IF EXISTS users
+DROP TABLE IF EXISTS shows;
+DROP TABLE IF EXISTS artist;
+DROP TABLE IF EXISTS gallery;
+DROP TABLE IF EXISTS songs;
+DROP TABLE IF EXISTS setlists;
+DROP TABLE IF EXISTS review;
+DROP TABLE IF EXISTS users;
 
 --CREATE TABLE--
-CREATE TYPE ROLES AS ENUM ('admin', 'member')
+CREATE TYPE ROLES AS ENUM ('admin', 'member');
 CREATE TABLE users (
 	user_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 	username VARCHAR(255) NOT NULL,
 	password VARCHAR(255) NOT NULL,
 	role ROLES NOT NULL DEFAULT 'member'
-)
+);
 
 CREATE TABLE shows (
 	show_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -23,38 +23,38 @@ CREATE TABLE shows (
 	show_date DATE NOT NULL,
 	start_time TIME NOT NULL,
 	duration INT NOT NULL
-)
+);
 
 CREATE TABLE artists (
 	artist_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 	name VARCHAR(255) NOT NULL
-)
+);
 
 CREATE TABLE songs (
 	song_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 	title VARCHAR(255) NOT NULL
-)
+);
 
 CREATE TABLE gallery (
 	gallery_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 	url VARCHAR(255) NOT NULL
-)
+);
 
 CREATE TABLE setlist_version (
 	version_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 	show_id INT REFERENCES shows(show_id) NOT NULL,
 	acc_status BOOLEAN NOT NULL,
 	created_by INT REFERENCES users(user_id) NOT NULL
-)
+);
 
 CREATE TABLE setlists (
 	version_id INT REFERENCES setlist_version(version_id) NOT NULL,
-	artist_id INT REFERENCES artist(artist_id) NOT NULL,
+	artist_id INT REFERENCES artists(artist_id) NOT NULL,
 	song_id INT REFERENCES songs(song_id) NOT NULL,
-	PRIMARY KEY(show_id, artist_id, song_id)
-)
+	PRIMARY KEY(version_id, artist_id, song_id)
+);
 
 CREATE TABLE review (
 	review_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 	commment TEXT NOT NULL
-)
+);
