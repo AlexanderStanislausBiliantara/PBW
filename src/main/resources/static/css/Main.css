@@ -37,6 +37,12 @@ body {
     display: flex;
     align-items: center;
     overflow: hidden;
+    gap: 10px;
+}
+
+.left-section > a {
+    text-decoration: none;
+    color: whites;
 }
 
 .logo {
@@ -105,6 +111,15 @@ div h3{
     text-decoration: none;
     font-size: 14px;
     font-weight: bold;
+}
+
+.search-bar-submit-button {
+    background-color: transparent;
+    border: none;
+}
+
+.search-bar-submit-button:hover {
+    cursor: pointer;
 }
 
 .login {
