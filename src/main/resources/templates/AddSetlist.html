@@ -4,76 +4,92 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add New Setlist</title>
-  <link rel="stylesheet" href="AddSetlist.css">
+  <link rel="stylesheet" href="../static/css/AddSetlist.css">
 </head>
 <body>
   <header class="header">
-    <h1>Add New Setlist</h1>
+    <a href="Main.html">
+      <img id="logo" src="../static/Image Assets/Podcast_or_Radio_Logo-removebg-preview.png">
+    </a>
   </header>
 
-  <main class="form-container">
-    <form action="#" method="POST" class="setlist-form">
-      <div class="form-group">
-        <label for="setlist-name">Setlist Name</label>
-        <input type="text" id="setlist-name" name="setlist-name" placeholder="Enter setlist name" required>
+  <div id="container">
+    <main class="form-container">
+      <div class="text-setlist">
+        <h1>Add New Setlist</h1>
       </div>
-
-      <div class="form-group">
-        <label for="description">Description (optional)</label>
-        <textarea id="description" name="description" rows="4" placeholder="Add a brief description..."></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="concert-date">Concert Date & Time</label>
-        <input type="datetime-local" id="concert-date" name="concert-date" required>
-      </div>
-
-      <div class="form-group">
-        <label for="stadium">Stadium</label>
-        <div class="input-group">
-          <input type="text" id="stadium" name="stadium" placeholder="Search stadium" readonly required>
-          <button type="button" class="search-button" id="search-stadium">Search</button>
+      <form action="#" method="POST" class="setlist-form">
+        <div class="form-group">
+          <label for="setlist-name">Setlist Name</label>
+          <input type="text" id="setlist-name" name="setlist-name" placeholder="Enter setlist name" required>
         </div>
-      </div>
-
-      <div class="form-group">
-        <label for="city">City</label>
-        <div class="input-group">
-          <input type="text" id="city" name="city" placeholder="Search city" readonly required>
-          <button type="button" class="search-button" id="search-city">Search</button>
+        
+        <!---
+        <div class="form-group">
+          <label for="description">Description (optional)</label>
+          <textarea id="description" name="description" rows="4" placeholder="Add a brief description..."></textarea>
         </div>
-      </div>
-
-      <div class="form-group">
-        <label for="songs">Songs</label>
-        <div id="songs-container">
+        -->
+  
+        <div class="form-group">
+          <label for="concert-date">Concert Date & Time</label>
+          <input type="datetime-local" id="concert-date" name="concert-date" required>
+        </div>
+  
+        <div class="form-group">
+          <label for="stadium">Stadium</label>
           <div class="input-group">
-            <input type="text" name="songs[]" placeholder="Enter song name" required>
-            <button type="button" class="remove-song">Remove</button>
+            <input type="text" id="stadium" name="stadium" placeholder="Search stadium" readonly required>
+            <button type="button" class="search-button" id="openModal">Search</button>
           </div>
         </div>
-        <button type="button" class="add-song" id="add-song">+ Add Song</button>
-      </div>
+  
+        <div class="form-group">
+          <label for="city">City</label>
+          <div class="input-group">
+            <input type="text" id="city" name="city" placeholder="Search city" readonly required>
+            <button type="button" class="search-button" id="search-city">Search</button>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="songs">Songs</label>
+          <div id="songs-container">
+            <div class="input-group">
+              <input type="text" name="songs[]" placeholder="Enter song name" required>
+              <button type="button" class="remove-song">Remove</button>
+            </div>
+          </div>
+          <button type="button" class="add-song" id="add-song">+ Add Song</button>
+        </div>
+  
+        <div class="form-actions">
+          <button type="submit" class="submit-button">Save Setlist</button>
+          <a href="Main.html" class="reset-button">Cancel</a>
+        </div>
+      </form>
+    </main>
 
-      <div class="form-actions">
-        <button type="submit" class="submit-button">Save Setlist</button>
-        <button type="reset" class="reset-button">Cancel</button>
+    <div id="popup-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Select Stadium</h2>
+        <input type="text" id="search-field" class="search-input" placeholder="Search...">
+        <ul id="results-list" class="results-list">
+          <li>Stadium A</li>
+          <li>Stadium B</li>
+          <li>Stadium C</li>
+          <li>Stadium D</li>
+          <li>Stadium E</li>
+          <li>Stadium F</li>
+          <li>Stadium G</li>
+          <li>Stadium H</li>
+          <li>Stadium I</li>
+          <li>Stadium J</li>
+        </ul>
       </div>
-    </form>
-  </main>
-
-  <!-- Popup Modal -->
-  <div id="popup-modal" class="modal hidden">
-    <div class="modal-content">
-      <span class="close-modal">&times;</span>
-      <h2>Select Stadium or City</h2>
-      <input type="text" id="search-field" class="search-input" placeholder="Search...">
-      <ul id="results-list" class="results-list">
-        <li>Stadium A - City X</li>
-        <li>Stadium B - City Y</li>
-        <li>Stadium C - City Z</li>
-      </ul>
     </div>
+    
   </div>
   <footer>
     <img src="Image Assets/Podcast_or_Radio_Logo-removebg-preview.png" alt="">
@@ -106,6 +122,6 @@
       <p>© 2024 Property of Kelompok 2 Pemerograman Berbasis Web Kelas B</p>
 </footer>
 
-  <script src="scripts.js"></script>
+  <script src="../templates/script.js"></script>
 </body>
 </html>
