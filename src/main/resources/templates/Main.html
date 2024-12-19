@@ -6,16 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <header>
-        <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Header</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
     <header class="header-section">
         <div class="left-section">
             <img src="Image Assets/Podcast_or_Radio_Logo-removebg-preview.png" alt="Logo" class="logo">
@@ -26,8 +16,12 @@
         </div>
         <div class="search-section">
             <div class="search-bar">
-                <img src="Image Assets/icons8-search-50.png" class="search-icon">
-                <input type="text" placeholder="What do you want to play?">
+                <form th:action="{/search}" method="GET">
+                    <input type="text" placeholder="What do you want to play?">
+                    <button type="submit" class="search-bar-submit-button">
+                        <img src="Image Assets/icons8-search-50.png" class="search-icon">
+                    </button>
+                </form>
             </div>
         </div>
         <div class="right-section">

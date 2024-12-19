@@ -1,11 +1,11 @@
-package com.example.WombatFm;
+package com.example.WombatFm.Controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/member")
 public class MainController {
     
     @GetMapping
@@ -28,4 +28,8 @@ public class MainController {
         return "Event";
     }
 
+    @GetMapping("/search")
+    public String showSearchResults(@RequestParam String query, Model Model) {
+        
+    }
 }
