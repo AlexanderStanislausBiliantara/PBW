@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Setlist Page</title>
-    <link rel="stylesheet" href="Setlist.css">
+    <link rel="stylesheet" href="/css/Setlist.css">
 </head>
 <body>
     <header class="header-section">
         <div class="left-section">
-            <img src="Image Assets/Podcast_or_Radio_Logo-removebg-preview.png" alt="Logo" class="logo">
+            <img src="/Image Assets/Podcast_or_Radio_Logo-removebg-preview.png" alt="Logo" class="logo">
             <h3>Wombat.fm</h3>
             <p>Setlist</p>
             <p>Artist</p>
@@ -17,7 +17,7 @@
         </div>
         <div class="search-section">
             <div class="search-bar">
-                <img src="Image Assets/icons8-search-50.png" class="search-icon">
+                <img src="/Image Assets/icons8-search-50.png" class="search-icon">
                 <input type="text" placeholder="What do you want to play?">
             </div>
         </div>
@@ -30,25 +30,21 @@
 
     <div class="container">
         <div class="song-section">
-            <h2>NewJeans World Tour</h2>
+            <h2 th:text="${title}"></h2>
             <h2>Song List</h2>
-            <ul class="song-list">
-                <li>1. Attention</li>
-                <li>2. Super Shy</li>
-                <li>3. ETA</li>
-                <li>4. OMG</li>
-                <li>5. Ditto</li>
-                <li>6. Hype Boy</li>
-            </ul>
+            <ol class="song-list" th:each="song, iterStat  : ${songs}">
+                <li th:text="${iterStat.index+1} + '. ' + ${song}">
+                </li>
+            </ol>
         </div>
         <div class="setlist-info">
             <h2>Concert Details</h2>
-            <p><strong>Location:</strong> Tokyo Dome, Japan</p>
-            <p><strong>Date:</strong> January 5, 2024</p>
+            <p><strong>Location:</strong> <span th:text="${location}"><span></p>
+            <p><strong>Date:</strong> <span th:text="${date}"><span></p>
         </div>
     </div>
     <footer>
-        <img src="Image Assets/Podcast_or_Radio_Logo-removebg-preview.png" alt="">
+        <img src="/Image Assets/Podcast_or_Radio_Logo-removebg-preview.png" alt="">
         <p class="companydescription">Wombat.fm is a dynamic platform that connects music fans with setlists from concerts past and future. Dive into the live music experience by exploring the songs your favorite artists performed and stay in the loop for upcoming shows. Wombat.fm is where every concert memory comes alive and every future performance awaits!</p>
         <hr>
 
@@ -68,9 +64,9 @@
             <div class="socialmedia">
                 <h4>Find us</h4>
                 <div class="image-container">
-                    <a href="#"><img src="Image Assets/icons8-instagram-32.png" alt=""></a>
-                    <a href="#"><img src="Image Assets/icons8-facebook-32 (1).png" alt=""></a>
-                    <a href="#"><img src="Image Assets/icons8-twitterx-32.png" alt=""></a>
+                    <a href="#"><img src="/Image Assets/icons8-instagram-32.png" alt=""></a>
+                    <a href="#"><img src="/Image Assets/icons8-facebook-32 (1).png" alt=""></a>
+                    <a href="#"><img src="/Image Assets/icons8-twitterx-32.png" alt=""></a>
                 </div>
               </div>
         </div>
