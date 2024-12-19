@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Main.css">
+    <link rel="stylesheet" th:href="@{/css/Main.css}">
     <title>Document</title>
 </head>
 <body>
@@ -20,9 +20,9 @@
         <div class="left-section">
             <img src="Image Assets/Podcast_or_Radio_Logo-removebg-preview.png" alt="Logo" class="logo">
             <h3>Wombat.fm</h3>
-            <p>Setlist</p>
-            <p>Artist</p>
-            <p>Event</p>
+            <a th:href="@{member/setlist}">Setlist</a>
+            <a th:href="@{member/artist}">Artist</a>
+            <a th:href="@{member/event}">Event</a> <!-- belum dibikin -->    
         </div>
         <div class="search-section">
             <div class="search-bar">
