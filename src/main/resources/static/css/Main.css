@@ -90,8 +90,7 @@ div h3{
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 20px;
-    gap: 0.5rem;
+    height: 100%;
 }
 
 .see-more-container{
@@ -130,12 +129,26 @@ div h3{
 }
 
 .search-bar {
+    height: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
     background-color: #333;
     padding: 5px 10px;
     border-radius: 20px;
     color: #888;
+}
+
+.search-bar > form{
+    margin-bottom: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-bar input, .search-bar button{
+    height: 100%;
 }
 
 .search-icon {
@@ -204,6 +217,25 @@ div h3{
 
 .addSetlist:hover {
     background-color: #ddd;
+}
+
+.setlist-artist-event{
+    padding-left: 1rem;
+    display: flex;
+    width: 50%;
+    gap: 1rem;
+}
+
+.setlist-artist-event > a{
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 1rem;
+}
+
+.setlist-artist-event > a:hover{
+    background-color: rgb(101, 101, 101);
+    border-radius: 1rem;
 }
 
 /*body-section*/
@@ -552,6 +584,7 @@ footer a img {
 .footer-container div{
     margin-left: 45px;
 }
+
 
 footer .socialmedia{
     
