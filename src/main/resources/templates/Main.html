@@ -2,37 +2,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/Main.css">
+    <link rel="stylesheet" th:href="@{/css/Main.css}">
     <title>Document</title>
-</head>
-<body>
-    <header>
-        <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Header</title>
-    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header class="header-section">
         <div class="left-section">
-            <img src="../static/Image Assets/Podcast_or_Radio_Logo-removebg-preview.png" alt="Logo" class="logo">
+            <img src="Image Assets/Podcast_or_Radio_Logo-removebg-preview.png" alt="Logo" class="logo">
             <h3>Wombat.fm</h3>
-            <p>Setlist</p>
-            <p>Artist</p>
-            <p>Event</p>
+            <a th:href="@{member/setlist}">Setlist</a>
+            <a th:href="@{member/artist}">Artist</a>
+            <a th:href="@{member/event}">Event</a> <!-- belum dibikin -->    
         </div>
         <div class="search-section">
             <div class="search-bar">
-                <img src="../static/Image Assets/icons8-search-50.png" class="search-icon">
-                <input type="text" placeholder="What do you want to play?">
+                <form th:action="{/search}" method="GET">
+                    <input type="text" placeholder="What do you want to play?">
+                    <button type="submit" class="search-bar-submit-button">
+                        <img src="Image Assets/icons8-search-50.png" class="search-icon">
+                    </button>
+                </form>
             </div>
         </div>
         <div class="right-section">
-            <a href="AddSetlist.html" class="addSetlist">+Add Setlist</a>
-            <a href="Login.html" class="login">Log in</a>
+            <a href="#" class="addSetlist">+Add Setlist</a>
+            <a href="#" class="login">Log in</a>
         </div>
     </header>
 
@@ -46,19 +40,19 @@
             <hr>
             <div class="img-container">
                 <div class="container">
-                    <img src="../static/Image Assets/kanye west.webp" alt="Avatar" class="image">
+                    <img src="Image Assets/kanye west.webp" alt="Avatar" class="image">
                     <div class="overlay">Kanye West</div>
                 </div>
                 <div class="container">
-                    <img src="../static/Image Assets/New_Jeans.width-500.format-webp.webp" alt="Avatar" class="image">
+                    <img src="Image Assets/New_Jeans.width-500.format-webp.webp" alt="Avatar" class="image">
                     <div class="overlay">New Jeans</div>
                 </div>
                 <div class="container">
-                    <img src="../static/Image Assets/ed sheeran.webp" alt="Avatar" class="image">
+                    <img src="Image Assets/ed sheeran.webp" alt="Avatar" class="image">
                     <div class="overlay">ed sheeran</div>
                 </div>
                 <div class="container">
-                    <img src="../static/Image Assets/aespa.jpg" alt="Avatar" class="image">
+                    <img src="Image Assets/aespa.jpg" alt="Avatar" class="image">
                     <div class="overlay">aespa</div>
                 </div>
             </div>
