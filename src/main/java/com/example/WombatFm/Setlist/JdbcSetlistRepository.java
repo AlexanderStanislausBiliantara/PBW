@@ -2,12 +2,14 @@ package com.example.WombatFm.Setlist;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import com.example.WombatFm.Song.Song;
 
 @Repository
 public class JdbcSetlistRepository implements SetlistRepository {
@@ -15,42 +17,46 @@ public class JdbcSetlistRepository implements SetlistRepository {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public List<Setlist> findAll() {
-        String sql = "SELECT * FROM setlists";
-        List<Setlist> results = jdbcTemplate.query(sql, this::mapRowToSetlist);
-        return results;
+    public List<Song> getNewestSetlist(int setlistId) {
+        String setlistSql = "SELECT sv.version_id AS version_id " +
+                "FROM setlists s " +
+                "JOIN setlist_version sv ON s.setlist_id = sv.setlist_id " +
+                "WHERE s.show_id = ? " +
+                "ORDER BY sv.version_id DESC " +
+                "LIMIT 1";
+
+        List<Integer> versionIdResult = jdbcTemplate.query(setlistSql, this::mapRowToVersionId, setlistId);
+
+        if (versionIdResult.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        int versionId = versionIdResult.get(0);
+
+        String songsSql = "SELECT so.song_id AS song_id, so.title AS title, si.song_order AS song_order " +
+                "FROM setlist_items si " +
+                "JOIN songs so ON si.song_id = so.song_id " +
+                "WHERE si.version_id = ? " +
+                "ORDER BY si.song_order ASC";
+
+        List<Song> songs = jdbcTemplate.query(songsSql, this::mapRowToSong, versionId);
+
+        return songs;
     }
 
     @Override
-    public Optional<Setlist> findById(int idSetlist) {
-        String sql = "SELECT * FROM setlists WHERE id = ?";
-        List<Setlist> results = jdbcTemplate.query(sql, this::mapRowToSetlist, idSetlist);
-        return results.size() == 0 ? Optional.empty() : Optional.of(results.get(0));
+    public void createSetlist(int showId, int artistId) {
+        String sql = "INSERT INTO setlists (show_id, artist_id) VALUES (?, ?)";
+        jdbcTemplate.update(sql, showId, artistId);
     }
 
-    @Override
-    public Setlist save(Setlist setlist) {
-        String sql = "INSERT INTO setlists (showTitle, versionNumber, artistName, concertDate, stadium, city, songs) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, setlist.getShowTitle(), setlist.getVersionNumber(), setlist.getArtistName(),
-                setlist.getConcertDate(), setlist.getStadium(), setlist.getCity(), setlist.getSongs());
-        return setlist;
+    private Song mapRowToSong(ResultSet resultSet, int rowNum) throws SQLException {
+        Song song = new Song(resultSet.getInt("song_id"), resultSet.getString("title"));
+        song.setSongOrder(resultSet.getInt("song_order"));
+        return song;
     }
 
-    @Override
-    public void delete(Setlist setlist) {
-        String sql = "DELETE FROM setlists WHERE id = ?";
-        jdbcTemplate.update(sql, setlist.getId());
-    }
-
-    private Setlist mapRowToSetlist(ResultSet resultSet, int rowNum) throws SQLException {
-        return new Setlist(
-                resultSet.getInt("id"),
-                resultSet.getString("show_title"),
-                resultSet.getString("version_number"),
-                resultSet.getString("artist_name"),
-                resultSet.getString("concert_date"),
-                resultSet.getString("stadium"),
-                resultSet.getString("city"),
-                null);
+    private int mapRowToVersionId(ResultSet resultSet, int rowNum) throws SQLException {
+        return resultSet.getInt("version_id");
     }
 }
