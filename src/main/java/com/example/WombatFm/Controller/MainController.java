@@ -27,9 +27,4 @@ public class MainController {
     public String showEventPage() {
         return "Event";
     }
-
-    @GetMapping("/search")
-    public String showSearchResults(@RequestParam String query, Model Model) {
-        
-    }
 }
