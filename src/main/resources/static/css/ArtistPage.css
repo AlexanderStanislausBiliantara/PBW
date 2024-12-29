@@ -324,3 +324,77 @@ div h3{
     font-size: 14px;
     color: #bbb;
 }
+
+footer .companydescription{
+    margin-left: 100px;
+    margin-right: 100px;
+    color: grey;
+    text-align: center;
+}
+
+footer a{
+    color: grey;
+}
+
+footer p{
+    color: grey;
+    text-align: center;
+}
+footer hr{
+    color: grey;
+    opacity: 50%;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+footer img{
+    display: flex;
+    margin-top: 25px;
+    height: 81px;
+    width: 81px;
+    justify-self: center;
+}
+
+footer a img {
+    height: 30px;
+    width: 30px;
+}
+
+.footer-container{
+    display: flex;
+    color: grey;
+}
+
+.footer-container div{
+    margin-left: 45px;
+}
+
+footer .socialmedia{
+    
+}
+
+footer .socialmedia .image-container{
+    display: flex;
+    margin-top: -30px;
+    margin-left: -5px;
+}
+
+footer .footer-container .information, .socialmedia{
+    justify-self: right;
+}
+
+.information{
+    padding-left: 160px;
+}
+
+.socialmedia{
+    padding-left: 400px;
+}
+
+.address-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.socialmedia{
+    justify-self: right;
+}

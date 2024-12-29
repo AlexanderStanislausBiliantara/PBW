@@ -13,11 +13,6 @@ public class MainController {
         return "Main";
     }
 
-    @GetMapping("/setlist")
-    public String showSetlist() {
-        return "Setlist";
-    }
-
     @GetMapping("/artist")
     public String showArtistPage() {
         return "Artist";
