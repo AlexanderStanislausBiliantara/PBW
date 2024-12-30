@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.WombatFm.Artist.Artist;
 import com.example.WombatFm.Artist.ArtistService;
+import com.example.WombatFm.Review.Review;
+import com.example.WombatFm.Review.ReviewService;
 import com.example.WombatFm.Show.Show;
 import com.example.WombatFm.Show.ShowService;
 import com.example.WombatFm.Song.Song;
@@ -31,22 +33,22 @@ public class SetlistController {
     @Autowired
     private ArtistService artistService;
 
-    // @Autowired
-    // private SongService songService;
+    @Autowired
+    private ReviewService reviewService;
 
     // @GetMapping("test")
     // @ResponseBody
     // public String test() {
-    // Optional<Song> result = songService.getSongById(11);
+    // List<Review> result = reviewService.getAllReviews();
     // // List<Artist> result = showService.getShowArtists(1003);
+    // if (result.size() > 0) {
     // String res = "";
-    // // for (Artist artist : result) {
-    // // res += artist.getName() + " - ";
-    // // }
-    // // if (result.size() > 0) {
-    // // return result.get().getSongs().size() + "";
-    // // }
-    // return result.get().getTitle();
+    // for (Review review : result) {
+    // res += review.toString() + " | ";
+    // }
+    // return res;
+    // }
+    // return "0";
     // }
 
     @GetMapping("/{showId}")
@@ -66,6 +68,10 @@ public class SetlistController {
                 model.addAttribute("startTime", show.getStartTime());
                 model.addAttribute("duration", show.getDuration());
                 model.addAttribute("songs", songs);
+
+                List<Review> reviews = reviewService.getReviewsByShowIdAndArtistId(showId, artistId);
+                model.addAttribute("reviews", reviews);
+
                 return "Setlist"; // setlist detail
 
             } else {
