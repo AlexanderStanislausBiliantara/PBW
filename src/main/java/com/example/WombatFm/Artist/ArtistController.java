@@ -62,7 +62,7 @@ public class ArtistController {
 
             System.out.println(path.toString());
 
-            Artist artist = new Artist(0, name, path.toString());
+            Artist artist = new Artist(0, name, filename);
             int idArtist = artistService.addArtist(artist);
 
             return "redirect:/artist/" + idArtist;
