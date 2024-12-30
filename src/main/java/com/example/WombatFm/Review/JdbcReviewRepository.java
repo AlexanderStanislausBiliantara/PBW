@@ -57,7 +57,7 @@ public class JdbcReviewRepository implements ReviewRepository {
     }
 
     private List<Song> getSongsForReview(int reviewId) {
-        String sql = "SELECT si.song_id, so.title, si.song_order "
+        String sql = "SELECT si.song_id, so.title, si.song_order, so.artist_id AS artist_id  "
                 + "FROM setlist_version sv "
                 + "JOIN setlist_items si ON sv.version_id = si.version_id "
                 + "JOIN songs so ON si.song_id = so.song_id "
@@ -77,7 +77,8 @@ public class JdbcReviewRepository implements ReviewRepository {
     private Song mapRowToSong(ResultSet resultSet, int rowNum) throws SQLException {
         Song song = new Song(
                 resultSet.getInt("song_id"),
-                resultSet.getString("title"));
+                resultSet.getString("title"),
+                resultSet.getInt("artist_id"));
         song.setSongOrder(resultSet.getInt("song_order"));
         return song;
     }

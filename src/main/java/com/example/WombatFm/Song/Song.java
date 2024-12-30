@@ -13,5 +13,8 @@ public class Song {
     @Nonnull
     private String title;
 
+    @Nonnull
+    private int artistId;
+
     private int songOrder;
 }

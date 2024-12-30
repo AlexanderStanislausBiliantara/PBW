@@ -33,7 +33,8 @@ public class JdbcSetlistRepository implements SetlistRepository {
 
         int versionId = versionIdResult.get(0);
 
-        String songsSql = "SELECT so.song_id AS song_id, so.title AS title, si.song_order AS song_order " +
+        String songsSql = "SELECT so.song_id AS song_id, so.title AS title, si.song_order AS song_order, so.artist_id AS artist_id  "
+                +
                 "FROM setlist_items si " +
                 "JOIN songs so ON si.song_id = so.song_id " +
                 "WHERE si.version_id = ? " +
@@ -51,7 +52,10 @@ public class JdbcSetlistRepository implements SetlistRepository {
     }
 
     private Song mapRowToSong(ResultSet resultSet, int rowNum) throws SQLException {
-        Song song = new Song(resultSet.getInt("song_id"), resultSet.getString("title"));
+        Song song = new Song(
+                resultSet.getInt("song_id"),
+                resultSet.getString("title"),
+                resultSet.getInt("artist_id"));
         song.setSongOrder(resultSet.getInt("song_order"));
         return song;
     }
