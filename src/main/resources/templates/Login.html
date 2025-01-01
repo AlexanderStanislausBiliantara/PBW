@@ -11,14 +11,14 @@
             <img src="Image Assets/Podcast_or_Radio_Logo-removebg-preview.png" alt="Wombat.fm Logo">
         </div>
         <h2>Log in to Wombat.fm</h2>
-        <form action="#">
+        <form th:action="@{/login}" method="POST">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" placeholder="Username">
+                <input name="username" type="text" id="username" placeholder="Username">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Password">
+                <input name="password" type="password" id="password" placeholder="Password">
             </div>
             <button type="submit" class="btn-login">Log in</button>
             <hr>
