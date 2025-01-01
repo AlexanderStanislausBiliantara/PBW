@@ -1,5 +1,6 @@
 package com.example.WombatFm.Show;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -36,6 +37,33 @@ public class JdbcShowRepository implements ShowRepository {
         String sql = "SELECT * FROM shows WHERE title LIKE ?";
         List<Show> results = jdbcTemplate.query(sql, this::mapRowToShow, "%" + showTitle + "%");
         return results;
+    }
+
+    @Override
+    public List<Show> getFilteredShows(String showTitle, Date startDate, Date endDate, int limit, int offset) {
+        String sql = """
+                SELECT * 
+                FROM 
+                    shows
+                WHERE
+                    title ILIKE CONCAT('%', ?, '%') AND show_date BETWEEN ? AND ?
+                ORDER BY
+                    show_date ASC LIMIT ? OFFSET ?
+                """;
+        return jdbcTemplate.query(sql, this::mapRowToShow, showTitle, startDate, endDate, limit, offset);
+    }
+
+    @Override
+    public int countShows(String showTitle, Date startDate, Date endDate) {
+        String sql = """
+                SELECT 
+                    COUNT(*) 
+                FROM 
+                    shows
+                WHERE
+                    title ILIKE CONCAT('%', ?, '%') AND show_date BETWEEN ? AND ?
+                """;
+        return jdbcTemplate.queryForObject(sql, Integer.class, showTitle, startDate, endDate);
     }
 
     @Override
