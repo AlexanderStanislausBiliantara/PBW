@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,10 @@ import com.example.WombatFm.Review.ReviewService;
 import com.example.WombatFm.Show.Show;
 import com.example.WombatFm.Show.ShowService;
 import com.example.WombatFm.Song.Song;
+
+import jakarta.validation.Valid;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Controller
 @RequestMapping("/setlist")
@@ -35,6 +40,13 @@ public class SetlistController {
 
     @Autowired
     private ReviewService reviewService;
+
+    @Data
+    @NoArgsConstructor
+    class SetlistForm {
+        private int showId;
+        private int artistId;
+    }
 
     // @GetMapping("test")
     // @ResponseBody
@@ -88,7 +100,7 @@ public class SetlistController {
     }
 
     @GetMapping("/add")
-    public String addSetlist(Model model) {
+    public String addSetlist(Model model, SetlistForm setlistForm) {
         List<Show> shows = showService.getAllShows();
         List<Artist> artists = artistService.getAllArtists();
         model.addAttribute("shows", shows);
@@ -97,8 +109,25 @@ public class SetlistController {
     }
 
     @PostMapping("/add")
-    public String addSetlist(@RequestParam("showId") int showId, @RequestParam("artistId") int artistId) {
-        setlistService.createSetlist(showId, artistId);
-        return "redirect:/setlist";
+    public String addSetlist(@Valid SetlistForm setlistForm,
+            BindingResult bindingResult,
+            Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("shows", showService.getAllShows());
+            model.addAttribute("artists", artistService.getAllArtists());
+            return "AddSetlist";
+        }
+
+        try {
+            setlistService.createSetlist(setlistForm.getShowId(),
+                    setlistForm.getArtistId());
+            return "redirect:/setlist";
+        } catch (Throwable e) {
+            bindingResult.reject("InternalServerError", "An error occurred while creating the setlist");
+            model.addAttribute("shows", showService.getAllShows());
+            model.addAttribute("artists", artistService.getAllArtists());
+            return "AddSetlist";
+        }
     }
 }

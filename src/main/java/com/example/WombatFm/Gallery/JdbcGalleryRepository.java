@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.example.WombatFm.Artist.Artist;
-
 @Repository
 public class JdbcGalleryRepository implements GalleryRepository {
 
@@ -24,14 +22,14 @@ public class JdbcGalleryRepository implements GalleryRepository {
 
     @Override
     public int addShowImage(Gallery gallery) {
-        String sql = "INSERT INTO gallery (show_id, image_url) VALUES (?, ?)";
+        String sql = "INSERT INTO gallery (show_id, url) VALUES (?, ?)";
 
         return jdbcTemplate.update(sql, gallery.getShowId(), gallery.getImageUrl());
     }
 
     @Override
     public int addShowImages(List<Gallery> galleries) {
-        String sql = "INSERT INTO gallery (show_id, image_url) VALUES (?, ?)";
+        String sql = "INSERT INTO gallery (show_id, url) VALUES (?, ?)";
 
         int count = 0;
 
@@ -46,6 +44,6 @@ public class JdbcGalleryRepository implements GalleryRepository {
         return new Gallery(
                 resultSet.getInt("gallery_id"),
                 resultSet.getInt("show_id"),
-                resultSet.getString("image_url"));
+                resultSet.getString("url"));
     }
 }

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Artist</title>
+  </head>
+  <body>
+    <h1>Add Artist</h1>
+    <form
+      action="#"
+      method="post"
+      enctype="multipart/form-data"
+      th:action="@{/artist/add}"
+      th:object="${artist}"
+    >
+      <div th:if="${#fields.hasGlobalErrors()}">
+        <p th:text="${#fields.globalErrors()[0]}"></p>
+      </div>
+      <div>
+        <label for="name">Artist Name:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          th:field="*{name}"
+          placeholder="Artist name"
+        />
+        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+      </div>
+      <div>
+        <label for="image">Artist Image:</label>
+        <input type="file" id="image" name="image" accept="image/*" />
+        <div
+          th:if="${#fields.hasErrors('photoUrl')}"
+          th:errors="*{photoUrl}"
+        ></div>
+      </div>
+      <button type="submit">Add Artist</button>
+    </form>
+  </body>
+</html>
