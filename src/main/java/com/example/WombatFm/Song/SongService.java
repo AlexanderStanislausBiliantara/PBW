@@ -15,4 +15,8 @@ public class SongService {
         return songRepository.getSongById(songId);
     }
 
+    public int addSong(Song newSong) {
+        int songId = songRepository.addSong(newSong);
+        return songId;
+    }
 }

@@ -1,14 +1,16 @@
 package com.example.WombatFm.Show;
 
+import java.sql.PreparedStatement;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.example.WombatFm.Artist.Artist;
@@ -79,10 +81,20 @@ public class JdbcShowRepository implements ShowRepository {
 
     @Override
     public int addShow(Show show) {
-        String sql = "INSERT INTO shows (title, venue, show_date, start_time, duration) VALUES (?, ?, ?, ?, ?)";
-        int result = jdbcTemplate.update(sql, show.getTitle(), show.getVenue(), show.getShowDate(), show.getStartTime(),
-                show.getDuration());
-        return result;
+        String sql = "INSERT INTO shows (title, venue, show_date, start_time, duration) VALUES (?, ?, ?, ?, ?) RETURNING show_id";
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, new String[] { "show_id" });
+            ps.setString(1, show.getTitle());
+            ps.setString(2, show.getVenue());
+            ps.setDate(3, show.getShowDate());
+            ps.setTime(4, show.getStartTime());
+            ps.setInt(5, show.getDuration());
+            return ps;
+        }, keyHolder);
+
+        return keyHolder.getKey().intValue();
     }
 
     private Show mapRowToShow(ResultSet resultSet, int rowNum) throws SQLException {
