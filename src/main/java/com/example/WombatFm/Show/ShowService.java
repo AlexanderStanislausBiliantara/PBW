@@ -1,5 +1,6 @@
 package com.example.WombatFm.Show;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,4 +52,17 @@ public class ShowService {
         return showRepository.addShow(show);
     }
 
+    public List<Show> getShowWithPagination(String showTitle, Date startDate, Date endDate, int page, int size) {
+        int offset = (page - 1) * size;
+        return showRepository.getFilteredShows(showTitle, startDate, endDate, size, offset);
+    }
+
+    public int getTotalShowCount(String showTitle, Date startDate, Date endDate) {
+        return showRepository.countShows(showTitle, startDate, endDate);
+    }
+
+    public int getPageCount(String showTitle, Date startDate, Date endDate, int size) {
+        int rowCount = getTotalShowCount(showTitle, startDate, endDate);
+        return (int) Math.ceil((double) rowCount / size);
+    }
 }

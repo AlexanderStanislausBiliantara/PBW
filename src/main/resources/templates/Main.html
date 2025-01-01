@@ -10,14 +10,14 @@
         <div class="left-section">
             <img src="Image Assets/Podcast_or_Radio_Logo-removebg-preview.png" alt="Logo" class="logo">
             <h3>Wombat.fm</h3>
-            <a th:href="@{member/setlist}">Setlist</a>
-            <a th:href="@{member/artist}">Artist</a>
-            <a th:href="@{member/event}">Event</a> <!-- belum dibikin -->    
+            <a th:href="@{/setlist}">Setlist</a>
+            <a th:href="@{/artist}">Artist</a>
+            <a th:href="@{/event}">Event</a>
         </div>
         <div class="search-section">
             <div class="search-bar">
-                <form th:action="{/search}" method="GET">
-                    <input type="text" placeholder="What do you want to play?">
+                <form th:action="@{/show/search}" method="GET">
+                    <input type="text" name="query" placeholder="What do you want to play?">
                     <button type="submit" class="search-bar-submit-button">
                         <img src="Image Assets/icons8-search-50.png" class="search-icon">
                     </button>
