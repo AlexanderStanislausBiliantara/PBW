@@ -10,14 +10,14 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
-import ch.qos.logback.core.model.Model;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/artist")
@@ -39,16 +39,25 @@ public class ArtistController {
     }
 
     @GetMapping("/add")
-    public String showAddArtistForm(Model model) {
+    public String showAddArtistForm(Artist artist) {
         return "AddArtist";
     }
 
     @PostMapping("/add")
-    public String addArtist(@RequestParam("name") String name,
+    public String addArtist(
+            @Valid Artist artist,
+            BindingResult bindingResult,
             @RequestParam("image") MultipartFile image) {
-        if (image.isEmpty()) {
-            return "redirect:/artist/add";
+        if (bindingResult.hasErrors()) {
+            return "AddArtist";
         }
+
+        if (image.isEmpty()) {
+            bindingResult.rejectValue("photoUrl", "imageNotFound", "Image is required");
+            return "AddArtist";
+        }
+
+        String filename = UUID.randomUUID().toString() + "_" + image.getOriginalFilename();
 
         try {
             File uploadDir = new File(UPLOAD_DIR);
@@ -56,19 +65,22 @@ public class ArtistController {
                 uploadDir.mkdirs();
             }
 
-            String filename = UUID.randomUUID().toString() + "_" + image.getOriginalFilename();
             Path path = Paths.get(UPLOAD_DIR).resolve(filename);
             Files.copy(image.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+        } catch (Throwable e) {
+            bindingResult.rejectValue("photoUrl", "uploadError", "Failed to upload image. Please try again.");
+            return "AddArtist";
+        }
+        System.out.println("added image");
 
-            System.out.println(path.toString());
-
-            Artist artist = new Artist(0, name, filename);
-            int idArtist = artistService.addArtist(artist);
+        try {
+            Artist newArtist = new Artist(0, artist.getName(), filename);
+            int idArtist = artistService.addArtist(newArtist);
 
             return "redirect:/artist/" + idArtist;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "redirect:/artist/add";
+        } catch (Throwable e) {
+            bindingResult.reject("InternalServerError", "Failed to add artist. Please try again.");
+            return "AddArtist";
         }
     }
 }
