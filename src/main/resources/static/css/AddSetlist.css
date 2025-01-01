@@ -33,6 +33,7 @@ header.header h1 {
 
 main.form-container {
   width: 600px;
+  height: auto;
   margin: 2rem auto;
   background-color: #2a2a2a;
   padding: 2rem;
@@ -194,41 +195,37 @@ main.form-container {
   height: 100%;
 }
 
-/* Modal Styles */
+
+/* Modal Container */
 .modal {
-  display: none; /* Initially hidden */
-  position: fixed;
+  width: 20vw;
+  background: #333;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  box-shadow: -4px 0 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
   top: 0;
   left: 0;
-  width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.8);
   justify-content: flex-end; /* Aligns modal to the right */
   align-items: center;
-  z-index: 1000;
+  margin-left: auto;
 }
 
-.modal.visible {
-  display: flex; /* Shows the modal */
-}
-
-/* Modal Container */
-#popup-modal {
+.modal-content-show, .modal-content-artist {
+  width: 100%;
   height: 100%;
-  width: 20vw;
-  background: #333;
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1.5rem;
-  box-shadow: -4px 0 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
 }
 
+
 /* Close Button */
-.close-modal {
-  position: absolute;
+.close-modal-show, .close-modal-artist {
+  margin-left: auto;
   top: 1rem;
   right: 1rem;
   font-size: 1.5rem;
@@ -242,7 +239,7 @@ main.form-container {
 }
 
 /* Search Field */
-.modal-content .search-input {
+.search-input {
   width: 100%;
   padding: 0.75rem;
   margin: 1rem 0;
@@ -276,12 +273,3 @@ main.form-container {
 .results-list li:hover {
   background: #777;
 }
-
-/* Modal Content */
-.modal-content {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-

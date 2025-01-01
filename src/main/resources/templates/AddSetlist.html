@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add New Setlist</title>
   <link rel="stylesheet" th:href="@{/css/AddSetlist.css}">
+  <script th:src="@{/js/script.js}" defer></script>
 </head>
 <body>
   <header class="header">
@@ -19,48 +20,21 @@
         <h1>Add New Setlist</h1>
       </div>
       <form action="#" method="POST" class="setlist-form">
-        <div class="form-group">
-          <label for="setlist-name">Setlist Name</label>
-          <input type="text" id="setlist-name" name="setlist-name" placeholder="Enter setlist name" required>
-        </div>
-        
-        <!---
-        <div class="form-group">
-          <label for="description">Description (optional)</label>
-          <textarea id="description" name="description" rows="4" placeholder="Add a brief description..."></textarea>
-        </div>
-        -->
   
         <div class="form-group">
-          <label for="concert-date">Concert Date & Time</label>
-          <input type="datetime-local" id="concert-date" name="concert-date" required>
-        </div>
-  
-        <div class="form-group">
-          <label for="stadium">Stadium</label>
+          <label for="show">Show</label>
           <div class="input-group">
-            <input type="text" id="stadium" name="stadium" placeholder="Search stadium" readonly required>
-            <button type="button" class="search-button" id="openModal">Search</button>
+            <input type="text" id="show" name="show" placeholder="Search show" readonly required>
+            <button type="button" class="search-button" id="search-show">Search</button>
           </div>
         </div>
   
         <div class="form-group">
-          <label for="city">City</label>
+          <label for="artist">Artist</label>
           <div class="input-group">
-            <input type="text" id="city" name="city" placeholder="Search city" readonly required>
-            <button type="button" class="search-button" id="search-city">Search</button>
+            <input type="text" id="artist" name="artist" placeholder="Search artist" readonly required>
+            <button type="button" class="search-button" id="search-artist">Search</button>
           </div>
-        </div>
-  
-        <div class="form-group">
-          <label for="songs">Songs</label>
-          <div id="songs-container">
-            <div class="input-group">
-              <input type="text" name="songs[]" placeholder="Enter song name" required>
-              <button type="button" class="remove-song">Remove</button>
-            </div>
-          </div>
-          <button type="button" class="add-song" id="add-song">+ Add Song</button>
         </div>
   
         <div class="form-actions">
@@ -70,22 +44,28 @@
       </form>
     </main>
 
-    <div id="popup-modal" class="modal">
-      <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <h2>Select Stadium</h2>
-        <input type="text" id="search-field" class="search-input" placeholder="Search...">
+    <div id="popup-modal-show" class="modal" style="display: none;">
+      <div class="modal-content-show">
+        <span class="close-modal-show">&times;</span>
+        <h2>Select Show</h2>
+        <input type="text" id="search-field-show" class="search-input" placeholder="Search...">
         <ul id="results-list" class="results-list">
-          <li>Stadium A</li>
-          <li>Stadium B</li>
-          <li>Stadium C</li>
-          <li>Stadium D</li>
-          <li>Stadium E</li>
-          <li>Stadium F</li>
-          <li>Stadium G</li>
-          <li>Stadium H</li>
-          <li>Stadium I</li>
-          <li>Stadium J</li>
+          <li class="option-show" data-value="Show A">Show A</li>
+          <li class="option-show" data-value="Show B">Show B</li>
+          <li class="option-show" data-value="Show C">Show C</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="popup-modal-artist" class="modal" style="display: none;">
+      <div class="modal-content-artist">
+        <span class="close-modal-artist">&times;</span>
+        <h2>Select Artist</h2>
+        <input type="text" id="search-field-artist" class="search-input" placeholder="Search...">
+        <ul id="results-list" class="results-list">
+          <li class="option-artist" data-value="Artist A">Artist A</li>
+          <li class="option-artist" data-value="Artist B">Artist B</li>
+          <li class="option-artist" data-value="Artist C">Artist C</li>
         </ul>
       </div>
     </div>
@@ -122,6 +102,6 @@
       <p>© 2024 Property of Kelompok 2 Pemerograman Berbasis Web Kelas B</p>
 </footer>
 
-  <script th:src="@{/js/script.js}"></script>
+  
 </body>
 </html>
