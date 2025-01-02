@@ -1,5 +1,6 @@
 package com.example.WombatFm.User;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,20 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    public List<User> getUsersWithPagination(int page, int size) {
+        int offset = (page - 1) * size;
+        return userRepository.getAllUsersPaginated(size, offset);
+    }
+
+    public int getTotalUserCount() {
+        return userRepository.countUsers();
+    }
+
+    public int getUserPageCount(int size) {
+        int rowCount = getTotalUserCount();
+        return (int) Math.ceil((double) rowCount / size);
+    }
 
     public boolean register(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -36,5 +51,5 @@ public class UserService {
         }
 
         return user;
-    }
+    }    
 }

@@ -11,11 +11,6 @@ public class MainController {
         return "Main";
     }
 
-    @GetMapping("/artist")
-    public String showArtistPage() {
-        return "Artist";
-    }
-
     @GetMapping("/event")
     public String showEventPage() {
         return "Event";
