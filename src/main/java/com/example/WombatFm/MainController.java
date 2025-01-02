@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.WombatFm.Artist.Artist;
 import com.example.WombatFm.Artist.ArtistService;
+import com.example.WombatFm.Setlist.Setlist;
 import com.example.WombatFm.Setlist.SetlistService;
 import com.example.WombatFm.Show.Show;
 import com.example.WombatFm.Show.ShowService;
@@ -57,7 +58,9 @@ public class MainController {
     }
 
     @GetMapping("/showSetlist")
-    public String showSetlist(){
+    public String showSetlist(Model model){
+        List<Show> listShow = showService.getAllShows().subList(0, 20);
+        model.addAttribute("listShow", listShow);
         return "Setlist";
     }
 

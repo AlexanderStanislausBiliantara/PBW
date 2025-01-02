@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Setlist Page</title>
     <link rel="stylesheet" th:href="@{/css/Setlist.css}">
+    
 </head>
 <body>
     <header class="header-section">
@@ -45,12 +46,14 @@
                 </li>
             </ol>
         </div>
-        <div class="setlist-info">
-            <h2>Concert Details</h2>
-            <p><strong>Location:</strong> <span th:text="${location}"><span></p>
-            <p><strong>Date:</strong> <span th:text="${date}"><span></p>
-            <p><strong>Duration:</strong> <span th:text="${duration} + ' minutes'"><span></p>
-            <p><strong>Start Time:</strong> <span th:text="${startTime}"><span></p>
+        <div class="container-show-info">
+            <div class="show-info" th:each="show : ${listShow}">
+                <center><h2>Concert Details</h2></center>
+                <p><strong>Location:</strong> <span th:text="${show.venue}"><span></p>
+                <p><strong>Date:</strong> <span th:text="${show.showDate}"><span></p>
+                <p><strong>Duration:</strong> <span th:text="${show.duration} + ' minutes'"><span></p>
+                <p><strong>Start Time:</strong> <span th:text="${show.startTime}"><span></p>
+            </div>
         </div>
     </div>
     <footer>
