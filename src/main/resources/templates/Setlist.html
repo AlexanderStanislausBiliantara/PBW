@@ -39,7 +39,9 @@
             <h2 th:text="${title}"></h2>
             <h2>Song List</h2>
             <ol class="song-list" th:each="song, iterStat  : ${songs}">
-                <li th:text="${iterStat.index+1} + '. ' + ${song}">
+                <li>
+                    <a th:text="${iterStat.index+1} + '. ' + ${song.getTitle()}"><!-- song order -->
+                    </a>
                 </li>
             </ol>
         </div>
@@ -47,6 +49,8 @@
             <h2>Concert Details</h2>
             <p><strong>Location:</strong> <span th:text="${location}"><span></p>
             <p><strong>Date:</strong> <span th:text="${date}"><span></p>
+            <p><strong>Duration:</strong> <span th:text="${duration.toString()} + ' minutes'"><span></p>
+            <p><strong>Start Time:</strong> <span th:text="${startTime.toString().substring(0,5)}"><span></p>
         </div>
     </div>
     <footer>

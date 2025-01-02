@@ -6,38 +6,43 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.WombatFm.Show.Show;
+import com.example.WombatFm.Show.ShowRepository;
+import com.example.WombatFm.Song.Song;
+
 @Service
 public class SetlistService {
 
     @Autowired
     private SetlistRepository setlistRepository;
 
-    public List<Setlist> getAllSetlists() {
-        return setlistRepository.findAll();
-    }
+    @Autowired
+    private ShowRepository showRepository;
 
-    public Setlist addSetlist(Setlist setlist) {
-        return setlistRepository.save(setlist);
-    }
+    public Optional<Setlist> getNewestSetlist(int showId, int artist_id) {
+        Optional<Show> showDetails = showRepository.getShowById(showId);
+        if (showDetails.isPresent()) {
+            List<Song> songs = setlistRepository.getNewestSetlist(showId);
+            Setlist setlist = new Setlist(showDetails.get(), songs);
 
-    public Setlist updateSetlist(int id, Setlist setlistDetails) {
-        Optional<Setlist> setlist = setlistRepository.findById(id);
-        if (setlist.isPresent()) {
-            setlist.get().setShowTitle(setlistDetails.getShowTitle());
-            setlist.get().setVersionNumber(setlistDetails.getVersionNumber());
-            setlist.get().setConcertDate(setlistDetails.getConcertDate());
-            setlist.get().setStadium(setlistDetails.getStadium());
-            setlist.get().setCity(setlistDetails.getCity());
-            setlist.get().setSongs(setlistDetails.getSongs());
-            return setlistRepository.save(setlist.get());
+            return Optional.of(setlist);
         }
-        return null;
+        return Optional.empty();
     }
 
-    public void deleteSetlist(int id) {
-        Optional<Setlist> setlist = setlistRepository.findById(id);
-        if (setlist.isPresent()) {
-            setlistRepository.delete(setlist.get());
+    public Optional<Setlist> getShowArtists(int showId, int artist_id) {
+        Optional<Show> showDetails = showRepository.getShowById(showId);
+        if (showDetails.isPresent()) {
+            List<Song> songs = setlistRepository.getNewestSetlist(showId);
+            Setlist setlist = new Setlist(showDetails.get(), songs);
+
+            return Optional.of(setlist);
         }
+        return Optional.empty();
     }
+
+    public void createSetlist(int showId, int artistId) {
+        setlistRepository.createSetlist(showId, artistId);
+    }
+
 }

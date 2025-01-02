@@ -1,66 +1,133 @@
 package com.example.WombatFm.Setlist;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.WombatFm.Artist.Artist;
+import com.example.WombatFm.Artist.ArtistService;
+import com.example.WombatFm.Review.Review;
+import com.example.WombatFm.Review.ReviewService;
+import com.example.WombatFm.Show.Show;
+import com.example.WombatFm.Show.ShowService;
+import com.example.WombatFm.Song.Song;
+
+import jakarta.validation.Valid;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Controller
+@RequestMapping("/setlist")
 public class SetlistController {
 
     @Autowired
     private SetlistService setlistService;
 
-    @GetMapping("/setlist")
+    @Autowired
+    private ShowService showService;
+
+    @Autowired
+    private ArtistService artistService;
+
+    @Autowired
+    private ReviewService reviewService;
+
+    @Data
+    @NoArgsConstructor
+    class SetlistForm {
+        private int showId;
+        private int artistId;
+    }
+
+    // @GetMapping("test")
+    // @ResponseBody
+    // public String test() {
+    // List<Review> result = reviewService.getAllReviews();
+    // // List<Artist> result = showService.getShowArtists(1003);
+    // if (result.size() > 0) {
+    // String res = "";
+    // for (Review review : result) {
+    // res += review.toString() + " | ";
+    // }
+    // return res;
+    // }
+    // return "0";
+    // }
+
+    @GetMapping("/{showId}")
     public String showSetlist(Model model,
-            @RequestParam(name = "show_id", required = false) String showId,
-            @RequestParam(name = "artist_id", required = false) String artistId,
-            @RequestParam(name = "version_id", required = false) String versionId) {
+            @PathVariable int showId,
+            @RequestParam(name = "artist_id", required = false) Integer artistId) {
+        if (artistId != null) {
 
-        if (showId != null && artistId != null) {
+            Optional<Setlist> setlist = setlistService.getNewestSetlist(showId, artistId);
 
-            setlistService.getAllSetlists();
+            if (setlist.isPresent()) {
+                Show show = setlist.get().getShow();
+                List<Song> songs = setlist.get().getSongs();
+                model.addAttribute("title", show.getTitle());
+                model.addAttribute("location", show.getVenue());
+                model.addAttribute("date", show.getShowDate());
+                model.addAttribute("startTime", show.getStartTime());
+                model.addAttribute("duration", show.getDuration());
+                model.addAttribute("songs", songs);
 
-            String songs[] = new String[6];
+                List<Review> reviews = reviewService.getReviewsByShowIdAndArtistId(showId, artistId);
+                model.addAttribute("reviews", reviews);
 
-            songs[0] = "Attention";
-            songs[1] = "Super Shy";
-            songs[2] = "ETA";
-            songs[3] = "OMG";
-            songs[4] = "Ditto";
+                return "Setlist"; // setlist detail
 
-            model.addAttribute("title", "NewJeans World Tour");
-            model.addAttribute("location", "Tokyo Dome, Japan");
-            model.addAttribute("date", "January 5, 2024");
-            model.addAttribute("songs", songs);
+            } else {
+                // Setlist not found
+                model.addAttribute("error", "Setlist not found");
+                return "404";
+            }
         } else {
-            // Homepage Setlist
+            // artist on Setlist
+            List<Artist> artists = showService.getShowArtists(showId);
+            model.addAttribute("artists", artists);
+            return "Setlist"; // show artist
+        }
+    }
+
+    @GetMapping("/add")
+    public String addSetlist(Model model, SetlistForm setlistForm) {
+        List<Show> shows = showService.getAllShows();
+        List<Artist> artists = artistService.getAllArtists();
+        model.addAttribute("shows", shows);
+        model.addAttribute("artists", artists);
+        return "AddSetlist";
+    }
+
+    @PostMapping("/add")
+    public String addSetlist(@Valid SetlistForm setlistForm,
+            BindingResult bindingResult,
+            Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("shows", showService.getAllShows());
+            model.addAttribute("artists", artistService.getAllArtists());
+            return "AddSetlist";
         }
 
-        return "Setlist";
-    }
-
-    @PostMapping("/setlist")
-    public String addSetlist(@RequestBody Setlist setlist) {
-        setlistService.addSetlist(setlist);
-        return "redirect:/setlist";
-    }
-
-    @PutMapping("/setlist/{id}")
-    public String updateSetlist(@PathVariable int id, @RequestBody Setlist setlistDetails) {
-        setlistService.updateSetlist(id, setlistDetails);
-        return "redirect:/setlist";
-    }
-
-    @DeleteMapping("/setlist/{id}")
-    public String deleteSetlist(@PathVariable int id) {
-        setlistService.deleteSetlist(id);
-        return "redirect:/setlist";
+        try {
+            setlistService.createSetlist(setlistForm.getShowId(),
+                    setlistForm.getArtistId());
+            return "redirect:/setlist";
+        } catch (Throwable e) {
+            bindingResult.reject("InternalServerError", "An error occurred while creating the setlist");
+            model.addAttribute("shows", showService.getAllShows());
+            model.addAttribute("artists", artistService.getAllArtists());
+            return "AddSetlist";
+        }
     }
 }

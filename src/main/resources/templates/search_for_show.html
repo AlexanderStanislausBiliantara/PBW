@@ -1,0 +1,31 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/search_for_show.css}">
+    <title>Document</title>
+</head>
+<body>
+    <header class="header-section">
+        <div class="left-section">
+            <img src="Image Assets/Podcast_or_Radio_Logo-removebg-preview.png" alt="Logo" class="logo">
+            <h3>Wombat.fm</h3>
+            <a th:href="@{/setlist}">Setlist</a>
+            <a th:href="@{/artist}">Artist</a>
+            <a th:href="@{/event}">Event</a>
+        </div>
+        <div class="search-section">
+            <div class="search-bar">
+                <form th:action="@{/show/search}" method="GET">
+                    <input type="text" name="query" th:value="${query}" placeholder="What do you want to play?">
+                    <button type="submit" class="search-bar-submit-button">
+                        <img src="Image Assets/icons8-search-50.png" class="search-icon">
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="right-section">
+            <a href="#" class="addSetlist">+Add Setlist</a>
+            <a href="#" class="login">Log in</a>
+        </div>
+    </header>
