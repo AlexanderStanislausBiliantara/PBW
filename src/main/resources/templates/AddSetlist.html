@@ -1,185 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add New Setlist</title>
-    <link rel="stylesheet" href="AddSetlist.css" />
-  </head>
-  <body>
-    <div class="new-add-setlist-form">
-      <h1>Add Setlist</h1>
-      <form
-        action="#"
-        method="post"
-        th:action="@{/setlist/add}"
-        th:object="${setlistForm}"
-      >
-        <div th:if="${#fields.hasGlobalErrors()}">
-          <p th:text="${#fields.globalErrors()[0]}"></p>
-        </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add New Setlist</title>
+  <link rel="stylesheet" th:href="@{/css/AddSetlist.css}">
+  <script th:src="@{/js/script.js}" defer></script>
+</head>
+<body>
+  <header class="header">
+    <a th:href="@{/}">
+      <img id="logo" th:src="@{/Image Assets/Podcast_or_Radio_Logo-removebg-preview.png}">
+    </a>
+  </header>
 
-        <div>
-          <label for="showId">Show ID:</label>
-          <select id="showId" name="showId" th:field="*{showId}">
-            <option
-              th:each="show : ${shows}"
-              th:value="${show.showId}"
-              th:text="${show.title}"
-            ></option>
-          </select>
-          <div
-            th:if="${#fields.hasErrors('showId')}"
-            th:errors="*{showId}"
-          ></div>
-        </div>
-
-        <div>
-          <label for="artistId">Artist ID:</label>
-          <select id="artistId" name="artistId" th:field="*{artistId}">
-            <option
-              th:each="artist : ${artists}"
-              th:value="${artist.artistId}"
-              th:text="${artist.name}"
-            ></option>
-          </select>
-          <div
-            th:if="${#fields.hasErrors('artistId')}"
-            th:errors="*{artistId}"
-          ></div>
-        </div>
-
-        <button type="submit">Add Setlist</button>
-      </form>
-    </div>
-
-    <header class="header">
-      <h1>Add New Setlist</h1>
-    </header>
-
+  <div id="container">
     <main class="form-container">
-      <form action="#" method="POST" class="setlist-form">
+      <div class="text-setlist">
+        <h1>Add New Setlist</h1>
+      </div>
+      <form th:action="@{/saveSetlist}" method="POST" class="setlist-form">
+  
         <div class="form-group">
-          <label for="setlist-name">Setlist Name</label>
-          <input
-            type="text"
-            id="setlist-name"
-            name="setlist-name"
-            placeholder="Enter setlist name"
-            required
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="description">Description (optional)</label>
-          <textarea
-            id="description"
-            name="description"
-            rows="4"
-            placeholder="Add a brief description..."
-          ></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="concert-date">Concert Date & Time</label>
-          <input
-            type="datetime-local"
-            id="concert-date"
-            name="concert-date"
-            required
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="stadium">Stadium</label>
+          <label for="show">Show</label>
           <div class="input-group">
-            <input
-              type="text"
-              id="stadium"
-              name="stadium"
-              placeholder="Search stadium"
-              readonly
-              required
-            />
-            <button type="button" class="search-button" id="search-stadium">
-              Search
-            </button>
+            <input type="text" id="show" name="show" placeholder="Search show" readonly required>
+            <button type="button" class="search-button" id="search-show">Search</button>
           </div>
         </div>
-
+  
         <div class="form-group">
-          <label for="city">City</label>
+          <label for="artist">Artist</label>
           <div class="input-group">
-            <input
-              type="text"
-              id="city"
-              name="city"
-              placeholder="Search city"
-              readonly
-              required
-            />
-            <button type="button" class="search-button" id="search-city">
-              Search
-            </button>
+            <input type="text" id="artist" name="artist" placeholder="Search artist" readonly required>
+            <button type="button" class="search-button" id="search-artist">Search</button>
           </div>
         </div>
-
-        <div class="form-group">
-          <label for="songs">Songs</label>
-          <div id="songs-container">
-            <div class="input-group">
-              <input
-                type="text"
-                name="songs[]"
-                placeholder="Enter song name"
-                required
-              />
-              <button type="button" class="remove-song">Remove</button>
-            </div>
-          </div>
-          <button type="button" class="add-song" id="add-song">
-            + Add Song
-          </button>
-        </div>
-
+  
         <div class="form-actions">
           <button type="submit" class="submit-button">Save Setlist</button>
-          <button type="reset" class="reset-button">Cancel</button>
+          <a th:href="@{/}" class="reset-button">Cancel</a>
         </div>
       </form>
     </main>
 
-    <!-- Popup Modal -->
-    <div id="popup-modal" class="modal hidden">
-      <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <h2>Select Stadium or City</h2>
-        <input
-          type="text"
-          id="search-field"
-          class="search-input"
-          placeholder="Search..."
-        />
-        <ul id="results-list" class="results-list">
-          <li>Stadium A - City X</li>
-          <li>Stadium B - City Y</li>
-          <li>Stadium C - City Z</li>
+    <div id="popup-modal-show" class="modal" style="display: none;">
+      <div class="modal-content-show">
+        <span class="close-modal-show">&times;</span>
+        <h2>Select Show</h2>
+        <input type="text" id="search-field-show" class="search-input" placeholder="Search...">
+        <ul id="results-list" class="results-list" >
+          <li class="option-show" th:each="show : ${allShow}" th:text="${show.title}"></li>
         </ul>
       </div>
     </div>
-    <footer>
-      <img
-        src="Image Assets/Podcast_or_Radio_Logo-removebg-preview.png"
-        alt=""
-      />
-      <p class="companydescription">
-        Wombat.fm is a dynamic platform that connects music fans with setlists
-        from concerts past and future. Dive into the live music experience by
-        exploring the songs your favorite artists performed and stay in the loop
-        for upcoming shows. Wombat.fm is where every concert memory comes alive
-        and every future performance awaits!
-      </p>
-      <hr />
+
+    <div id="popup-modal-artist" class="modal" style="display: none;">
+      <div class="modal-content-artist">
+        <span class="close-modal-artist">&times;</span>
+        <h2>Select Artist</h2>
+        <input type="text" id="search-field-artist" class="search-input" placeholder="Search...">
+        <ul id="results-list" class="results-list">
+          <li class="option-artist" th:each="artist : ${allArtists}" th:text="${artist.name}"></li>
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+  <footer>
+    <img th:src="@{/Image Assets/Podcast_or_Radio_Logo-removebg-preview.png}" alt="">
+    <p class="companydescription">Wombat.fm is a dynamic platform that connects music fans with setlists from concerts past and future. Dive into the live music experience by exploring the songs your favorite artists performed and stay in the loop for upcoming shows. Wombat.fm is where every concert memory comes alive and every future performance awaits!</p>
+    <hr>
 
       <div class="footer-container">
         <div class="address-container">
@@ -195,24 +86,18 @@
         </div>
 
         <div class="socialmedia">
-          <h4>Find us</h4>
-          <div class="image-container">
-            <a href="#"
-              ><img src="Image Assets/icons8-instagram-32.png" alt=""
-            /></a>
-            <a href="#"
-              ><img src="Image Assets/icons8-facebook-32 (1).png" alt=""
-            /></a>
-            <a href="#"
-              ><img src="Image Assets/icons8-twitterx-32.png" alt=""
-            /></a>
+            <h4>Find us</h4>
+            <div class="image-container">
+                <a href="#"><img th:src="@{/Image Assets/icons8-instagram-32.png}" alt=""></a>
+                <a href="#"><img th:src="@{/Image Assets/icons8-facebook-32 (1).png}" alt=""></a>
+                <a href="#"><img th:src="@{/Image Assets/icons8-twitterx-32.png}" alt=""></a>
+            </div>
           </div>
-        </div>
-      </div>
+    </div>
 
       <p>© 2024 Property of Kelompok 2 Pemerograman Berbasis Web Kelas B</p>
     </footer>
 
-    <script src="scripts.js"></script>
-  </body>
+  
+</body>
 </html>
