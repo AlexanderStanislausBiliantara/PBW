@@ -20,6 +20,10 @@ public class ArtistService {
         return artistRepository.getArtistById(artistId);
     }
 
+    public Optional<Artist> getArtistByName(String name){
+        return artistRepository.getArtistByName(name);
+    }
+
     public int addArtist(Artist artist) throws IllegalArgumentException {
         if (artist.getName() == null || artist.getName().isEmpty()) {
             throw new IllegalArgumentException("Artist name cannot be empty");

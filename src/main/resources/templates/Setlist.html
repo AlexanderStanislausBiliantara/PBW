@@ -49,8 +49,8 @@
             <h2>Concert Details</h2>
             <p><strong>Location:</strong> <span th:text="${location}"><span></p>
             <p><strong>Date:</strong> <span th:text="${date}"><span></p>
-            <p><strong>Duration:</strong> <span th:text="${duration.toString()} + ' minutes'"><span></p>
-            <p><strong>Start Time:</strong> <span th:text="${startTime.toString().substring(0,5)}"><span></p>
+            <p><strong>Duration:</strong> <span th:text="${duration} + ' minutes'"><span></p>
+            <p><strong>Start Time:</strong> <span th:text="${startTime}"><span></p>
         </div>
     </div>
     <footer>

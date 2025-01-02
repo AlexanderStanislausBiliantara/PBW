@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const optionShow = document.querySelectorAll('.option-show');
   const fieldArtist = document.getElementById('artist');
   const fieldShow = document.getElementById('show');
+  const searchShow = document.getElementById('search-field-show');
+  const searchArtist = document.getElementById('search-field-artist');
 
 
 
@@ -51,19 +53,41 @@ document.addEventListener('DOMContentLoaded', function () {
 
   optionArtist.forEach(artist => {
     artist.addEventListener('click', () => {
-      fieldArtist.value = artist.dataset.value;
+      fieldArtist.value = artist.textContent;
       console.log(artist.dataset.value);
     });
   });
 
   optionShow.forEach(show => {
     show.addEventListener('click', () => {
-      fieldShow.value = show.dataset.value;
+      fieldShow.value = show.textContent;
 
       console.log(show.dataset.value);
     });
   });
 
+  searchShow.addEventListener('input', () => {
+    const searchValue = searchShow.value.toLowerCase(); // Ambil input pengguna dan ubah ke lowercase
+    optionShow.forEach(show => {
+        const showTitle = show.textContent.toLowerCase(); // Ambil teks dari elemen show dan ubah ke lowercase
+        if (showTitle.includes(searchValue)) {
+          show.style.display = ''; // Tampilkan elemen jika cocok
+        } else {
+          show.style.display = 'none'; // Sembunyikan elemen jika tidak cocok
+        }
+      });
+  });
 
+  searchArtist.addEventListener('input', () => {
+    const searchValue = searchArtist.value.toLowerCase(); // Ambil input pengguna dan ubah ke lowercase
+    optionArtist.forEach(artist => {
+        const artistTitle = artist.textContent.toLowerCase(); // Ambil teks dari elemen artist dan ubah ke lowercase
+        if (artistTitle.includes(searchValue)) {
+          artist.style.display = ''; // Tampilkan elemen jika cocok
+        } else {
+          artist.style.display = 'none'; // Sembunyikan elemen jika tidak cocok
+        }
+      });
+  });
 
 });

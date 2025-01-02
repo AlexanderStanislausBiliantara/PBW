@@ -19,7 +19,7 @@
       <div class="text-setlist">
         <h1>Add New Setlist</h1>
       </div>
-      <form action="#" method="POST" class="setlist-form">
+      <form th:action="@{/saveSetlist}" method="POST" class="setlist-form">
   
         <div class="form-group">
           <label for="show">Show</label>
@@ -49,10 +49,8 @@
         <span class="close-modal-show">&times;</span>
         <h2>Select Show</h2>
         <input type="text" id="search-field-show" class="search-input" placeholder="Search...">
-        <ul id="results-list" class="results-list">
-          <li class="option-show" data-value="Show A">Show A</li>
-          <li class="option-show" data-value="Show B">Show B</li>
-          <li class="option-show" data-value="Show C">Show C</li>
+        <ul id="results-list" class="results-list" >
+          <li class="option-show" th:each="show : ${allShow}" th:text="${show.title}"></li>
         </ul>
       </div>
     </div>
@@ -63,9 +61,7 @@
         <h2>Select Artist</h2>
         <input type="text" id="search-field-artist" class="search-input" placeholder="Search...">
         <ul id="results-list" class="results-list">
-          <li class="option-artist" data-value="Artist A">Artist A</li>
-          <li class="option-artist" data-value="Artist B">Artist B</li>
-          <li class="option-artist" data-value="Artist C">Artist C</li>
+          <li class="option-artist" th:each="artist : ${allArtists}" th:text="${artist.name}"></li>
         </ul>
       </div>
     </div>
