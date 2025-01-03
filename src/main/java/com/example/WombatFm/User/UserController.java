@@ -1,5 +1,9 @@
 package com.example.WombatFm.User;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,5 +54,25 @@ public class UserController {
         }
 
         return "redirect:/login";
+    }
+
+    @PostMapping("/saveUserRole")
+    public String saveUserRole(@RequestParam(name = "uid") int userId, @RequestParam(name = "user_role") String role) {
+        this.userService.updateUserRole(userId, role);
+        return "redirect:/showUsers";
+    }
+
+    @PostMapping("/saveRoles")
+    public String saveRoles(@RequestParam(name = "roles") Map<String, String> roles) {
+        Map<Integer, String> userRoles = new HashMap<>();
+
+        for(Map.Entry<String, String> entry : roles.entrySet()) {
+            int userId = Integer.parseInt(entry.getKey());
+            String role = entry.getValue();
+            userRoles.put(userId, role);
+        }
+
+        userService.updateMultipleUserRole(userRoles);
+        return "redirect:/showUsers";
     }
 }
