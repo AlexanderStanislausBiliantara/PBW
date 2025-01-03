@@ -2,28 +2,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Login.css">
+    <link rel="stylesheet" th:href="@{/css/Login.css}">
     <title>Login - Wombat.fm</title>
 </head>
 <body>
     <div class="login-container">
         <div class="login-header">
-            <img src="Image Assets/Podcast_or_Radio_Logo-removebg-preview.png" alt="Wombat.fm Logo">
+            <img th:src="@{/Image Assets/Podcast_or_Radio_Logo-removebg-preview.png}" alt="Wombat.fm Logo">
         </div>
         <h2>Log in to Wombat.fm</h2>
-        <form action="#">
+        <form th:action="@{/login}" method="POST">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" placeholder="Username">
+                <input name="username" type="text" id="username" placeholder="Username">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Password">
+                <input name="password" type="password" id="password" placeholder="Password">
             </div>
             <button type="submit" class="btn-login">Log in</button>
             <hr>
             <p>Don't have an account?</p>
-            <button type="button" class="btn-signup">Sign up for Wombat.fm</button>
+            <a th:href="@{/register}"><button type="button" class="btn-signup">Sign up for Wombat.fm</button></a>
         </form>
     </div>
 </body>

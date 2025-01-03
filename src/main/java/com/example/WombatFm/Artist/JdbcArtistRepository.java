@@ -52,4 +52,11 @@ public class JdbcArtistRepository implements ArtistRepository {
                 resultSet.getString("name"),
                 resultSet.getString("artist_photo_url"));
     }
+
+    @Override
+    public Optional<Artist> getArtistByName(String name) {
+        String sql = "SELECT * FROM artists where name = ?";
+        List<Artist> results = jdbcTemplate.query(sql, this::mapRowToArtist, name);
+        return results.size() == 0 ? Optional.empty() : Optional.of(results.get(0));
+    }
 }

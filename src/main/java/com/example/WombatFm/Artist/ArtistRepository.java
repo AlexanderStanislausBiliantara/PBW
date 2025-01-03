@@ -8,5 +8,7 @@ public interface ArtistRepository {
 
     List<Artist> getAllArtists();
 
+    Optional<Artist> getArtistByName(String name);
+
     int addArtist(Artist artist);
 }

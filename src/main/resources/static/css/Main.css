@@ -25,15 +25,17 @@ body {
 
 /*Header Section*/
 .header-section {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
+    grid-template-areas: 
+    "left search right";
+    grid-template-columns: 1fr 1fr 1fr;
     padding: 10px 20px;
     background-color: black;
     color: white;
 }
 
 .left-section {
+    grid-area: "left";
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -43,6 +45,28 @@ body {
 .left-section > a {
     text-decoration: none;
     color: whites;
+}
+
+.WombatFM{
+    display: flex;
+}
+
+.left-section-more{
+    padding-left: 2rem;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.left-section-more > a{
+    text-decoration: none;
+    color: white;
+    padding: 1rem;
+    border-radius: 1rem;
+    transition: background-color 0.2s ease;
+}
+
+.left-section-more > a:hover{
+    background-color: rgb(77, 77, 77);
 }
 
 .logo {
@@ -62,18 +86,69 @@ div h3{
 }
 
 .search-section {
+    grid-area: "search";
     display: flex;
     align-items: center;
-    margin: 0 20px;
+    justify-content: center;
+    height: 100%;
+}
+
+.see-more-container{
+    display: grid;
+    grid-template-areas: 
+    "top"
+    "more";
+    grid-template-rows: 1fr 2fr;
+}
+
+.top-artist{
+    grid-area: "top";
+}
+
+.see-more{
+    grid-area: "more";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.see-more > p{
+    text-decoration: none;
+    font-size: 2rem;
+}
+
+.searchButton{
+    background-color: #333;
+    padding: 0.5rem;
+    border-radius: 2rem;
+}   
+
+.searchButton > img{
+    width: 1.5rem;
+    height: 1.5rem;
 }
 
 .search-bar {
+    height: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
     background-color: #333;
     padding: 5px 10px;
     border-radius: 20px;
     color: #888;
+}
+
+.search-bar > form{
+    margin-bottom: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-bar input, .search-bar button{
+    height: 100%;
 }
 
 .search-icon {
@@ -99,15 +174,19 @@ div h3{
 }
 
 .right-section {
+    grid-area: "right";
+    display: flex;
+    justify-content: end;
     align-items: center;
     overflow:unset;
+    gap: 1rem;
 }
 
 .addSetlist {
     background-color: white;
     color: black;
-    padding: 5px 15px;
     border-radius: 20px;
+    padding: 1rem;
     text-decoration: none;
     font-size: 14px;
     font-weight: bold;
@@ -125,7 +204,7 @@ div h3{
 .login {
     background-color: white;
     color: black;
-    padding: 5px 15px;
+    padding: 1rem;
     border-radius: 20px;
     text-decoration: none;
     font-size: 14px;
@@ -138,6 +217,25 @@ div h3{
 
 .addSetlist:hover {
     background-color: #ddd;
+}
+
+.setlist-artist-event{
+    padding-left: 1rem;
+    display: flex;
+    width: 50%;
+    gap: 1rem;
+}
+
+.setlist-artist-event > a{
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 1rem;
+}
+
+.setlist-artist-event > a:hover{
+    background-color: rgb(101, 101, 101);
+    border-radius: 1rem;
 }
 
 /*body-section*/
@@ -430,8 +528,7 @@ div h3{
     text-align: center;
 }
 
-.artist-container span{
-    text-decoration: underline;
+.artist-container p{
     cursor: pointer;
 }
 
@@ -487,6 +584,7 @@ footer a img {
 .footer-container div{
     margin-left: 45px;
 }
+
 
 footer .socialmedia{
     
