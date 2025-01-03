@@ -18,6 +18,15 @@ public class JdbcSongRepository implements SongRepository {
     private JdbcTemplate jdbcTemplate;
 
     @Override
+    public List<Song> getAllSongs() {
+        String sql = "SELECT s.song_id AS song_id, s.title AS title, a.artist_id AS artist_id "
+                + "FROM songs s "
+                + "JOIN artists a ON s.artist_id = a.artist_id ";
+        List<Song> results = jdbcTemplate.query(sql, this::mapRowToSong);
+        return results;
+    }
+
+    @Override
     public Optional<Song> getSongById(int songId) {
         String sql = "SELECT s.song_id AS song_id, s.title AS title, a.artist_id AS artist_id "
                 + "FROM songs s "
