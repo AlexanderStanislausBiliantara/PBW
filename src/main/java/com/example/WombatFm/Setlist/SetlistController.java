@@ -108,6 +108,20 @@ public class SetlistController {
         return "AddSetlist";
     }
 
+    @GetMapping("/addSetlist")
+    public String addSetlist(Model model){
+        List<Show> allShow = showService.getAllShows();
+        List<Artist> allArtist = artistService.getAllArtists();
+        model.addAttribute("allShow", allShow); 
+        model.addAttribute("allArtists", allArtist);
+        return "AddSetlist";
+    }
+
+    @GetMapping("/showSetlist")
+    public String showSetlist(){
+        return "Setlist";
+    }
+
     @PostMapping("/add")
     public String addSetlist(@Valid SetlistForm setlistForm,
             BindingResult bindingResult,
@@ -129,5 +143,13 @@ public class SetlistController {
             model.addAttribute("artists", artistService.getAllArtists());
             return "AddSetlist";
         }
+    }
+
+    @PostMapping("/saveSetlist")
+    public String saveSetlist(@RequestParam(name="show") String show, @RequestParam(name="artist") String artist){
+        Show saveShow = showService.getShowsByTitle(show).get(0);
+        Artist saveArtist = artistService.getArtistByName(artist).get();
+        setlistService.createSetlist(saveShow.getShowId(), saveArtist.getArtistId());
+        return "redirect:/addSetlist";
     }
 }

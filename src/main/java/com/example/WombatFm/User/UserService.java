@@ -1,6 +1,7 @@
 package com.example.WombatFm.User;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,16 @@ public class UserService {
         return (int) Math.ceil((double) rowCount / size);
     }
 
+    public void updateUserRole(int userId, String role) {
+        this.userRepository.updateUserRole(userId, role);
+    }
+
+    public void updateMultipleUserRole(Map<Integer, String> userRoles) {
+        for(Map.Entry<Integer, String> entry : userRoles.entrySet()) {
+            this.userRepository.updateUserRole(entry.getKey(), entry.getValue());
+        }
+    }
+
     public boolean register(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         try {
@@ -51,5 +62,7 @@ public class UserService {
         }
 
         return user;
-    }    
+    }
+
+
 }
