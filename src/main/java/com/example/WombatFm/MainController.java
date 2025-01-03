@@ -31,7 +31,7 @@ public class MainController {
     public String index() {
         return "Main";
     }
-
+  
     @GetMapping("/event")
     public String showEventPage() {
         return "Event";

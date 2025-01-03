@@ -10,5 +10,6 @@ public class WebConfig implements WebMvcConfigurer {
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(new StringToDateConverter());
         registry.addConverter(new StringToTimeConverter());
+        registry.addConverter(new StringToSongListConverter());
     }
 }

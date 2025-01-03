@@ -1,5 +1,6 @@
 package com.example.WombatFm.Review;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -7,6 +8,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.example.WombatFm.Song.Song;
@@ -54,6 +57,57 @@ public class JdbcReviewRepository implements ReviewRepository {
             review.setSongs(getSongsForReview(review.getReviewId()));
         }
         return reviews;
+    }
+
+    // @Override
+    // public int addReview(Review review) {
+    // String sql = "INSERT INTO reviews " +
+    // "(user_id, setlist_id, comment) " +
+    // "VALUES (?, ?, ?)";
+    // return jdbcTemplate.update(sql, review.getUserId(), review.getSetlistId(),
+    // review.getComment());
+    // }
+
+    @Override
+    public int addReview(Review review) {
+        String sql = "INSERT INTO reviews " +
+                "(user_id, setlist_id, comment) " +
+                "VALUES (?, ?, ?) RETURNING review_id";
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, new String[] { "review_id" });
+            ps.setInt(1, review.getUserId());
+            ps.setInt(2, review.getSetlistId());
+            ps.setString(3, review.getComment());
+            return ps;
+        }, keyHolder);
+
+        int reviewId = keyHolder.getKey().intValue();
+        ;
+        if (review.getSongs() != null && review.getSongs().size() > 0) {
+
+            String sqlSetlistVersion = "INSERT INTO setlist_version " +
+                    "(setlist_id, review_id) VALUES (?, ?) RETURNING version_id";
+
+            jdbcTemplate.update(connection -> {
+                PreparedStatement ps = connection.prepareStatement(sqlSetlistVersion, new String[] { "version_id" });
+                ps.setInt(1, review.getSetlistId());
+                ps.setInt(2, reviewId);
+                return ps;
+            }, keyHolder);
+
+            int versionId = keyHolder.getKey().intValue();
+
+            for (Song song : review.getSongs()) {
+                String sqlSetlistItems = "INSERT INTO setlist_items " +
+                        "(version_id, song_id, song_order) " +
+                        "VALUES (?, ?, ?)";
+                jdbcTemplate.update(sqlSetlistItems, versionId, song.getSongId(), song.getSongOrder());
+            }
+        }
+        return reviewId;
     }
 
     private List<Song> getSongsForReview(int reviewId) {

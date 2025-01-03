@@ -2,6 +2,8 @@ package com.example.WombatFm.Show;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -46,5 +48,10 @@ public class Show {
                 ", startTime=" + startTime +
                 ", duration=" + duration +
                 '}';
+    }
+
+    public String getDateFormatted() {
+        SimpleDateFormat formatter = new SimpleDateFormat("d MMMM yyyy", Locale.ENGLISH);
+        return formatter.format(showDate);
     }
 }
