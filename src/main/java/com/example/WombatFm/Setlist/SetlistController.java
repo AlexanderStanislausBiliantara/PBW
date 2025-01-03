@@ -19,8 +19,9 @@ import com.example.WombatFm.Review.Review;
 import com.example.WombatFm.Review.ReviewService;
 import com.example.WombatFm.Show.Show;
 import com.example.WombatFm.Show.ShowService;
-import com.example.WombatFm.Song.Song;
+import com.example.WombatFm.Song.SongService;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -40,6 +41,8 @@ public class SetlistController {
 
     @Autowired
     private ReviewService reviewService;
+    @Autowired
+    private SongService songService;
 
     @Data
     @NoArgsConstructor
@@ -64,7 +67,8 @@ public class SetlistController {
     // }
 
     @GetMapping("/{showId}")
-    public String showSetlist(Model model,
+    public String showSetlist(HttpSession session,
+            Model model,
             @PathVariable int showId,
             @RequestParam(name = "artist_id", required = false) Integer artistId) {
         if (artistId != null) {
@@ -72,15 +76,32 @@ public class SetlistController {
             Optional<Setlist> setlist = setlistService.getNewestSetlist(showId, artistId);
 
             if (setlist.isPresent()) {
-                Show show = setlist.get().getShow();
-                List<Song> songs = setlist.get().getSongs();
-                model.addAttribute("title", show.getTitle());
-                model.addAttribute("location", show.getVenue());
-                model.addAttribute("date", show.getShowDate());
-                model.addAttribute("startTime", show.getStartTime());
-                model.addAttribute("duration", show.getDuration());
-                model.addAttribute("songs", songs);
+                String userId = (String) session.getAttribute("user_id");
 
+                // Render field comment only if user already is logged in
+                if (userId != null) {
+                    model.addAttribute("isLoggedIn", true);
+                    model.addAttribute("userId", userId);
+
+                    Review review = new Review();
+                    review.setSetlistId(setlist.get().getSetlistId());
+                    review.setUserId(Integer.parseInt(userId));
+                    model.addAttribute("review", review);
+                } else {
+                    model.addAttribute("isLoggedIn", false);
+                }
+
+                // Show show = setlist.get().getShow();
+                // List<Song> songs = setlist.get().getSongs();
+                // model.addAttribute("title", show.getTitle());
+                // model.addAttribute("location", show.getVenue());
+                // model.addAttribute("date", show.getShowDate());
+                // model.addAttribute("startTime", show.getStartTime());
+                // model.addAttribute("duration", show.getDuration());
+                // model.addAttribute("songs", songs);
+
+                model.addAttribute("setlist", setlist.get());
+                model.addAttribute("artistId", artistId);
                 List<Review> reviews = reviewService.getReviewsByShowIdAndArtistId(showId, artistId);
                 model.addAttribute("reviews", reviews);
 
@@ -151,5 +172,142 @@ public class SetlistController {
         Artist saveArtist = artistService.getArtistByName(artist).get();
         setlistService.createSetlist(saveShow.getShowId(), saveArtist.getArtistId());
         return "redirect:/addSetlist";
+  
+    @GetMapping("/edit")
+    public String editSetlist(HttpSession session,
+            // @PathVariable String showIdStr,
+            @RequestParam(name = "show_id", required = true) Integer showId,
+            @RequestParam(name = "artist_id", required = true) Integer artistId,
+            Model model) {
+        // int showId = Integer.parseInt(showIdStr);
+
+        session.setAttribute("user_id", "7");
+        String userId = (String) session.getAttribute("user_id");
+
+        if (userId == null)
+            return "redirect:/login";
+        else {
+            model.addAttribute("showId", showId);
+            model.addAttribute("artistId", artistId);
+
+            Optional<Setlist> setlist = setlistService.getNewestSetlist(showId, artistId);
+            if (setlist.isPresent()) {
+                Review review = new Review();
+
+                review.setSetlistId(setlist.get().getSetlistId());
+
+                review.setSongs(setlist.get().getSongs());
+
+                review.setUserId(Integer.parseInt(userId));
+
+                model.addAttribute("review", review);
+                model.addAttribute("setlist", setlist.get());
+                model.addAttribute("songs", songService.getAllSongs());
+
+                return "EditSetlist";
+            } else {
+                model.addAttribute("error", "Setlist not found");
+                return "404";
+            }
+        }
+    }
+
+    @PostMapping("/{showIdStr}")
+    public String addReview(
+            @Valid Review review,
+            BindingResult bindingResult,
+            @PathVariable String showIdStr,
+            @RequestParam(name = "artist_id", required = true) Integer artistId,
+            Model model,
+            HttpSession session) {
+
+        // ? Should this method getUserId
+        int showId = Integer.parseInt(showIdStr);
+        String userId = (String) session.getAttribute("user_id");
+
+        if (userId == null)
+            return "redirect:/login";
+        else {
+            if (bindingResult.hasErrors()) {
+                return "Setlist";
+            }
+
+            try {
+                Optional<Setlist> setlist = setlistService.getNewestSetlist(showId, artistId);
+                if (setlist.isPresent()) {
+                    reviewService.addReview(review);
+                }
+                return "redirect:/setlist/" + showId + "?artist_id=" + artistId;
+            } catch (Exception e) {
+                return "Setlist";
+            }
+        }
+    }
+
+    @PostMapping("/edit")
+    public String addRevision(
+            @Valid Review review,
+            BindingResult bindingResult,
+            @RequestParam(name = "show_id", required = true) Integer showId,
+            @RequestParam(name = "artist_id", required = true) Integer artistId,
+            // @RequestParam(name = "song", required = true) String songStr,
+            Model model,
+            HttpSession session) {
+        // System.out.println("songs size : " + (review.getSongs() == null ? "-" :
+        // review.getSongs().size()));
+        System.out.println("1 songs : " + review.getSongs());
+        // System.out.println("song : " + songStr);
+        session.setAttribute("user_id", "7");
+        String userId = (String) session.getAttribute("user_id");
+
+        if (userId == null)
+            return "redirect:/login";
+        else {
+
+            if (bindingResult.hasErrors()) {
+                System.out.println("binding error" + bindingResult.toString());
+                Optional<Setlist> setlist = setlistService.getNewestSetlist(showId, artistId);
+                if (setlist.isPresent()) {
+                    Review curReview = new Review();
+
+                    curReview.setSetlistId(setlist.get().getSetlistId());
+
+                    curReview.setSongs(setlist.get().getSongs());
+
+                    curReview.setUserId(Integer.parseInt(userId));
+                    model.addAttribute("showId", showId);
+                    model.addAttribute("artistId", artistId);
+                    model.addAttribute("review", curReview);
+                    model.addAttribute("setlist", setlist.get());
+                    model.addAttribute("songs", songService.getAllSongs());
+                }
+                return "EditSetlist";
+            }
+
+            try {
+                reviewService.addReview(review);
+                return "redirect:/setlist/" + showId + "?artist_id=" + artistId;
+            } catch (Exception e) {
+                Optional<Setlist> setlist = setlistService.getNewestSetlist(showId, artistId);
+                if (setlist.isPresent()) {
+                    Review curReview = new Review();
+
+                    curReview.setSetlistId(setlist.get().getSetlistId());
+
+                    curReview.setSongs(setlist.get().getSongs());
+
+                    curReview.setUserId(Integer.parseInt(userId));
+
+                    model.addAttribute("showId", showId);
+                    model.addAttribute("artistId", artistId);
+                    model.addAttribute("review", curReview);
+                    model.addAttribute("setlist", setlist.get());
+                    model.addAttribute("songs", songService.getAllSongs());
+
+                }
+                bindingResult.reject("InternalServerError", "An error occurred while creating new setlist");
+                return "EditSetlist";
+            }
+        }
     }
 }

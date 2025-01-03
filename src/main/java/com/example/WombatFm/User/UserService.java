@@ -1,6 +1,7 @@
 package com.example.WombatFm.User;
 
 import java.util.List;
+
 import java.util.Map;
 import java.util.Optional;
 
@@ -29,6 +30,7 @@ public class UserService {
         int rowCount = getTotalUserCount();
         return (int) Math.ceil((double) rowCount / size);
     }
+
 
     public void updateUserRole(int userId, String role) {
         this.userRepository.updateUserRole(userId, role);
@@ -62,7 +64,6 @@ public class UserService {
         }
 
         return user;
+
     }
-
-
 }

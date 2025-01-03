@@ -24,4 +24,11 @@ public class ReviewService {
         return reviewRepository.getReviewsByShowIdAndArtistId(showId, artistId);
     }
 
+    public int addReview(Review review) {
+        return reviewRepository.addReview(review);
+    }
+
+    // public int addRevision(Review review) {
+    // return reviewRepository.addRevision(review);
+    // }
 }

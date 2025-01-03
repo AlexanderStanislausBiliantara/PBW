@@ -10,4 +10,8 @@ public interface ReviewRepository {
     Optional<Review> getReviewById(int reviewId);
 
     List<Review> getReviewsByShowIdAndArtistId(int showId, int artistId);
+
+    int addReview(Review review);
+
+    // int addRevision(Review review);
 }
