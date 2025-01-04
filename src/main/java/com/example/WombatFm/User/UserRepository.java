@@ -8,5 +8,5 @@ public interface UserRepository {
     Optional<User> findByUsername(String username);
     List<User> getAllUsersPaginated(int limit, int offset);
     int countUsers();
-    void updateUserRole(int userId, String role);
+    void updateUserRow(int userId, String role, boolean isActive);
 }
