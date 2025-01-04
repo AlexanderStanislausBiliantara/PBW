@@ -65,6 +65,19 @@ public class JdbcSetlistRepository implements SetlistRepository {
     }
 
     @Override
+    public List<Setlist> getTopTenSetlists() {
+        String sql = """
+                SELECT artists.name, artists.artist_id, artists.artist_photo_url, 
+                shows.title, shows.venue, shows.show_id, shows.show_date, 
+                shows.start_time, shows.duration
+                FROM setlists JOIN shows ON setlists.show_id = shows.show_id
+                JOIN artists ON setlists.artist_id = artists.artist_id
+                ORDER BY setlist_id DESC FETCH FIRST 10 ROWS ONLY
+                """;
+        return jdbcTemplate.query(sql, this::mapRowToSetlist);
+    }
+
+    @Override
     public void createSetlist(int showId, int artistId) {
         String sql = "INSERT INTO setlists (show_id, artist_id) VALUES (?, ?)";
         jdbcTemplate.update(sql, showId, artistId);
@@ -98,5 +111,5 @@ public class JdbcSetlistRepository implements SetlistRepository {
 
     private int mapRowToVersionId(ResultSet resultSet, int rowNum) throws SQLException {
         return resultSet.getInt("version_id");
-    }
+    }    
 }

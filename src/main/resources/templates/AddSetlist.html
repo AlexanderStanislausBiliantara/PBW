@@ -19,7 +19,7 @@
       <div class="text-setlist">
         <h1>Add New Setlist</h1>
       </div>
-      <form th:action="@{/saveSetlist}" method="POST" class="setlist-form">
+      <form th:action="@{/setlist/add}" method="POST" class="setlist-form">
   
         <div class="form-group">
           <label for="show">Show</label>
@@ -50,7 +50,7 @@
         <h2>Select Show</h2>
         <input type="text" id="search-field-show" class="search-input" placeholder="Search...">
         <ul id="results-list" class="results-list" >
-          <li class="option-show" th:each="show : ${allShow}" th:text="${show.title}"></li>
+          <li class="option-show" th:each="show : ${shows}" th:text="${show.title}"></li>
         </ul>
       </div>
     </div>
@@ -61,7 +61,7 @@
         <h2>Select Artist</h2>
         <input type="text" id="search-field-artist" class="search-input" placeholder="Search...">
         <ul id="results-list" class="results-list">
-          <li class="option-artist" th:each="artist : ${allArtists}" th:text="${artist.name}"></li>
+          <li class="option-artist" th:each="artist : ${artists}" th:text="${artist.name}"></li>
         </ul>
       </div>
     </div>
@@ -97,7 +97,5 @@
 
       <p>© 2024 Property of Kelompok 2 Pemerograman Berbasis Web Kelas B</p>
     </footer>
-
-  
 </body>
 </html>
