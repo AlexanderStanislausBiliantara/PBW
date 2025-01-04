@@ -1,0 +1,25 @@
+<header class="header-section">
+    <div class="left-section">
+        <img th:src="@{/Image Assets/Podcast_or_Radio_Logo-removebg-preview.png}" alt="Logo" class="logo">
+        <h3>Wombat.fm</h3>
+        <div class="setlist-artist-event">
+            <a th:href="@{/setlist}">Setlist</a>
+            <a th:href="@{/artist}">Artist</a>
+            <a th:href="@{/show}">Show</a> <!-- belum dibikin -->    
+        </div>
+    </div>
+    <div class="search-section">
+        <div class="search-bar">
+            <form th:action="@{/search}" method="post">
+                <input type="text" placeholder="What do you want to play?">
+                <button type="submit" class="search-bar-submit-button">
+                    <img th:src="@{/Image Assets/icons8-search-50.png}" class="search-icon">
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="right-section">
+        <a th:href="@{/setlist/add}" class="addSetlist">+Add Setlist</a>
+        <a th:href="@{/login}" class="login">Log in</a>
+    </div>
+</header>

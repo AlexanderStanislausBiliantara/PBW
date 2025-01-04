@@ -255,17 +255,39 @@ div h3{
     display: flex;
 }
 
-.setlist-info {
+.container-show-info{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.show-info {
+    width: 15%;
+    background-color: #333;
     margin-bottom: 30px;
     margin-left: 20px;
+    padding: 1rem;
+    border-radius: 20px;
 }
 
-.setlist-info h2 {
+.container-show-info .show-info {
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    cursor: default; 
+}
+
+.container-show-info .show-info:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
+    cursor: pointer; 
+}
+
+
+.show-info h2 {
     font-size: 1.5em;
-    margin-bottom: 5px;
+    margin-bottom: 10px;    
+    margin-top: 0;
 }
 
-.setlist-info p {
+.show-info p {
     margin: 5px 0;
 }
 

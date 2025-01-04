@@ -41,6 +41,12 @@ public class ShowController {
 
     private static String UPLOAD_DIR = "src/main/resources/static/uploads/";
 
+    @GetMapping
+    public String getTopShows(Model model){
+        
+        return "Show";
+    }
+
     @GetMapping("/add")
     public String addShow(Show show) {
         return "AddShow";

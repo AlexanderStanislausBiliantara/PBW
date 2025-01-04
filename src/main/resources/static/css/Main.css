@@ -23,84 +23,6 @@ body {
     background-color: #121212;
 }
 
-/*Header Section*/
-.header-section {
-    display: grid;
-    grid-template-areas: 
-    "left search right";
-    grid-template-columns: 1fr 1fr 1fr;
-    padding: 10px 20px;
-    background-color: black;
-    color: white;
-}
-
-.left-section {
-    grid-area: "left";
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    gap: 10px;
-}
-
-.left-section > a {
-    text-decoration: none;
-    color: whites;
-}
-
-.WombatFM{
-    display: flex;
-}
-
-.left-section-more{
-    padding-left: 2rem;
-    display: flex;
-    gap: 1.5rem;
-}
-
-.left-section-more > a{
-    text-decoration: none;
-    color: white;
-    padding: 1rem;
-    border-radius: 1rem;
-    transition: background-color 0.2s ease;
-}
-
-.left-section-more > a:hover{
-    background-color: rgb(77, 77, 77);
-}
-
-.logo {
-    width: 50px;
-    height: 50px;
-    margin-right: 15px;
-    overflow: hidden;
-}
-
-div p{
-    margin-left: 100px;
-    overflow: hidden;
-}
-
-div h3{
-    overflow: hidden;
-}
-
-.search-section {
-    grid-area: "search";
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-}
-
-.see-more-container{
-    display: grid;
-    grid-template-areas: 
-    "top"
-    "more";
-    grid-template-rows: 1fr 2fr;
-}
-
 .top-artist{
     grid-area: "top";
 }
@@ -128,43 +50,10 @@ div h3{
     height: 1.5rem;
 }
 
-.search-bar {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #333;
-    padding: 5px 10px;
-    border-radius: 20px;
-    color: #888;
-}
-
-.search-bar > form{
-    margin-bottom: 0;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.search-bar input, .search-bar button{
-    height: 100%;
-}
-
 .search-icon {
     margin-right: 10px;
     width: 30px;
     height: 30px;
-}
-
-.search-bar input {
-    flex: none;
-    width: 300px; 
-    background: transparent;
-    border: none;
-    outline: none;
-    color: white;
-    font-size: 14px;
 }
 
 .icon-right img {
@@ -173,70 +62,6 @@ div h3{
     margin-left: 10px;
 }
 
-.right-section {
-    grid-area: "right";
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    overflow:unset;
-    gap: 1rem;
-}
-
-.addSetlist {
-    background-color: white;
-    color: black;
-    border-radius: 20px;
-    padding: 1rem;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.search-bar-submit-button {
-    background-color: transparent;
-    border: none;
-}
-
-.search-bar-submit-button:hover {
-    cursor: pointer;
-}
-
-.login {
-    background-color: white;
-    color: black;
-    padding: 1rem;
-    border-radius: 20px;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.login:hover {
-    background-color: #ddd;
-}
-
-.addSetlist:hover {
-    background-color: #ddd;
-}
-
-.setlist-artist-event{
-    padding-left: 1rem;
-    display: flex;
-    width: 50%;
-    gap: 1rem;
-}
-
-.setlist-artist-event > a{
-    color: white;
-    text-decoration: none;
-    font-size: 1.2rem;
-    padding: 1rem;
-}
-
-.setlist-artist-event > a:hover{
-    background-color: rgb(101, 101, 101);
-    border-radius: 1rem;
-}
 
 /*body-section*/
 .body-section {
