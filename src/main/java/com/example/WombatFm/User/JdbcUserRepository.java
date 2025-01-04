@@ -27,6 +27,27 @@ public class JdbcUserRepository implements UserRepository {
         return results.size() == 0 ? Optional.empty() : Optional.of(results.get(0));
     }
 
+    @Override
+    public List<User> getAllUsersPaginated(int limit, int offset) {
+        String sql = """
+                SELECT * FROM users
+                ORDER BY user_id DESC LIMIT ? OFFSET ?
+                """;
+        return jdbcTemplate.query(sql, this::mapRowToUser, limit, offset);
+    }
+
+    @Override
+    public void updateUserRole(int userId, String role) {
+        String sql = "UPDATE users SET role = ? WHERE user_id = ?";
+        jdbcTemplate.update(sql, role, userId);
+    }
+
+    @Override
+    public int countUsers() {
+        String sql = "SELECT COUNT(*) FROM users";
+        return jdbcTemplate.queryForObject(sql, Integer.class);
+    }
+
     private User mapRowToUser(ResultSet resultSet, int rowNum) throws SQLException {
         return new User(
             resultSet.getInt("user_id"),

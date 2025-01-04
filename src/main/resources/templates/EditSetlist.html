@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Setlist</title>
+  </head>
+  <body>
+    <h1>Edit Setlist <span th:text="${setlist.getSetlistId()}"></span></h1>
+    <form
+      action="#"
+      method="post"
+      th:action="@{/setlist/edit(show_id=${showId}, artist_id=${artistId})}"
+      th:object="${review}"
+      onsubmit="prepareFormData()"
+    >
+      <div th:if="${#fields.hasGlobalErrors()}" class="error">
+        <p th:text="${#fields.globalErrors()[0]}"></p>
+      </div>
+
+      <div>
+        <input
+          type="number"
+          id="setlistId"
+          name="setlistId"
+          th:value="${setlist.getSetlistId()}"
+          th:field="*{setlistId}"
+          hidden
+        />
+        <input
+          type="number"
+          id="userId"
+          name="userId"
+          th:field="*{userId}"
+          hidden
+        />
+        <input id="songInput" name="songs" hidden />
+      </div>
+
+      <div>
+        <label for="comment">Comment:</label>
+        <input
+          type="text"
+          id="comment"
+          name="comment"
+          th:field="*{comment}"
+          placeholder="Comment"
+        />
+        <div
+          th:if="${#fields.hasErrors('comment')}"
+          th:errors="*{comment}"
+        ></div>
+      </div>
+
+      <div>
+        <label for="songs">Song:</label>
+        <select id="songs" name="songs">
+          <option
+            th:each="song : ${songs}"
+            th:value="${song.songId}"
+            th:text="${song.title}"
+          ></option>
+        </select>
+        <button type="button" onclick="addSong(event)">Add Song</button>
+        <div th:if="${#fields.hasErrors('songs')}" th:errors="*{songs}"></div>
+      </div>
+
+      <div id="songListContainer">
+        <h3>Current Setlist Songs:</h3>
+        <ol id="songList"></ol>
+      </div>
+
+      <div>
+        <div
+          th:if="${review.getSongs() != null && review.getSongs().size() > 0}"
+        >
+          <h3>Previous Setlist Songs :</h3>
+          <ol>
+            <li
+              th:each="song : ${review.getSongs()}"
+              th:text="${song.getTitle()}"
+            ></li>
+          </ol>
+        </div>
+        <p
+          th:unless="${review.getSongs() != null && review.getSongs().size() > 0}"
+        >
+          There's no song on current version
+        </p>
+      </div>
+
+      <button type="submit">Add Revision</button>
+    </form>
+
+    <script th:inline="javascript">
+      const songList = /*[[${review.getSongs()}]]*/ [];
+      console.log(songList);
+      const songSelect = document.getElementById("songs");
+      let tempSongs = [];
+
+      function addSong(event) {
+        event.preventDefault();
+
+        const selectedSongId = songSelect.value;
+        const selectedSongTitle =
+          songSelect.options[songSelect.selectedIndex].text;
+
+        if (!tempSongs.some((song) => song.songId === selectedSongId)) {
+          tempSongs.push({
+            songId: selectedSongId,
+            title: selectedSongTitle,
+            artistId: 0,
+          });
+
+          updateSongList();
+        }
+
+        // const orderedSongs = tempSongs.map((song, index) => {
+        //   return { ...song, songOrder: index + 1 };
+        // });
+        // console.log(orderedSongs);
+      }
+
+      function removeSong(index) {
+        tempSongs.splice(index, 1);
+        updateSongList();
+      }
+
+      function updateSongList() {
+        const songList = document.getElementById("songList");
+        songList.innerHTML = "";
+
+        tempSongs.forEach((song, index) => {
+          const li = document.createElement("li");
+          li.textContent = song.title;
+
+          const removeButton = document.createElement("button");
+          removeButton.textContent = "Remove";
+          removeButton.onclick = removeSong;
+
+          li.appendChild(removeButton);
+          songList.appendChild(li);
+        });
+      }
+
+      function prepareFormData(e) {
+        const songsInput = document.getElementById("songInput");
+        const orderedSongs = tempSongs.map((song, index) => {
+          return { ...song, songOrder: index + 1 };
+        });
+        songsInput.value = JSON.stringify(orderedSongs);
+      }
+    </script>
+  </body>
+</html>

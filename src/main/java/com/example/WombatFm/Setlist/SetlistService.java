@@ -6,8 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.WombatFm.Show.Show;
-import com.example.WombatFm.Show.ShowRepository;
 import com.example.WombatFm.Song.Song;
 
 @Service
@@ -16,33 +14,33 @@ public class SetlistService {
     @Autowired
     private SetlistRepository setlistRepository;
 
-    @Autowired
-    private ShowRepository showRepository;
-
     public Optional<Setlist> getNewestSetlist(int showId, int artist_id) {
-        Optional<Show> showDetails = showRepository.getShowById(showId);
-        if (showDetails.isPresent()) {
+        // Optional<Show> showDetails = showRepository.getShowById(showId);
+        // Optional<Artist> artistDetails = artistRepository.getArtistById(artist_id);
+
+        Optional<Setlist> setlistDetails = setlistRepository.getSetlistByShowIdAndArtistId(showId, artist_id);
+        // if (showDetails.isPresent() && artistDetails.isPresent()) {
+        if (setlistDetails.isPresent()) {
             List<Song> songs = setlistRepository.getNewestSetlist(showId);
-            Setlist setlist = new Setlist(showDetails.get(), songs);
+            // Setlist setlist = new Setlist(0, showDetails.get(), artistDetails.get(),
+            // songs);
+            Setlist setlist = setlistDetails.get();
+            setlist.setSongs(songs);
 
             return Optional.of(setlist);
         }
         return Optional.empty();
     }
 
-    public Optional<Setlist> getShowArtists(int showId, int artist_id) {
-        Optional<Show> showDetails = showRepository.getShowById(showId);
-        if (showDetails.isPresent()) {
-            List<Song> songs = setlistRepository.getNewestSetlist(showId);
-            Setlist setlist = new Setlist(showDetails.get(), songs);
-
-            return Optional.of(setlist);
-        }
-        return Optional.empty();
+    public Optional<Setlist> getSetlistByShowIdAndArtistId(int showId, int artistId) {
+        return setlistRepository.getSetlistByShowIdAndArtistId(showId, artistId);
     }
 
     public void createSetlist(int showId, int artistId) {
         setlistRepository.createSetlist(showId, artistId);
     }
 
+    public List<Setlist> getTopTenSetlists() {
+        return setlistRepository.getTopTenSetlists();
+    }
 }
