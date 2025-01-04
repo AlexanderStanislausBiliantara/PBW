@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.example.WombatFm.RequiredRole;
+
 import jakarta.validation.Valid;
 
 @Controller
@@ -38,11 +41,13 @@ public class ArtistController {
         return "ArtistPage";
     }
 
+    @RequiredRole({ "*" })
     @GetMapping("/add")
     public String showAddArtistForm(Artist artist) {
         return "AddArtist";
     }
 
+    @RequiredRole({ "*" })
     @PostMapping("/add")
     public String addArtist(
             @Valid Artist artist,
