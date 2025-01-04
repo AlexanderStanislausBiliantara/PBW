@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.example.WombatFm.RequiredRole;
 import com.example.WombatFm.Gallery.Gallery;
 import com.example.WombatFm.Gallery.GalleryService;
 
@@ -41,6 +43,7 @@ public class ShowController {
 
     private static String UPLOAD_DIR = "src/main/resources/static/uploads/";
 
+    @RequiredRole({ "*" })
     @GetMapping("/add")
     public String addShow(Show show) {
         return "AddShow";
@@ -55,16 +58,20 @@ public class ShowController {
     }
 
     @GetMapping("/filtered_search")
-    public String searchFilteredShow(@RequestParam("query") String query, @RequestParam("start_date") Date startDate, @RequestParam("end_date") Date endDate, @RequestParam(name = "page", required = false, defaultValue = "1") int page, @RequestParam(name = "size", required = false, defaultValue = "8") int size, Model model) {
+    public String searchFilteredShow(@RequestParam("query") String query, @RequestParam("start_date") Date startDate,
+            @RequestParam("end_date") Date endDate,
+            @RequestParam(name = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(name = "size", required = false, defaultValue = "8") int size, Model model) {
         List<Show> foundShows = this.showService.getShowWithPagination(query, startDate, endDate, page, size);
         int pageCount = this.showService.getPageCount(query, startDate, endDate, size);
-        
+
         model.addAttribute("currentPage", page);
         model.addAttribute("pageCount", pageCount);
         model.addAttribute("results", foundShows);
         return "search_for_show";
     }
 
+    @RequiredRole({ "*" })
     @PostMapping("/add")
     public String addShow(
             @Valid Show show,
@@ -152,6 +159,7 @@ public class ShowController {
     }
 
     @GetMapping("/selectShow")
+
     public String selectShow(Model model){
         List<Show> allShow = showService.getAllShows();
         

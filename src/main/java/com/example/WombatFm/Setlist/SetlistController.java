@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.WombatFm.RequiredRole;
 import com.example.WombatFm.Artist.Artist;
 import com.example.WombatFm.Artist.ArtistService;
 import com.example.WombatFm.Review.Review;
@@ -121,6 +122,7 @@ public class SetlistController {
         }
     }
 
+    @RequiredRole({ "*" })
     @GetMapping("/add")
     public String addSetlist(Model model, SetlistForm setlistForm) {
         List<Show> shows = showService.getAllShows();
@@ -132,12 +134,13 @@ public class SetlistController {
     }
 
     @GetMapping
-    public String showSetlist(Model model){
+    public String showSetlist(Model model) {
         List<Setlist> topTenSetlists = this.setlistService.getTopTenSetlists();
         model.addAttribute("topTenSetlists", topTenSetlists);
         return "Setlist";
     }
 
+    @RequiredRole({ "*" })
     @PostMapping("/add")
     public String addSetlist(@Valid SetlistForm setlistForm,
             BindingResult bindingResult,
@@ -162,13 +165,15 @@ public class SetlistController {
     }
 
     // @PostMapping("/saveSetlist")
-    // public String saveSetlist(@RequestParam(name="show") String show, @RequestParam(name="artist") String artist){
-    //     Show saveShow = showService.getShowsByTitle(show).get(0);
-    //     Artist saveArtist = artistService.getArtistByName(artist).get();
-    //     setlistService.createSetlist(saveShow.getShowId(), saveArtist.getArtistId());
-    //     return "redirect:/addSetlist";
+    // public String saveSetlist(@RequestParam(name="show") String show,
+    // @RequestParam(name="artist") String artist){
+    // Show saveShow = showService.getShowsByTitle(show).get(0);
+    // Artist saveArtist = artistService.getArtistByName(artist).get();
+    // setlistService.createSetlist(saveShow.getShowId(), saveArtist.getArtistId());
+    // return "redirect:/addSetlist";
     // }
 
+    @RequiredRole({ "*" })
     @GetMapping("/edit")
     public String editSetlist(HttpSession session,
             // @PathVariable String showIdStr,
@@ -208,6 +213,7 @@ public class SetlistController {
         }
     }
 
+    @RequiredRole({ "*" })
     @PostMapping("/{showIdStr}")
     public String addReview(
             @Valid Review review,
@@ -240,6 +246,7 @@ public class SetlistController {
         }
     }
 
+    @RequiredRole({ "*" })
     @PostMapping("/edit")
     public String addRevision(
             @Valid Review review,

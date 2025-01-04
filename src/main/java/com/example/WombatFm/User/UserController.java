@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.WombatFm.RequiredRole;
+
 import jakarta.validation.Valid;
 
 @Controller
@@ -22,10 +24,11 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/showUsers")
-    public String showUsers(@RequestParam(name = "page", required = false, defaultValue = "1") int page, @RequestParam(name = "size", required = false, defaultValue = "25") int size, Model model) {
+    public String showUsers(@RequestParam(name = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(name = "size", required = false, defaultValue = "25") int size, Model model) {
         List<User> users = userService.getUsersWithPagination(page, size);
         int pageCount = this.userService.getUserPageCount(size);
-        
+
         model.addAttribute("currentPageForUser", page);
         model.addAttribute("userPageCount", pageCount);
         model.addAttribute("foundUsers", users);
@@ -39,16 +42,16 @@ public class UserController {
 
     @PostMapping("/validate")
     public String register(@Valid User user, BindingResult bindingResult) {
-        if(!user.getConfirmPassword().equals(user.getPassword())) {
+        if (!user.getConfirmPassword().equals(user.getPassword())) {
             bindingResult.rejectValue("confirmpassword", "PasswordMismatch", "Passwords do not match");
         }
 
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             return "Register";
         }
 
         boolean registerSuccess = this.userService.register(user);
-        if(!registerSuccess) {
+        if (!registerSuccess) {
             bindingResult.rejectValue("username", "DuplicateValue", "Username is already taken");
             return "Register";
         }
@@ -56,11 +59,13 @@ public class UserController {
         return "redirect:/login";
     }
 
+    @RequiredRole({ "*" })
     @PostMapping("/saveUserRole")
     public String saveUserRole(@RequestParam(name = "uid") int userId, @RequestParam(name = "user_role") String role, @RequestParam(name = "user_activity") boolean isActive) {
         this.userService.updateUserRow(userId, role, isActive);
         return "redirect:/showUsers";
     }
+
 
     // @PostMapping("/saveRoles")
     // public String saveRoles(@RequestParam(name = "roles") Map<String, String> roles) {
@@ -71,7 +76,6 @@ public class UserController {
     //         String role = entry.getValue();
     //         userRoles.put(userId, role);
     //     }
-
     //     userService.updateMultipleUserRole(userRoles);
     //     return "redirect:/showUsers";
     // }

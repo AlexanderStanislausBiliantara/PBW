@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.WombatFm.RequiredRole;
 import com.example.WombatFm.Artist.ArtistService;
 
 import jakarta.validation.Valid;
@@ -39,11 +40,13 @@ public class SongController {
         }
     }
 
+    @RequiredRole({ "*" })
     @GetMapping("/add")
     public String addSongPage(Song song) {
         return "AddSong";
     }
 
+    @RequiredRole({ "*" })
     @PostMapping("/add")
     public String addSong(
             @Valid Song song,
