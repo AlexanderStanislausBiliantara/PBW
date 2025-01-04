@@ -61,23 +61,22 @@ public class UserController {
 
     @RequiredRole({ "*" })
     @PostMapping("/saveUserRole")
-    public String saveUserRole(@RequestParam(name = "uid") int userId, @RequestParam(name = "user_role") String role) {
-        this.userService.updateUserRole(userId, role);
+    public String saveUserRole(@RequestParam(name = "uid") int userId, @RequestParam(name = "user_role") String role, @RequestParam(name = "user_activity") boolean isActive) {
+        this.userService.updateUserRow(userId, role, isActive);
         return "redirect:/showUsers";
     }
 
-    @RequiredRole({ "*" })
-    @PostMapping("/saveRoles")
-    public String saveRoles(@RequestParam(name = "roles") Map<String, String> roles) {
-        Map<Integer, String> userRoles = new HashMap<>();
 
-        for (Map.Entry<String, String> entry : roles.entrySet()) {
-            int userId = Integer.parseInt(entry.getKey());
-            String role = entry.getValue();
-            userRoles.put(userId, role);
-        }
+    // @PostMapping("/saveRoles")
+    // public String saveRoles(@RequestParam(name = "roles") Map<String, String> roles) {
+    //     Map<Integer, String> userRoles = new HashMap<>();
 
-        userService.updateMultipleUserRole(userRoles);
-        return "redirect:/showUsers";
-    }
+    //     for(Map.Entry<String, String> entry : roles.entrySet()) {
+    //         int userId = Integer.parseInt(entry.getKey());
+    //         String role = entry.getValue();
+    //         userRoles.put(userId, role);
+    //     }
+    //     userService.updateMultipleUserRole(userRoles);
+    //     return "redirect:/showUsers";
+    // }
 }

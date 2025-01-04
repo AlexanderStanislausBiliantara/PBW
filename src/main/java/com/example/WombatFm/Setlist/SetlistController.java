@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.WombatFm.RequiredRole;
 import com.example.WombatFm.Artist.Artist;
@@ -126,6 +127,7 @@ public class SetlistController {
     public String addSetlist(Model model, SetlistForm setlistForm) {
         List<Show> shows = showService.getAllShows();
         List<Artist> artists = artistService.getAllArtists();
+
         model.addAttribute("shows", shows);
         model.addAttribute("artists", artists);
         return "AddSetlist";

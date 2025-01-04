@@ -159,9 +159,11 @@ public class ShowController {
     }
 
     @GetMapping("/selectShow")
-    public String selecdtShow(Model model) {
+
+    public String selectShow(Model model){
         List<Show> allShow = showService.getAllShows();
-        model.addAttribute("allShow", allShow);
-        return "AddSetlist";
+        
+        model.addAttribute("allShow", allShow.subList(0, 15));
+        return "Show";
     }
 }

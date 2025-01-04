@@ -67,7 +67,7 @@ public class JdbcSetlistRepository implements SetlistRepository {
     @Override
     public List<Setlist> getTopTenSetlists() {
         String sql = """
-                SELECT artists.name, artists.artist_id, artists.artist_photo_url, 
+                SELECT setlists.setlist_id, artists.name, artists.artist_id, artists.artist_photo_url, 
                 shows.title, shows.venue, shows.show_id, shows.show_date, 
                 shows.start_time, shows.duration
                 FROM setlists JOIN shows ON setlists.show_id = shows.show_id

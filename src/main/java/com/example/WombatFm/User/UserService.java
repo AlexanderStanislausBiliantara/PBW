@@ -32,15 +32,15 @@ public class UserService {
     }
 
 
-    public void updateUserRole(int userId, String role) {
-        this.userRepository.updateUserRole(userId, role);
+    public void updateUserRow(int userId, String role, boolean isActive) {
+        this.userRepository.updateUserRow(userId, role, isActive);
     }
 
-    public void updateMultipleUserRole(Map<Integer, String> userRoles) {
-        for(Map.Entry<Integer, String> entry : userRoles.entrySet()) {
-            this.userRepository.updateUserRole(entry.getKey(), entry.getValue());
-        }
-    }
+    // public void updateMultipleUserRole(Map<Integer, String> userRoles) {
+    //     for(Map.Entry<Integer, String> entry : userRoles.entrySet()) {
+    //         this.userRepository.updateUserRole(entry.getKey(), entry.getValue());
+    //     }
+    // }
 
     public boolean register(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));

@@ -17,23 +17,13 @@
 <body>
     <div th:include="fragments/Header :: Header" id="headerDiv"></div>
     <div class="container">
-        <div class="song-section">
-            <h2 th:text="${title}"></h2>
-            <h2>Song List</h2>
-            <ol class="song-list" th:each="song, iterStat  : ${songs}">
-                <li>
-                    <a th:text="${iterStat.index+1} + '. ' + ${song.getTitle()}"><!-- song order -->
-                    </a>
-                </li>
-            </ol>
-        </div>
-        <div class="container-setlist-info">
-            <div class="setlist-info" th:each="setlist : ${topTenSetlists}">
-                <center><h2>Setlist Details</h2></center>
-                <p><strong>Location:</strong> <span th:text="${setlist.show.venue}"><span></p>
-                <p><strong>Date:</strong> <span th:text="${setlist.show.showDate}"><span></p>
-                <p><strong>Duration:</strong> <span th:text="${setlist.show.duration} + ' minutes'"><span></p>
-                <p><strong>Start Time:</strong> <span th:text="${setlist.show.startTime}"><span></p>
+        <div class="container-show-info">
+            <div class="show-info" th:each="show : ${allShow}">
+                <center><h2 th:text="${show.title}"></h2></center>
+                <p><strong>Location:</strong> <span th:text="${show.venue}"><span></p>
+                <p><strong>Date:</strong> <span th:text="${show.showDate}"><span></p>
+                <p><strong>Duration:</strong> <span th:text="${show.duration} + ' minutes'"><span></p>
+                <p><strong>Start Time:</strong> <span th:text="${show.startTime}"><span></p>
             </div>
         </div>
     </div>
