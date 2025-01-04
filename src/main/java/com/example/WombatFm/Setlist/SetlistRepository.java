@@ -11,4 +11,6 @@ public interface SetlistRepository {
     Optional<Setlist> getSetlistByShowIdAndArtistId(int showId, int artistId);
 
     void createSetlist(int showId, int artistId);
+
+    List<Setlist> getTopTenSetlists();
 }

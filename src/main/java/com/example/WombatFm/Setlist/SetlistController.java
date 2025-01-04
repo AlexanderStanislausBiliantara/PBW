@@ -129,17 +129,10 @@ public class SetlistController {
         return "AddSetlist";
     }
 
-    @GetMapping("/addSetlist")
-    public String addSetlist(Model model){
-        List<Show> allShow = showService.getAllShows();
-        List<Artist> allArtist = artistService.getAllArtists();
-        model.addAttribute("allShow", allShow); 
-        model.addAttribute("allArtists", allArtist);
-        return "AddSetlist";
-    }
-
-    @GetMapping("/showSetlist")
-    public String showSetlist(){
+    @GetMapping
+    public String showSetlist(Model model){
+        List<Setlist> topTenSetlists = this.setlistService.getTopTenSetlists();
+        model.addAttribute("topTenSetlists", topTenSetlists);
         return "Setlist";
     }
 
@@ -166,13 +159,14 @@ public class SetlistController {
         }
     }
 
-    @PostMapping("/saveSetlist")
-    public String saveSetlist(@RequestParam(name="show") String show, @RequestParam(name="artist") String artist){
-        Show saveShow = showService.getShowsByTitle(show).get(0);
-        Artist saveArtist = artistService.getArtistByName(artist).get();
-        setlistService.createSetlist(saveShow.getShowId(), saveArtist.getArtistId());
-        return "redirect:/addSetlist";
-  
+    // @PostMapping("/saveSetlist")
+    // public String saveSetlist(@RequestParam(name="show") String show, @RequestParam(name="artist") String artist){
+    //     Show saveShow = showService.getShowsByTitle(show).get(0);
+    //     Artist saveArtist = artistService.getArtistByName(artist).get();
+    //     setlistService.createSetlist(saveShow.getShowId(), saveArtist.getArtistId());
+    //     return "redirect:/addSetlist";
+    // }
+
     @GetMapping("/edit")
     public String editSetlist(HttpSession session,
             // @PathVariable String showIdStr,
