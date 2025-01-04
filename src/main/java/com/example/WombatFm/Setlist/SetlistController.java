@@ -124,6 +124,7 @@ public class SetlistController {
     public String addSetlist(Model model, SetlistForm setlistForm) {
         List<Show> shows = showService.getAllShows();
         List<Artist> artists = artistService.getAllArtists();
+
         model.addAttribute("shows", shows);
         model.addAttribute("artists", artists);
         return "AddSetlist";

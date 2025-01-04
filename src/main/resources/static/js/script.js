@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const fieldShow = document.getElementById('show');
   const searchShow = document.getElementById('search-field-show');
   const searchArtist = document.getElementById('search-field-artist');
+  const tempShow = document.getElementById('tempShowTitle');
+  const tempArtist = document.getElementById('tempArtistName');
 
 
 
@@ -53,16 +55,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
   optionArtist.forEach(artist => {
     artist.addEventListener('click', () => {
-      fieldArtist.value = artist.textContent;
-      console.log(artist.dataset.value);
+      fieldArtist.value = artist.value;
+      tempArtist.value = artist.textContent;
     });
   });
 
   optionShow.forEach(show => {
     show.addEventListener('click', () => {
-      fieldShow.value = show.textContent;
-
-      console.log(show.dataset.value);
+      fieldShow.value = show.value;
+      tempShow.value = show.textContent;
     });
   });
 

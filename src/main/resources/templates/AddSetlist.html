@@ -19,12 +19,13 @@
       <div class="text-setlist">
         <h1>Add New Setlist</h1>
       </div>
-      <form th:action="@{/setlist/add}" method="POST" class="setlist-form">
+      <form th:object="${setlistForm}" th:action="@{/setlist/add}" method="POST" class="setlist-form">
   
         <div class="form-group">
           <label for="show">Show</label>
           <div class="input-group">
-            <input type="text" id="show" name="show" placeholder="Search show" readonly required>
+            <input type="text" id="tempShowTitle">
+            <input th:field="*{showId}" hidden th:value="*{showId}" type="text" id="show" name="show" placeholder="Search show" readonly required>
             <button type="button" class="search-button" id="search-show">Search</button>
           </div>
         </div>
@@ -32,7 +33,8 @@
         <div class="form-group">
           <label for="artist">Artist</label>
           <div class="input-group">
-            <input type="text" id="artist" name="artist" placeholder="Search artist" readonly required>
+            <input type="text" id="tempArtistName">
+            <input th:field="*{artistId}" hidden th:value="*{artistId}" type="text" id="artist" name="artist" placeholder="Search artist" readonly required>
             <button type="button" class="search-button" id="search-artist">Search</button>
           </div>
         </div>
@@ -50,7 +52,7 @@
         <h2>Select Show</h2>
         <input type="text" id="search-field-show" class="search-input" placeholder="Search...">
         <ul id="results-list" class="results-list" >
-          <li class="option-show" th:each="show : ${shows}" th:text="${show.title}"></li>
+          <li class="option-show" th:each="show : ${shows}" th:text="${show.title}" th:value="${show.showId}"></li>
         </ul>
       </div>
     </div>
@@ -61,7 +63,7 @@
         <h2>Select Artist</h2>
         <input type="text" id="search-field-artist" class="search-input" placeholder="Search...">
         <ul id="results-list" class="results-list">
-          <li class="option-artist" th:each="artist : ${artists}" th:text="${artist.name}"></li>
+          <li class="option-artist" th:each="artist : ${artists}" th:text="${artist.name}" th:value="${artist.artistId}"></li>
         </ul>
       </div>
     </div>
