@@ -28,6 +28,10 @@ public class ReviewService {
         return reviewRepository.addReview(review);
     }
 
+    public List<ReviewData> getReviewsPerDay() {
+        return reviewRepository.getReviewsPerDay();
+    }
+
     // public int addRevision(Review review) {
     // return reviewRepository.addRevision(review);
     // }

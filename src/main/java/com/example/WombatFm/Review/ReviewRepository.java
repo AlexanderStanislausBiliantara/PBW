@@ -13,5 +13,7 @@ public interface ReviewRepository {
 
     int addReview(Review review);
 
+    List<ReviewData> getReviewsPerDay();
+
     // int addRevision(Review review);
 }

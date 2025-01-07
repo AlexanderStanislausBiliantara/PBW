@@ -110,6 +110,17 @@ public class JdbcReviewRepository implements ReviewRepository {
         return reviewId;
     }
 
+    @Override
+    public List<ReviewData> getReviewsPerDay() {
+        String sql = """
+                SELECT DATE(created_at) AS day, COUNT(*) AS reviewCount 
+                FROM reviews 
+                GROUP BY DATE(created_at)
+                ORDER BY day DESC
+                """;
+        return jdbcTemplate.query(sql, this::mapRowToReviewData);
+    }
+
     private List<Song> getSongsForReview(int reviewId) {
         String sql = "SELECT si.song_id, so.title, si.song_order, so.artist_id AS artist_id  "
                 + "FROM setlist_version sv "
@@ -135,5 +146,11 @@ public class JdbcReviewRepository implements ReviewRepository {
                 resultSet.getInt("artist_id"));
         song.setSongOrder(resultSet.getInt("song_order"));
         return song;
+    }
+
+    private ReviewData mapRowToReviewData(ResultSet resultSet, int rowNum) throws SQLException {
+        return new ReviewData(
+            resultSet.getDate("day"), 
+            resultSet.getInt("reviewcount"));
     }
 }
