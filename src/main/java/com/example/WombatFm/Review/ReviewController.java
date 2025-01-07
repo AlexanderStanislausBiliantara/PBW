@@ -1,49 +1,57 @@
-// package com.example.WombatFm.Review;
+package com.example.WombatFm.Review;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.stereotype.Controller;
-// import org.springframework.validation.BindingResult;
-// import org.springframework.web.bind.annotation.PostMapping;
-// import org.springframework.web.bind.annotation.RequestMapping;
+import java.util.List;
 
-// import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-// @Controller
-// @RequestMapping("/review")
-// public class ReviewController {
+import jakarta.validation.Valid;
 
-// @Autowired
-// private ReviewService reviewService;
+@Controller
+@RequestMapping("/review")
+public class ReviewController {
 
-// @PostMapping
-// public String addReview(@Valid Review review,
-// BindingResult bindingResult) {
+    @Autowired
+    private ReviewService reviewService;
 
-// if (bindingResult.hasErrors()) {
-// return "Setlist";
-// }
+    @GetMapping("/chartData")
+    public List<ReviewData> getReviewData() {
+        return reviewService.getReviewsPerDay();
+    }
 
-// try {
-// reviewService.addReview(review);
-// return "redirect:/setlist" + "";
-// } catch (Exception e) {
-// return "Setlist";
-// }
-// }
+    @PostMapping
+    public String addReview(@Valid Review review,
+        BindingResult bindingResult) {
 
-// @PostMapping("/revision")
-// public String addRevision(@Valid Review review,
-// BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "Setlist";
+        }
 
-// if (bindingResult.hasErrors()) {
-// return "EditSetlist";
-// }
+        try {
+            reviewService.addReview(review);
+            return "redirect:/setlist" + "";
+        } catch (Exception e) {
+            return "Setlist";
+        }
+    }
 
-// try {
-// reviewService.addRevision(review);
-// return "redirect:/setlist" + "";
-// } catch (Exception e) {
-// return "EditSetlist";
-// }
-// }
-// }
+    // @PostMapping("/revision")
+    // public String addRevision(@Valid Review review,
+    //     BindingResult bindingResult) {
+
+    //     if (bindingResult.hasErrors()) {
+    //         return "EditSetlist";
+    //     }
+
+    //     try {
+    //         reviewService.addRevision(review);
+    //         return "redirect:/setlist" + "";
+    //     } catch (Exception e) {
+    //         return "EditSetlist";
+    //     }
+    // }
+}
