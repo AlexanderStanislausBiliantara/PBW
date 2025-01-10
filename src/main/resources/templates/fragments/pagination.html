@@ -1,30 +1,53 @@
 <div th:fragment="pagination" class="pagination">
-    <nav th:if="${userPageCount > 1}">
-        <ul class="pagination-container">
-            <!-- Previous Button -->
-            <li>
-                <a th:href="@{/showUsers(page=${currentPageForUser} - 1)}" aria-label="Previous" 
-                   th:class="${currentPageForUser} == 1 ? 'disabled' : null">
+  <nav th:if="${userPageCount > 1}">
+    <ul class="pagination-container">
+      <!-- Previous Button -->
+      <!-- <li>
+                <a
+                    th:href="@{/showUsers(page=${currentPageForUser} - 1)}"
+                    aria-label="Previous"
+                    th:class="${currentPageForUser} == 1 ? 'disabled' : null"
+                >
                     <span aria-hidden="true">&laquo;</span>
                 </a>
-            </li>
+            </li> -->
 
-            <!-- Page Numbers -->
-            <li th:each="i : ${#numbers.sequence(
-                                T(java.lang.Math).max(1, currentPageForUser - 2), 
-                                T(java.lang.Math).min(userPageCount, currentPageForUser + 2))}">
-                <a th:href="@{/showUsers(page=${i})}" 
-                   th:text="${i}" 
-                   th:class="${currentPageForUser} == ${i} ? 'active' : null"></a>
-            </li>
+      <!-- Page Numbers -->
+      <li th:if="${currentPageForUser >= 3}">
+        <a th:href="@{/showUsers#manage-user(page=1)}">1</a>
+      </li>
+      <span th:if="${currentPageForUser > 3}">...</span>
 
-            <!-- Next Button -->
-            <li>
-                <a th:href="@{/showUsers(page=${currentPageForUser} + 1)}" aria-label="Next" 
-                   th:class="${currentPageForUser} == ${userPageCount} ? 'disabled' : null">
+      <li
+        th:each="i : ${#numbers.sequence(
+                                T(java.lang.Math).max(1, currentPageForUser - 1), 
+                                T(java.lang.Math).min(userPageCount, currentPageForUser + 1))}"
+      >
+        <a
+          th:href="@{/showUsers#manage-user(page=${i})}"
+          th:text="${i}"
+          th:class="${currentPageForUser} == ${i} ? 'bg-white text-black' : null"
+        ></a>
+      </li>
+
+      <span th:if="${currentPageForUser} < ${userPageCount - 2}">...</span>
+      <li th:if="${currentPageForUser} <= ${userPageCount - 2}">
+        <a
+          th:href="@{/showUsers#manage-user(page=${userPageCount})}"
+          th:text="${userPageCount}"
+        ></a>
+      </li>
+
+      <!-- Next Button -->
+      <!-- <li>
+                <a
+                    th:href="@{/showUsers(page=${currentPageForUser} + 1)}"
+                    aria-label="Next"
+                    th:class="${currentPageForUser} == ${userPageCount} ? 'disabled' : null"
+                >
                     <span aria-hidden="true">&raquo;</span>
                 </a>
-            </li>
-        </ul>
-    </nav>
+            </li> -->
+    </ul>
+  </nav>
 </div>
