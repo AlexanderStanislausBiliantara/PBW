@@ -33,7 +33,9 @@ public class UserController {
         model.addAttribute("userPageCount", pageCount);
         model.addAttribute("foundUsers", users);
         return "AdminPage";
-    }
+    } 
+
+
 
     @GetMapping("/register")
     public String registerView(User user) {

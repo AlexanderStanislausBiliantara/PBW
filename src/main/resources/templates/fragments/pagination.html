@@ -1,0 +1,30 @@
+<div th:fragment="pagination" class="pagination">
+    <nav th:if="${userPageCount > 1}">
+        <ul class="pagination-container">
+            <!-- Previous Button -->
+            <li>
+                <a th:href="@{/showUsers(page=${currentPageForUser} - 1)}" aria-label="Previous" 
+                   th:class="${currentPageForUser} == 1 ? 'disabled' : null">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+
+            <!-- Page Numbers -->
+            <li th:each="i : ${#numbers.sequence(
+                                T(java.lang.Math).max(1, currentPageForUser - 2), 
+                                T(java.lang.Math).min(userPageCount, currentPageForUser + 2))}">
+                <a th:href="@{/showUsers(page=${i})}" 
+                   th:text="${i}" 
+                   th:class="${currentPageForUser} == ${i} ? 'active' : null"></a>
+            </li>
+
+            <!-- Next Button -->
+            <li>
+                <a th:href="@{/showUsers(page=${currentPageForUser} + 1)}" aria-label="Next" 
+                   th:class="${currentPageForUser} == ${userPageCount} ? 'disabled' : null">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
