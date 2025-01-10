@@ -24,7 +24,7 @@
         <div class="form-group">
           <label for="show">Show</label>
           <div class="input-group">
-            <input type="text" id="tempShowTitle">
+            <input type="text" id="tempShowTitle" disabled>
             <input th:field="*{showId}" hidden th:value="*{showId}" type="text" id="show" name="show" placeholder="Search show" readonly required>
             <button type="button" class="search-button" id="search-show">Search</button>
           </div>
@@ -33,7 +33,7 @@
         <div class="form-group">
           <label for="artist">Artist</label>
           <div class="input-group">
-            <input type="text" id="tempArtistName">
+            <input type="text" id="tempArtistName" disabled>
             <input th:field="*{artistId}" hidden th:value="*{artistId}" type="text" id="artist" name="artist" placeholder="Search artist" readonly required>
             <button type="button" class="search-button" id="search-artist">Search</button>
           </div>

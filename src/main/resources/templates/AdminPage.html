@@ -13,21 +13,50 @@
             padding: 20px;
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
     <div th:include="fragments/Header :: Header" id="headerDiv"></div>
 
     <div class="chart-dashboard">
-
+        <div>
+            <canvas id="myChart"></canvas>
+        </div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        
+        <script>
+            const ctx = document.getElementById('myChart');
+        
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                borderWidth: 1
+            }]
+            },
+            options: {
+            scales: {
+                y: {
+                beginAtZero: true
+                }
+            }
+            }
+        });
+        </script>
+          
     </div>
 
-    <div class="page-number">
-        <th:block th:include="~{/fragments/pagination :: pagination}"></th:block>
-    </div>    
     <hr>
     <div class="search-username">
         <input type="text" id="userName" name="userName" placeholder="Search Userame">
     </div>
+    <div class="page-number">
+        <th:block th:include="~{/fragments/pagination :: pagination}"></th:block>
+    </div>    
     <div class="table-user">
         <table>
             <thead>
