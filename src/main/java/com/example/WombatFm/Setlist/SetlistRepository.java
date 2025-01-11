@@ -6,7 +6,7 @@ import java.util.Optional;
 import com.example.WombatFm.Song.Song;
 
 public interface SetlistRepository {
-    List<Song> getNewestSetlist(int showId);
+    List<Song> getNewestSetlist(int showId, int artistId);
 
     Optional<Setlist> getSetlistByShowIdAndArtistId(int showId, int artistId);
 

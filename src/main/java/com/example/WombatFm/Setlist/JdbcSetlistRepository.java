@@ -20,15 +20,15 @@ public class JdbcSetlistRepository implements SetlistRepository {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public List<Song> getNewestSetlist(int showId) {
+    public List<Song> getNewestSetlist(int showId, int artistId) {
         String setlistSql = "SELECT sv.version_id AS version_id " +
                 "FROM setlists s " +
                 "JOIN setlist_version sv ON s.setlist_id = sv.setlist_id " +
-                "WHERE s.show_id = ? " +
+                "WHERE s.show_id = ? AND s.artist_id = ? " +
                 "ORDER BY sv.version_id DESC " +
                 "LIMIT 1";
 
-        List<Integer> versionIdResult = jdbcTemplate.query(setlistSql, this::mapRowToVersionId, showId);
+        List<Integer> versionIdResult = jdbcTemplate.query(setlistSql, this::mapRowToVersionId, showId, artistId);
 
         if (versionIdResult.isEmpty()) {
             return new ArrayList<>();
@@ -67,8 +67,8 @@ public class JdbcSetlistRepository implements SetlistRepository {
     @Override
     public List<Setlist> getTopTenSetlists() {
         String sql = """
-                SELECT setlists.setlist_id, artists.name, artists.artist_id, artists.artist_photo_url, 
-                shows.title, shows.venue, shows.show_id, shows.show_date, 
+                SELECT setlists.setlist_id, artists.name, artists.artist_id, artists.artist_photo_url,
+                shows.title, shows.venue, shows.show_id, shows.show_date,
                 shows.start_time, shows.duration
                 FROM setlists JOIN shows ON setlists.show_id = shows.show_id
                 JOIN artists ON setlists.artist_id = artists.artist_id
@@ -111,5 +111,5 @@ public class JdbcSetlistRepository implements SetlistRepository {
 
     private int mapRowToVersionId(ResultSet resultSet, int rowNum) throws SQLException {
         return resultSet.getInt("version_id");
-    }    
+    }
 }
