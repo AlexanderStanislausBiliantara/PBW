@@ -286,22 +286,22 @@ body {
 /*Artist*/
 .artist-container{
     display: flex;
-    max-width: 800px;
+    max-width: 810px;
     margin: 0 auto;
     background-color: #2a2a2a; 
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
     padding: 20px;
     margin-bottom: 20px;
+    height: 300px;
 }
 
 
 .container {
     position: relative;
-    width: 150px;
+    width: 120px;
     max-width: 300px;
     height: 200px;
-    padding-right: 5px;
     overflow: hidden;
 }
 
@@ -338,8 +338,9 @@ body {
 }
 
 .img-container{
-    margin-left: auto;
+    margin-left: 10px;
     display: flex;
     overflow:auto;
+    gap: 5px;
 }
 

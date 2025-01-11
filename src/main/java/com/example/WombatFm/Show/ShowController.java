@@ -52,8 +52,14 @@ public class ShowController {
     }
 
     @GetMapping("/search")
-    public String searchShow(@RequestParam(name = "query") String query, Model model) {
-        List<Show> foundShows = this.showService.getShowsByTitle(query);
+    public String searchShow(@RequestParam("query") String query, 
+            @RequestParam(name = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(name = "size", required = false, defaultValue = "8") int size, Model model) {
+        List<Show> foundShows = this.showService.getShowsByTitle(query, page, size);
+        int pageCount = this.showService.getPageCount(query, size);
+
+        model.addAttribute("currentPage", page);
+        model.addAttribute("pageCount", pageCount);
         model.addAttribute("shows", foundShows);
         model.addAttribute("query", query);
         return "search_for_show";
@@ -64,41 +70,14 @@ public class ShowController {
             @RequestParam(name = "end_date") Date endDate,
             @RequestParam(name = "page", required = false, defaultValue = "1") int page,
             @RequestParam(name = "size", required = false, defaultValue = "8") int size, Model model) {
-        List<Show> foundShows = this.showService.getShowWithPagination(query, startDate, endDate, page, size);
-        int pageCount = this.showService.getPageCount(query, startDate, endDate, size);
+        List<Show> foundShows = this.showService.getFilteredShowWithPagination(query, startDate, endDate, page, size);
+        int pageCount = this.showService.getFilteredPageCount(query, startDate, endDate, size);
 
-        model.addAttribute("currentPageForUser", page);
-        model.addAttribute("userPageCount", pageCount);
-        model.addAttribute("shows", foundShows);
-        model.addAttribute("query", query);
-        model.addAttribute("startDate", startDate);
-        model.addAttribute("endDate", endDate);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("pageCount", pageCount);
+        model.addAttribute("results", foundShows);
         return "search_for_show";
     }
-
-    /* @GetMapping("/filtered_search")
-    public String searchFilteredShow(
-            @RequestParam(name = "query", required = false, defaultValue = "") String query,
-            @RequestParam(name = "start_date", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
-            @RequestParam(name = "end_date", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
-            @RequestParam(name = "page", required = false, defaultValue = "1") int page,
-            @RequestParam(name = "size", required = false, defaultValue = "8") int size,
-            Model model) {
-
-        query = query != null ? query : "";
-        List<Show> foundShows = this.showService.getShowWithPagination(query, startDate, endDate, page, size);
-        int pageCount = this.showService.getPageCount(query, startDate, endDate, size);
-
-        // Adding attributes for pagination
-        model.addAttribute("currentPageForUser", page);
-        model.addAttribute("userPageCount", pageCount);
-        model.addAttribute("pageNumbers", IntStream.rangeClosed(1, pageCount).boxed().toList());
-        model.addAttribute("shows", foundShows);
-        model.addAttribute("query", query);
-
-        return "search_for_show";
-    } */
-
 
     @RequiredRole({ "*" })
     @PostMapping("/add")

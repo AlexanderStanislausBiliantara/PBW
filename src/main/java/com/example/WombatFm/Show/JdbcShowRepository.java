@@ -35,10 +35,31 @@ public class JdbcShowRepository implements ShowRepository {
     }
 
     @Override
-    public List<Show> getShowsByTitle(String showTitle) {
-        String sql = "SELECT * FROM shows WHERE title ILIKE ?";
-        List<Show> results = jdbcTemplate.query(sql, this::mapRowToShow, "%" + showTitle + "%");
+    public List<Show> getShowsByTitle(String showTitle, int limit, int offset) {
+        String sql = """
+                SELECT * 
+                FROM 
+                    shows 
+                WHERE 
+                    title ILIKE CONCAT('%', ?, '%')
+                ORDER BY
+                    show_date ASC LIMIT ? OFFSET ?
+                """;
+        List<Show> results = jdbcTemplate.query(sql, this::mapRowToShow, showTitle, limit, offset);
         return results;
+    }
+
+    @Override
+    public int countShows(String showTitle) {
+        String sql = """
+                SELECT 
+                    COUNT(*)
+                FROM 
+                    shows 
+                WHERE 
+                    title ILIKE CONCAT('%', ?, '%')
+                """;
+        return jdbcTemplate.queryForObject(sql, Integer.class, showTitle);
     }
 
     @Override
@@ -56,7 +77,7 @@ public class JdbcShowRepository implements ShowRepository {
     }
 
     @Override
-    public int countShows(String showTitle, Date startDate, Date endDate) {
+    public int countFilteredShows(String showTitle, Date startDate, Date endDate) {
         String sql = """
                 SELECT 
                     COUNT(*) 
