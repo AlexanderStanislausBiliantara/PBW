@@ -18,9 +18,9 @@
                 <div class="filter-container">
                     <input name="query" type="hidden" th:value="${query}">
                     <label for="start-date">Start Date:</label>
-                    <input name="start_date" type="date" id="start-date" placeholder="mm/dd/yyyy">
+                    <input name="start_date" type="date" id="start-date" placeholder="mm/dd/yyyy" required>
                     <label for="end-date">End Date:</label>
-                    <input name="end_date" type="date" id="end-date" placeholder="mm/dd/yyyy">
+                    <input name="end_date" type="date" id="end-date" placeholder="mm/dd/yyyy" required>
                     <button type="submit">Apply Filter</button>
                 </div>
             </form>

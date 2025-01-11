@@ -58,8 +58,8 @@ public class ShowController {
         List<Show> foundShows = this.showService.getShowsByTitle(query, page, size);
         int pageCount = this.showService.getPageCount(query, size);
 
-        model.addAttribute("currentPage", page);
-        model.addAttribute("pageCount", pageCount);
+        model.addAttribute("currentPageForUser", page);
+        model.addAttribute("userPageCount", pageCount);
         model.addAttribute("shows", foundShows);
         model.addAttribute("query", query);
         return "search_for_show";
@@ -73,9 +73,10 @@ public class ShowController {
         List<Show> foundShows = this.showService.getFilteredShowWithPagination(query, startDate, endDate, page, size);
         int pageCount = this.showService.getFilteredPageCount(query, startDate, endDate, size);
 
-        model.addAttribute("currentPage", page);
-        model.addAttribute("pageCount", pageCount);
-        model.addAttribute("results", foundShows);
+        model.addAttribute("currentPageForUser", page);
+        model.addAttribute("userPageCount", pageCount);
+        model.addAttribute("shows", foundShows);
+        model.addAttribute("query", query);
         return "search_for_show";
     }
 
