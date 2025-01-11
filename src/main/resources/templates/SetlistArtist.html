@@ -11,15 +11,14 @@
 <body>
     <div th:include="fragments/Header :: Header" id="headerDiv"></div>
     <div class="container">
-        <div class="song-section">
+        <div class="setlist-section">
             <h2>
-                Artist list on show 
-                <span th:text="${showName}"></span>
-                at <span th:text="${showDate}"></span>
+                Song list for 
+                <span th:text="${artistName}"></span>
             </h2>
-            <ol class="artist">
-                <li class="eachArtist" th:each="artist  : ${artists}">
-                    <a th:text="${artist.name}" th:href="@{/setlist/{id}?artist_id={artist}(id=${showId}, artist=${artist.artistId})}"></a>
+            <ol class="song">
+                <li class="eachSong" th:each="song  : ${setlist.songs}">
+                    <span th:text="${song.title}"></span>
                 </li>
             </ol>
         </div>

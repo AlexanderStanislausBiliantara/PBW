@@ -28,25 +28,27 @@
                     <h2>Search Results For "<span th:text="${query}"></span>"</h2>
                     <ul class="show">
                         <li class="eachShow" th:each="show : ${shows}">
-                            <div class="title">
-                                <h3 th:text="${show.title}"></h3>
-                            </div>
-                            <div class="date">
-                                <span>
-                                    Concert date: 
-                                    <span class="show-date" th:text="${show.getDateFormatted()}"></span>
-                                </span>
-                            </div>
-                            <div class="info">
-                                <p>
-                                    Starts at: 
-                                    <span class="show-startTime" th:text="${show.startTime}"></span>
-                                </p>
-                                <p>
-                                    Location: 
-                                    <span class="show-venue" th:text="${show.venue}"></span>
-                                </p>
-                            </div>
+                            <a th:href="@{/setlist/{id}(id=${show.showId})}">
+                                <div class="title">
+                                    <h3 th:text="${show.title}"></h3>
+                                </div>
+                                <div class="date">
+                                    <span>
+                                        Concert date: 
+                                        <span class="show-date" th:text="${show.getDateFormatted()}"></span>
+                                    </span>
+                                </div>
+                                <div class="info">
+                                    <p>
+                                        Starts at: 
+                                        <span class="show-startTime" th:text="${show.startTime}"></span>
+                                    </p>
+                                    <p>
+                                        Location: 
+                                        <span class="show-venue" th:text="${show.venue}"></span>
+                                    </p>
+                                </div>
+                            </a>
                         </li>
                     </ul>
                 </div>

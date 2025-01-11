@@ -361,3 +361,8 @@ footer .footer-container .information, .socialmedia{
     color: white;
     border-color: #007bff;
 }
+
+li > a{
+    text-decoration: none;
+    color: white;
+}
