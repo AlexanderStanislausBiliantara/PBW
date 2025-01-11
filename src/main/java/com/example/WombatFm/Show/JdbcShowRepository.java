@@ -36,7 +36,7 @@ public class JdbcShowRepository implements ShowRepository {
 
     @Override
     public List<Show> getShowsByTitle(String showTitle) {
-        String sql = "SELECT * FROM shows WHERE title LIKE ?";
+        String sql = "SELECT * FROM shows WHERE title ILIKE ?";
         List<Show> results = jdbcTemplate.query(sql, this::mapRowToShow, "%" + showTitle + "%");
         return results;
     }

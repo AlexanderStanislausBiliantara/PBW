@@ -1,31 +1,100 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/search_for_show.css}">
-    <title>Document</title>
-</head>
-<body>
-    <header class="header-section">
-        <div class="left-section">
-            <img src="Image Assets/Podcast_or_Radio_Logo-removebg-preview.png" alt="Logo" class="logo">
-            <h3>Wombat.fm</h3>
-            <a th:href="@{/setlist}">Setlist</a>
-            <a th:href="@{/artist}">Artist</a>
-            <a th:href="@{/event}">Event</a>
-        </div>
-        <div class="search-section">
-            <div class="search-bar">
-                <form th:action="@{/show/search}" method="GET">
-                    <input type="text" name="query" th:value="${query}" placeholder="What do you want to play?">
-                    <button type="submit" class="search-bar-submit-button">
-                        <img src="Image Assets/icons8-search-50.png" class="search-icon">
-                    </button>
-                </form>
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" th:href="@{/css/search_for_show.css}">
+        <title>Search Results</title>
+    </head>
+    <body>
+        <header class="header-section">
+            <div class="left-section">
+                <img src="Image Assets/Podcast_or_Radio_Logo-removebg-preview.png" alt="Logo" class="logo">
+                <h3>Wombat.fm</h3>
+                <p>Setlist</p>
+                <p>Artist</p>
+                <p>Event</p>
+            </div>
+            <div class="search-section">
+                <div class="search-bar">
+                    <img src="Image Assets/icons8-search-50.png" class="search-icon">
+                    <input type="text" placeholder="What do you want to play?">
+                </div>
+            </div>
+            <div class="right-section">
+                <a href="#" class="addSetlist">+Add Setlist</a>
+                <a href="#" class="login">Log in</a>
+            </div>
+        </header>
+    
+        <div class="body-section">
+            <div class="filter-container">
+                <label for="start-date">Start Date:</label>
+                <input type="date" id="start-date" placeholder="mm/dd/yyyy">
+                <label for="end-date">End Date:</label>
+                <input type="date" id="end-date" placeholder="mm/dd/yyyy">
+                <button type="button">Apply Filter</button>
+            </div>
+    
+            <div class="setlist-container">
+                <h2>Search Results For "The Truth"</h2>
+                <ul class="setlist">
+                    <li>
+                        <div class="date">
+                            <span class="month">NOV</span>
+                            <span class="day">23</span>
+                            <span class="year">2024</span>
+                        </div>
+                        <div class="info">
+                            <a href="#" class="artist">Young Lex</a>
+                            <p>Jakarta International Stadium, Jakarta - Nov 23, 2024</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="date">
+                            <span class="month">DEC</span>
+                            <span class="day">02</span>
+                            <span class="year">2016</span>
+                        </div>
+                        <div class="info">
+                            <a href="#" class="artist">Habib Rizieq</a>
+                            <p>Monumen Nasional, Jakarta - Dec 2, 2016</p>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
-        <div class="right-section">
-            <a href="#" class="addSetlist">+Add Setlist</a>
-            <a href="#" class="login">Log in</a>
-        </div>
-    </header>
+    
+        <footer>
+            <img src="Image Assets/Podcast_or_Radio_Logo-removebg-preview.png" alt="">
+            <p class="companydescription">Wombat.fm is a dynamic platform that connects music fans with setlists from concerts past and future. Dive into the live music experience by exploring the songs your favorite artists performed and stay in the loop for upcoming shows. Wombat.fm is where every concert memory comes alive and every future performance awaits!</p>
+            <hr>
+    
+            <div class="footer-container">
+                <div class="address-container">
+                    <h4>Address</h4>
+                    <span class="alamat">Jl. Ciumbuleuit No.94,Hegarmanah, </span>
+                    <span>Kec. Cidadap, Kota Bandung, Jawa Barat 40141</span>
+                    <span class="telepon">(022) 203 2655; (022) 204 2004</span>
+                </div>
+    
+                <div class="information">
+                    <h4>Information</h4>
+                    <a href="">About Us</a>
+                </div>
+    
+                <div class="socialmedia">
+                    <h4>Find us</h4>
+                    <div class="image-container">
+                        <a href="#"><img src="Image Assets/icons8-instagram-32.png" alt=""></a>
+                        <a href="#"><img src="Image Assets/icons8-facebook-32 (1).png" alt=""></a>
+                        <a href="#"><img src="Image Assets/icons8-twitterx-32.png" alt=""></a>
+                    </div>
+                </div>
+            </div>
+    
+            <p>© 2024 Property of Kelompok 2 Pemerograman Berbasis Web Kelas B</p>
+        </footer>
+    </body>
+    </html>

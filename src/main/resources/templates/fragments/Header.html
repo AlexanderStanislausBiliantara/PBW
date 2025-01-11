@@ -5,13 +5,13 @@
         <div class="setlist-artist-event">
             <a th:href="@{/setlist}">Setlist</a>
             <a th:href="@{/artist}">Artist</a>
-            <a th:href="@{/show/selectShow}">Show</a> <!-- belum dibikin -->    
+            <a th:href="@{/show/selectShow}">Show</a> 
         </div>
     </div>
     <div class="search-section">
         <div class="search-bar">
-            <form th:action="@{/search}" method="post">
-                <input type="text" placeholder="What do you want to play?">
+            <form th:action="@{/show/search}" method="get">
+                <input name="query" type="text" placeholder="What do you want to play?">
                 <button type="submit" class="search-bar-submit-button">
                     <img th:src="@{/Image Assets/icons8-search-50.png}" class="search-icon">
                 </button>

@@ -162,3 +162,9 @@ div h3{
 .login:hover {
     background-color: #ddd;
 }
+
+.search-icon {
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+}

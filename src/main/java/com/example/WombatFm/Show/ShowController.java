@@ -50,7 +50,7 @@ public class ShowController {
     }
 
     @GetMapping("/search")
-    public String searchShow(@RequestParam("query") String query, Model model) {
+    public String searchShow(@RequestParam(name = "query") String query, Model model) {
         List<Show> foundShows = this.showService.getShowsByTitle(query);
         model.addAttribute("shows", foundShows);
         model.addAttribute("query", query);

@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Show {
-    @Min(value = 1)
+    
     private int showId;
 
     @NotBlank
