@@ -5,96 +5,58 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" th:href="@{/css/search_for_show.css}">
+        <link rel="stylesheet" th:href="@{/css/header.css}">
+        <link rel="stylesheet" th:href="@{/css/footer.css}">
         <title>Search Results</title>
     </head>
     <body>
-        <header class="header-section">
-            <div class="left-section">
-                <img src="Image Assets/Podcast_or_Radio_Logo-removebg-preview.png" alt="Logo" class="logo">
-                <h3>Wombat.fm</h3>
-                <p>Setlist</p>
-                <p>Artist</p>
-                <p>Event</p>
-            </div>
-            <div class="search-section">
-                <div class="search-bar">
-                    <img src="Image Assets/icons8-search-50.png" class="search-icon">
-                    <input type="text" placeholder="What do you want to play?">
-                </div>
-            </div>
-            <div class="right-section">
-                <a href="#" class="addSetlist">+Add Setlist</a>
-                <a href="#" class="login">Log in</a>
-            </div>
-        </header>
-    
+        
+        <div th:include="fragments/Header :: Header" id="headerDiv"></div>
+        
         <div class="body-section">
-            <div class="filter-container">
-                <label for="start-date">Start Date:</label>
-                <input type="date" id="start-date" placeholder="mm/dd/yyyy">
-                <label for="end-date">End Date:</label>
-                <input type="date" id="end-date" placeholder="mm/dd/yyyy">
-                <button type="button">Apply Filter</button>
-            </div>
-    
-            <div class="setlist-container">
-                <h2>Search Results For "The Truth"</h2>
-                <ul class="setlist">
-                    <li>
-                        <div class="date">
-                            <span class="month">NOV</span>
-                            <span class="day">23</span>
-                            <span class="year">2024</span>
-                        </div>
-                        <div class="info">
-                            <a href="#" class="artist">Young Lex</a>
-                            <p>Jakarta International Stadium, Jakarta - Nov 23, 2024</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="date">
-                            <span class="month">DEC</span>
-                            <span class="day">02</span>
-                            <span class="year">2016</span>
-                        </div>
-                        <div class="info">
-                            <a href="#" class="artist">Habib Rizieq</a>
-                            <p>Monumen Nasional, Jakarta - Dec 2, 2016</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <form th:action="@{/show/filtered_search}" method="get">
+                <div class="filter-container">
+                    <input name="query" type="hidden" th:value="${query}">
+                    <label for="start-date">Start Date:</label>
+                    <input name="start_date" type="date" id="start-date" placeholder="mm/dd/yyyy">
+                    <label for="end-date">End Date:</label>
+                    <input name="end_date" type="date" id="end-date" placeholder="mm/dd/yyyy">
+                    <button type="submit">Apply Filter</button>
+                </div>
+            </form>
+                <div class="show-container">
+                    <h2>Search Results For "<span th:text="${query}"></span>"</h2>
+                    <ul class="show">
+                        <li class="eachShow" th:each="show : ${shows}">
+                            <div class="title">
+                                <h3 th:text="${show.title}"></h3>
+                            </div>
+                            <div class="date">
+                                <span>
+                                    Concert date: 
+                                    <span class="show-date" th:text="${show.getDateFormatted()}"></span>
+                                </span>
+                            </div>
+                            <div class="info">
+                                <p>
+                                    Starts at: 
+                                    <span class="show-startTime" th:text="${show.startTime}"></span>
+                                </p>
+                                <p>
+                                    Location: 
+                                    <span class="show-venue" th:text="${show.venue}"></span>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
         </div>
+
+        <div class="page-number">
+            <div th:include="fragments/paginationSearch :: pagination"></div>
+        </div> 
+
     
-        <footer>
-            <img src="Image Assets/Podcast_or_Radio_Logo-removebg-preview.png" alt="">
-            <p class="companydescription">Wombat.fm is a dynamic platform that connects music fans with setlists from concerts past and future. Dive into the live music experience by exploring the songs your favorite artists performed and stay in the loop for upcoming shows. Wombat.fm is where every concert memory comes alive and every future performance awaits!</p>
-            <hr>
-    
-            <div class="footer-container">
-                <div class="address-container">
-                    <h4>Address</h4>
-                    <span class="alamat">Jl. Ciumbuleuit No.94,Hegarmanah, </span>
-                    <span>Kec. Cidadap, Kota Bandung, Jawa Barat 40141</span>
-                    <span class="telepon">(022) 203 2655; (022) 204 2004</span>
-                </div>
-    
-                <div class="information">
-                    <h4>Information</h4>
-                    <a href="">About Us</a>
-                </div>
-    
-                <div class="socialmedia">
-                    <h4>Find us</h4>
-                    <div class="image-container">
-                        <a href="#"><img src="Image Assets/icons8-instagram-32.png" alt=""></a>
-                        <a href="#"><img src="Image Assets/icons8-facebook-32 (1).png" alt=""></a>
-                        <a href="#"><img src="Image Assets/icons8-twitterx-32.png" alt=""></a>
-                    </div>
-                </div>
-            </div>
-    
-            <p>© 2024 Property of Kelompok 2 Pemerograman Berbasis Web Kelas B</p>
-        </footer>
+        <footer th:include="fragments/footer :: footer"></footer>
     </body>
     </html>

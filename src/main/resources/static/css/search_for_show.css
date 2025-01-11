@@ -112,7 +112,7 @@ div h3{
     color: white;
 }
 
-.setlist-container {
+.show-container {
     max-width: 800px;
     margin: 0 auto;
     background-color: #2a2a2a; 
@@ -121,7 +121,7 @@ div h3{
     padding: 20px;
 }
 
-.setlist-container h2 {
+.show-container h2 {
     font-size: 24px;
     color: #f1f1f1;
     border-bottom: 2px solid #444; 
@@ -129,42 +129,43 @@ div h3{
     margin-bottom: 15px;
 }
 
-.setlist {
+.show {
     list-style: none;
     padding: 0;
     margin: 0;
     padding: 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .main-text{
     margin: 2rem;
 }
 
-.setlist .date .day {
+.show .date .day {
     font-size: 18px;
     font-weight: bold;
 }
 
-.setlist .date .year {
+.show .date .year {
     font-size: 12px;
 }
 
-.setlist .info {
+.show .info {
     flex: 1;
 }
 
-.setlist .info .artist {
+.show .info .artist {
     color: #1db954;
     font-size: 16px;
     font-weight: bold;
     text-decoration: none;
 }
 
-.setlist .info .artist:hover {
+.show .info .artist:hover {
     text-decoration: underline;
 }
 
-.setlist .info p {
+.show .info p {
     margin: 5px 0 0;
     font-size: 14px;
     color: #ddd;
@@ -290,4 +291,73 @@ footer .footer-container .information, .socialmedia{
 
 .socialmedia{
     justify-self: right;
+}
+
+.show-date, .show-startTime, .show-venue{
+    font-weight: bold;
+}
+
+.eachShow{
+    padding: 1rem;
+    background-color: rgb(56, 56, 56);
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    margin-top: 1rem;
+}
+
+.title, .title > h3{
+    margin-top: 0;
+}
+
+.eachShow:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); 
+}
+
+.page-number{
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination-container {
+    display: flex; 
+    list-style: none; 
+    padding: 0; 
+    margin: 0; 
+    justify-content: center; 
+    gap: 10px; 
+}
+
+.pagination-container li {
+    display: inline-block; 
+}
+
+.pagination-container li a {
+    text-decoration: none; 
+    padding: 8px 12px; 
+    border: 1px solid #ddd; 
+    border-radius: 4px; 
+    color: #333; 
+    background-color: #f9f9f9; 
+    transition: background-color 0.3s ease;
+}
+
+.pagination-container li a:hover {
+    background-color: #007bff; 
+    color: white; 
+}
+
+.pagination-container li a.disabled {
+    pointer-events: none; 
+    background-color: #e9ecef; 
+    color: #6c757d; 
+}
+
+.pagination-container li a.active {
+    background-color: #007bff; 
+    color: white;
+    border-color: #007bff;
 }

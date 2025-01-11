@@ -5,14 +5,8 @@
     <link rel="stylesheet" th:href="@{/css/AdminPage.css}">
     <title>Wombat FM</title>
     <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
     <script th:src="@{/js/admin.js}" defer></script>
-    <style>
-        #headerDiv{
-            height: 15vh;
-            display: flex;
-            padding: 20px;
-        }
-    </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
@@ -94,7 +88,7 @@
                             </select>
                         </td>
                         <td class="save">
-                            <button>
+                            <button class="svButton">
                                 <img class="svimg" th:src="@{/Image Assets/diskette.png}">
                             </button>
                         </td>
@@ -104,35 +98,6 @@
         </table>
     </div>
     
-    <footer>
-        <img th:src="@{/Image Assets/Podcast_or_Radio_Logo-removebg-preview.png}" alt="">
-        <p class="companydescription">Wombat.fm is a dynamic platform that connects music fans with setlists from concerts past and future. Dive into the live music experience by exploring the songs your favorite artists performed and stay in the loop for upcoming shows. Wombat.fm is where every concert memory comes alive and every future performance awaits!</p>
-        <hr>
-
-        <div class="footer-container">
-            <div class="address-container">
-                <h4>Address</h4>
-                <span class="alamat">Jl. Ciumbuleuit No.94,Hegarmanah, </span>
-                <span>Kec. Cidadap, Kota Bandung, Jawa Barat 40141</span>
-                <span class="telepon">(022) 203 2655; (022) 204 2004</p>
-            </div>
-    
-            <div class="information">
-                <h4>Information</h4>
-                <a href="#">About Us</a>
-            </div>
-    
-            <div class="socialmedia">
-                <h4>Find us</h4>
-                <div class="image-container">
-                    <a href="#"><img th:src="@{/Image Assets/icons8-instagram-32.png}" alt=""></a>
-                    <a href="#"><img th:src="@{/Image Assets/icons8-facebook-32 (1).png}" alt=""></a>
-                    <a href="#"><img th:src="@{/Image Assets/icons8-twitterx-32.png}" alt=""></a>
-                </div>
-            </div>
-        </div>
-
-          <p>© 2024 Property of Kelompok 2 Pemerograman Berbasis Web Kelas B</p>
-    </footer>    
+    <footer th:include="fragments/footer :: footer"></footer>   
 </body>
 </html>

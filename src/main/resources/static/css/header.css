@@ -168,3 +168,29 @@ div h3{
     width: 30px;
     height: 30px;
 }
+
+nav{
+    height: 10vh;
+    display: flex;
+    padding: 20px;
+}
+
+.home{
+    height: 100%;
+}
+
+.home a {
+    display: flex;
+    text-decoration: none;   
+    justify-content: center; 
+    align-items: center;
+    border-radius: 30px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    box-sizing: border-box;
+}
+
+.home a:hover{
+    cursor: pointer;
+    background-color: #555555;
+}

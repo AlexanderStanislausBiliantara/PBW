@@ -39,29 +39,6 @@ body {
     font-size: 2rem;
 }
 
-.searchButton{
-    background-color: #333;
-    padding: 0.5rem;
-    border-radius: 2rem;
-}   
-
-.searchButton > img{
-    width: 1.5rem;
-    height: 1.5rem;
-}
-
-.search-icon {
-    margin-right: 10px;
-    width: 30px;
-    height: 30px;
-}
-
-.icon-right img {
-    width: 20px;
-    height: 20px;
-    margin-left: 10px;
-}
-
 
 /*body-section*/
 .body-section {
@@ -318,7 +295,6 @@ body {
     margin-bottom: 20px;
 }
 
-* {box-sizing: border-box}
 
 .container {
     position: relative;
@@ -367,77 +343,3 @@ body {
     overflow:auto;
 }
 
-footer .companydescription{
-    margin-left: 100px;
-    margin-right: 100px;
-    color: grey;
-    text-align: center;
-}
-
-footer a{
-    color: grey;
-}
-
-footer p{
-    color: grey;
-    text-align: center;
-}
-footer hr{
-    color: grey;
-    opacity: 50%;
-    margin-left: 40px;
-    margin-right: 40px;
-}
-footer img{
-    display: flex;
-    margin-top: 25px;
-    height: 81px;
-    width: 81px;
-    justify-self: center;
-}
-
-footer a img {
-    height: 30px;
-    width: 30px;
-}
-
-.footer-container{
-    display: flex;
-    color: grey;
-}
-
-.footer-container div{
-    margin-left: 45px;
-}
-
-
-footer .socialmedia{
-    
-}
-
-footer .socialmedia .image-container{
-    display: flex;
-    margin-top: -30px;
-    margin-left: -5px;
-}
-
-footer .footer-container .information, .socialmedia{
-    justify-self: right;
-}
-
-.information{
-    padding-left: 160px;
-}
-
-.socialmedia{
-    padding-left: 400px;
-}
-
-.address-container{
-    display: flex;
-    flex-direction: column;
-}
-
-.socialmedia{
-    justify-self: right;
-}
