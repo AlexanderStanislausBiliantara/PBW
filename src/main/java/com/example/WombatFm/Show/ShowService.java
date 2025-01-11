@@ -23,8 +23,18 @@ public class ShowService {
         return showRepository.getShowById(showId);
     }
 
-    public List<Show> getShowsByTitle(String title) {
-        return showRepository.getShowsByTitle(title);
+    public List<Show> getShowsByTitle(String title, int page, int size) {
+        int offset = (page - 1) * size;
+        return showRepository.getShowsByTitle(title, size, offset);
+    }
+
+    public int getShowCount(String title) {
+        return showRepository.countShows(title);
+    }
+
+    public int getPageCount(String title, int size) {
+        int rowCount = getShowCount(title);
+        return (int) Math.ceil((double) rowCount / size);
     }
 
     public List<Artist> getShowArtists(int showId) {
@@ -52,17 +62,17 @@ public class ShowService {
         return showRepository.addShow(show);
     }
 
-    public List<Show> getShowWithPagination(String showTitle, Date startDate, Date endDate, int page, int size) {
+    public List<Show> getFilteredShowWithPagination(String showTitle, Date startDate, Date endDate, int page, int size) {
         int offset = (page - 1) * size;
         return showRepository.getFilteredShows(showTitle, startDate, endDate, size, offset);
     }
 
-    public int getTotalShowCount(String showTitle, Date startDate, Date endDate) {
-        return showRepository.countShows(showTitle, startDate, endDate);
+    public int getTotalFilteredShowCount(String showTitle, Date startDate, Date endDate) {
+        return showRepository.countFilteredShows(showTitle, startDate, endDate);
     }
 
-    public int getPageCount(String showTitle, Date startDate, Date endDate, int size) {
-        int rowCount = getTotalShowCount(showTitle, startDate, endDate);
+    public int getFilteredPageCount(String showTitle, Date startDate, Date endDate, int size) {
+        int rowCount = getTotalFilteredShowCount(showTitle, startDate, endDate);
         return (int) Math.ceil((double) rowCount / size);
     }
 }
