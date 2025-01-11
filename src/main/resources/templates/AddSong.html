@@ -3,48 +3,102 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/AddSong.css}">
+    <title>Add Song</title>
   </head>
   <body>
-    <h1>Add Song</h1>
+    <header class="header-section">
+      <div class="left-section">
+          <img src="/Image Assets/Podcast_or_Radio_Logo-removebg-preview.png" alt="Logo" class="logo">
+          <h3>Wombat.fm</h3>
+          <p>Setlist</p>
+          <p>Artist</p>
+          <p>Show</p>
+      </div>
+      <div class="search-section">
+          <div class="search-bar">
+              <img src="Image Assets/icons8-search-50.png" class="search-icon">
+              <input type="text" placeholder="What do you want to play?">
+          </div>
+      </div>
+      <div class="right-section">
+          <a href="#" class="addSetlist">+Add Setlist</a>
+          <a href="#" class="login">Log in</a>
+      </div>
+    </header>
 
-    <form
-      action="#"
-      method="post"
-      enctype="multipart/form-data"
-      th:action="@{/song/add}"
-      th:object="${song}"
-    >
-      <div th:if="${#fields.hasGlobalErrors()}">
-        <p th:text="${#fields.globalErrors()[0]}"></p>
-      </div>
+    <div class="body-section">
+      <div class="container">
+        <h1>Add Song</h1>
+        <form
+          action="#"
+          method="post"
+          enctype="multipart/form-data"
+          th:action="@{/song/add}"
+          th:object="${song}"
+        >
+          <div th:if="${#fields.hasGlobalErrors()}">
+            <p th:text="${#fields.globalErrors()[0]}"></p>
+          </div>
 
-      <div>
-        <label for="title">Song title:</label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          th:field="*{title}"
-          placeholder="Song title"
-        />
-        <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+          <div>
+            <label for="title">Song title:</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              th:field="*{title}"
+              placeholder="Song title"
+            />
+            <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+          </div>
+          <div>
+            <label for="artistId">Artist Id:</label>
+            <input
+              type="text"
+              id="artistId"
+              name="artistId"
+              th:field="*{artistId}"
+              placeholder="Artist Id"
+            />
+            <div
+              th:if="${#fields.hasErrors('artistId')}"
+              th:errors="*{artistId}"
+            ></div>
+          </div>
+          <button type="submit">Add Song</button>
+        </form>
       </div>
-      <div>
-        <label for="artistId">Artist Id:</label>
-        <input
-          type="text"
-          id="artistId"
-          name="artistId"
-          th:field="*{artistId}"
-          placeholder="Artist Id"
-        />
-        <div
-          th:if="${#fields.hasErrors('artistId')}"
-          th:errors="*{artistId}"
-        ></div>
+    </div>
+
+    <footer>
+      <img src="/Image Assets/Podcast_or_Radio_Logo-removebg-preview.png" alt="">
+      <p class="companydescription">Wombat.fm is a dynamic platform that connects music fans with setlists from concerts past and future. Dive into the live music experience by exploring the songs your favorite artists performed and stay in the loop for upcoming shows. Wombat.fm is where every concert memory comes alive and every future performance awaits!</p>
+      <hr>
+
+      <div class="footer-container">
+          <div class="address-container">
+              <h4>Address</h4>
+              <span class="alamat">Jl. Ciumbuleuit No.94,Hegarmanah, </span>
+              <span>Kec. Cidadap, Kota Bandung, Jawa Barat 40141</span>
+              <span class="telepon">(022) 203 2655; (022) 204 2004</p>
+          </div>
+  
+          <div class="information">
+              <h4>Information</h4>
+              <a href="">About Us</a>
+          </div>
+  
+          <div class="socialmedia">
+              <h4>Find us</h4>
+              <div class="image-container">
+                  <a href="https://instagram.com"><img src="/Image Assets/icons8-instagram-32.png" alt=""></a>
+                  <a href="https://facebook.com"><img src="/Image Assets/icons8-facebook-32 (1).png" alt=""></a>
+                  <a href="https://twitter.com"><img src="/Image Assets/icons8-twitterx-32.png" alt=""></a>
+              </div>
+            </div>
       </div>
-      <button type="submit">Add Song</button>
-    </form>
+        <p>© 2024 Property of Kelompok 2 Pemerograman Berbasis Web Kelas B</p>
+  </footer>
   </body>
 </html>
