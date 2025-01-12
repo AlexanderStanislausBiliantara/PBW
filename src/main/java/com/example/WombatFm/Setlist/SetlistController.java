@@ -21,6 +21,7 @@ import com.example.WombatFm.Review.Review;
 import com.example.WombatFm.Review.ReviewService;
 import com.example.WombatFm.Show.Show;
 import com.example.WombatFm.Show.ShowService;
+import com.example.WombatFm.Song.Song;
 import com.example.WombatFm.Song.SongService;
 
 import jakarta.servlet.http.HttpSession;
@@ -105,10 +106,9 @@ public class SetlistController {
                 model.addAttribute("setlist", setlist.get());
                 model.addAttribute("artistId", artistId);
                 List<Review> reviews = reviewService.getReviewsByShowIdAndArtistId(showId, artistId);
-                model.addAttribute("reviews", reviews);
-
+                model.addAttribute("review", reviews);
+                model.addAttribute("showId", showId);
                 model.addAttribute("artistName", artistService.getArtistById(artistId).get().getName());
-
                 return "SetlistArtist"; // setlist detail
 
             } else {

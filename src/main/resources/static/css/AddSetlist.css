@@ -19,18 +19,6 @@ body {
   align-items: center;
 }
 
-header.header {
-  background-color: #222;
-  text-align: center;
-  padding: 1.5rem 0;
-  border-bottom: 2px solid #444;
-}
-
-header.header h1 {
-  margin: 0;
-  font-size: 2rem;
-}
-
 main.form-container {
   width: 600px;
   height: auto;
