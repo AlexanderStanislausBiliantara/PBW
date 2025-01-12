@@ -331,6 +331,50 @@ div h3{
     background-color: #555555;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
     border-radius: 1rem;
+}
+
+.eachArtist > a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    width: 100%;
+    height: 100%;
     padding: 1rem;
+    border-radius: 1rem;   
+    box-sizing: border-box;
+}
+.eachArtist a:hover{
+    background-color: #333;
+}
+.eachSong{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.edit-setlist a{
+    text-decoration: none;
+    color: white;
+    background-color: #333;
+    border-radius: 1rem;
+    padding: 1rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
+}
+
+.edit-setlist a:hover{
+    cursor: pointer;
+    background-color: #282828;
+    border: 1px white solid;
+}
+
+.edit-setlist{
+    margin-top: 2rem;
+}
+
+.song{
+    background-color: #515151;
+    padding: 0.5rem;
+    padding-left: 3rem;
+    border-radius: 1rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
 }
 

@@ -13,7 +13,7 @@
     <div class="container">
         <div class="setlist-section">
             <h2>
-                Song list for 
+                Song list for
                 <span th:text="${artistName}"></span>
             </h2>
             <ol class="song">
@@ -21,6 +21,12 @@
                     <span th:text="${song.getTitle()}"></span>
                 </li>
             </ol>
+
+            <div class="edit-setlist">
+                <a th:href="@{/setlist/edit?show_id={showId}&artist_id={artistId}(showId=${showId}, artistId=${artistId})}">
+                    <span>Edit Setlist</span>
+                </a>
+            </div>
         </div>
     </div>
     <footer th:include="fragments/footer :: footer"></footer>

@@ -163,6 +163,21 @@ div h3{
     background-color: #ddd;
 }
 
+.logout {
+    background-color: rgb(115, 115, 115);
+    color: white;
+    padding: 1rem;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.logout:hover {
+    background-color: #4b4b4b;
+    border: 1px solid white;    
+}
+
 .search-icon {
     margin-right: 10px;
     width: 30px;

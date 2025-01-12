@@ -1,5 +1,5 @@
 <header class="header-section">
-   <nav>
+    <nav>
         <div class="left-section">
             <div class="home">
                 <a th:href="@{/}">
@@ -25,7 +25,8 @@
         </div>
         <div class="right-section">
             <a th:href="@{/setlist/add}" class="addSetlist">+Add Setlist</a>
-            <a th:href="@{/login}" class="login">Log in</a>
+            <a th:if="${session.username == null}" th:href="@{/login}" class="login">Log in</a>
+            <a th:if="${session.username != null}" th:href="@{/logout}" class="logout">Log out</a>
         </div>
-   </nav>
+    </nav>
 </header>
