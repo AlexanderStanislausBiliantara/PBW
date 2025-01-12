@@ -22,4 +22,6 @@ public interface ShowRepository {
     int countShows(String showTitle);
 
     int addShow(Show show);
+
+    List<Show> getShowsByArtistId(int artistId);
 }

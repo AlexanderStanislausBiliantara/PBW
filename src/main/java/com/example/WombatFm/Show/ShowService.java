@@ -41,6 +41,10 @@ public class ShowService {
         return showRepository.getShowArtists(showId);
     }
 
+    public List<Show> getShowsByArtistId(int artistId) {
+        return showRepository.getShowsByArtistId(artistId);
+    }
+
     public int addShow(Show show) throws IllegalArgumentException {
 
         if (show.getTitle() == null || show.getTitle().isEmpty()) {
