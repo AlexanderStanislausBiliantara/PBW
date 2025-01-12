@@ -12,10 +12,12 @@
     <div th:include="fragments/Header :: Header" id="headerDiv"></div>
     <div class="container">
         <div class="container-show-info">
-          <form th:action="@{/show/add}" method="get">
-            <h2>Shows</h2>
-            <button class="addshow">Add Show</button>
-        </form>
+          <div class="addShow">
+            <form th:action="@{/show/add}" method="get">
+              <h1>Shows</h1>
+              <button class="buttonAddShow">Add Show</button>
+            </form>
+          </div>
             <div class="show-info" th:each="show : ${allShow}">
                 <a th:href="@{/setlist/{showId}(showId=${show.showId})}">
                   <h2 th:text="${show.title}"></h2>

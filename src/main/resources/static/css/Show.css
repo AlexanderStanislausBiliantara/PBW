@@ -60,6 +60,26 @@ a{
     background-color: #2a2a2a;
 }
 
+.addShow{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonAddShow{
+    background-color: #2db93f;
+    color: white;
+    font-weight: bold;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.buttonAddShow:hover{
+    background-color: #1b7026;
+    cursor: pointer;
+    border: 1px solid white;
+}
 
 
 
