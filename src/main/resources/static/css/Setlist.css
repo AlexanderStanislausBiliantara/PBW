@@ -238,7 +238,33 @@ div h3{
     border-radius: 1rem;
 }
 
+form{
+    display: grid;
+    grid-template-columns: 1, 1;
+}
 
+.addshow{
+    display: grid;
+    grid-column: 2;
+    background-color: #4b4b4b;
+    color: white;
+    padding: 1rem;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    max-height: 15px;
+    max-width: 150px;
+    padding-top: 4px;
+    justify-content: center;
+    margin-left: 950px;
+    margin-top: 25px;
+}
+
+.addshow:hover {
+    background-color: #ddd;
+    cursor: pointer;
+}
 
 .artist-name {
     padding: 20px;
