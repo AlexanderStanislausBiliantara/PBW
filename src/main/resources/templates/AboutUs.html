@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="/css/footer.css" />
+  </head>
+  <body class="bg-[#121212] text-white min-h-screen">
+    <!-- <div class="min-h-screen justify-between flex flex-col"> -->
+    <div
+      th:include="fragments/HeaderTailwind :: Header"
+      id="headerDiv"
+      class="p-5"
+    ></div>
+    <div class="flex flex-col gap-12 my-12 mx-24 justify-center items-center">
+      <h1 class="text-4xl font-bold inline-block text-center">About Us</h1>
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 max-w-7xl gap-y-20 gap-x-12 p-20 items-center justify-items-center"
+      >
+        <img th:src="@{/Image Assets/about-us-img-1.jpg}" alt="" class="h-80" />
+        <h4 class="text-xl">
+          WombatFM is a free, wiki-like platform where music fans can collect
+          and share setlists from concerts around the world. It's a space for
+          the community to contribute and explore the songs that bands and
+          artists actually performed live. Whether you're reminiscing about past
+          shows, discovering rare setlists, or gearing up for an upcoming
+          concert, WombatFM has you covered!
+        </h4>
+
+        <h4 class="text-xl">
+          Anyone who loves sharing their knowledge about setlists is more than
+          welcome to contribute by adding or editing them. Whether it's
+          correcting a detail, filling in missing songs, or uploading an entire
+          setlist, your input helps keep the community informed and connected.
+          Join us in building the ultimate resource for live music enthusiasts
+          everywhere!
+        </h4>
+        <img th:src="@{/Image Assets/about-us-img-2.jpg}" alt="" class="h-80" />
+      </div>
+    </div>
+    <footer
+      th:include="fragments/footer :: footer"
+      class="bg-[#121212] p-6"
+    ></footer>
+    <!-- </div> -->
+  </body>
+</html>
