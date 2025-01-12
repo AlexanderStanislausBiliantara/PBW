@@ -63,6 +63,66 @@ body {
 .edit-setlist a{
     text-decoration: none;
     color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 1rem;
+}
+
+.setlist-artist-event > a:hover{
+    background-color: rgb(101, 101, 101);
+    border-radius: 1rem;
+}
+
+form{
+    display: grid;
+    grid-template-columns: 1, 1;
+}
+
+.addshow{
+    display: grid;
+    grid-column: 2;
+    background-color: #4b4b4b;
+    color: white;
+    padding: 1rem;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    max-height: 15px;
+    max-width: 150px;
+    padding-top: 4px;
+    justify-content: center;
+    margin-left: 950px;
+    margin-top: 25px;
+}
+
+.addshow:hover {
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+.artist-name {
+    padding: 20px;
+    text-align: left;
+}
+
+.artist-name h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+.container {
+    padding: 20px;
+    display: flex;
+}
+
+.container-show-info{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.show-info {
+    width: 15%;
     background-color: #333;
     border-radius: 1rem;
     padding: 1rem;
