@@ -48,7 +48,7 @@ public class UserController {
         return "Register";
     }
 
-    @PostMapping("/validate")
+    @PostMapping("/register")
     public String register(@Valid User user, BindingResult bindingResult) {
         if (!user.getConfirmPassword().equals(user.getPassword())) {
             bindingResult.rejectValue("confirmPassword", "PasswordMismatch", "Passwords doesn't match");
