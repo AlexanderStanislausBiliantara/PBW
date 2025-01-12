@@ -219,6 +219,33 @@ div h3{
     background-color: #ddd;
 }
 
+form{
+    display: grid;
+    grid-template-columns: 1, 1;
+}
+
+.addartist{
+    display: grid;
+    grid-column: 2;
+    background-color: #4b4b4b;
+    color: white;
+    padding: 1rem;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+    max-height: 15px;
+    max-width: 100px;
+    padding-top: 4px;
+    margin-left: 1000px;
+    margin-top: 25px;
+}
+
+.addartist:hover {
+    background-color: #ddd;
+    cursor: pointer;
+}
+
 .setlist-artist-event{
     padding-left: 1rem;
     display: flex;
