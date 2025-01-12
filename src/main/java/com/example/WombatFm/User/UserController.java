@@ -27,6 +27,7 @@ public class UserController {
     @Autowired
     private ReviewService reviewService;
 
+    @RequiredRole("admin")
     @GetMapping("/admin")
     public String adminDashboard(@RequestParam(name = "page", required = false, defaultValue = "1") int page,
             @RequestParam(name = "size", required = false, defaultValue = "25") int size, Model model) {
