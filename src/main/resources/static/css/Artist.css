@@ -289,6 +289,10 @@ form{
     padding: 10px;
     transition: transform 0.3s ease;
 }
+div a{
+    text-decoration: none;
+    color: white;
+}
 
 .artist-card img {
     width: 100px;

@@ -87,6 +87,7 @@ public class SetlistController {
                     model.addAttribute("userId", userId);
 
                     Review review = new Review();
+                    review.setSongs(null);
                     review.setSetlistId(setlist.get().getSetlistId());
                     review.setUserId(Integer.parseInt(userId));
                     model.addAttribute("review", review);

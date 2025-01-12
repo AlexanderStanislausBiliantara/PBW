@@ -1,105 +1,114 @@
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(180deg, #272727, #121212);
-    
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(180deg, #272727, #121212);
+
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .login-container {
-    max-width: 400px;
-    width: 100%;
-    background-color: #1c1c1c;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    text-align: center;
-    
+  max-width: 400px;
+  width: 100%;
+  background-color: #1c1c1c;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
 }
 
 .login-header img {
-    width: 100px;
-    margin-bottom: 20px;
+  width: 100px;
+  margin-bottom: 20px;
 }
 
 h2 {
-    margin-bottom: 30px;
-    font-size: 22px;
-    font-weight: bold;
+  margin-bottom: 30px;
+  font-size: 22px;
+  font-weight: bold;
 }
 
 .form-group {
-    text-align: left;
-    margin-bottom: 20px;
+  text-align: left;
+  margin-bottom: 20px;
 }
 
 .form-group label {
-    font-size: 14px;
-    color: white;
-    display: block;
-    margin-bottom: 5px;
+  font-size: 14px;
+  color: white;
+  display: block;
+  margin-bottom: 5px;
 }
 
 .form-group input {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    background-color: #333;
-    border: 1px solid #444;
-    border-radius: 4px;
-    color: white;
-    outline: none;
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  background-color: #333;
+  border: 1px solid #444;
+  border-radius: 4px;
+  color: white;
+  outline: none;
 }
 
 .form-group input:focus {
-    border-color: #ffffff;
-    background-color: #444;
+  border-color: #ffffff;
+  background-color: #444;
 }
 
 .btn-login {
-    width: 100%;
-    padding: 10px 15px;
-    background-color: white;
-    border: none;
-    border-radius: 20px;
-    color: black;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  width: 100%;
+  padding: 10px 15px;
+  background-color: white;
+  border: none;
+  border-radius: 20px;
+  color: black;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .btn-login:hover {
-    background-color: transparent;
-    color: white;
+  background-color: transparent;
+  color: white;
+  border: 1px solid #ffffff;
 }
 
 hr {
-    border: none;
-    height: 1px;
-    background-color: #333;
-    margin: 20px 0;
+  border: none;
+  height: 1px;
+  background-color: #333;
+  margin: 20px 0;
 }
 
 .btn-signup {
-    width: 100%;
-    padding: 10px 15px;
-    background-color: transparent;
-    border: 2px solid white;
-    border-radius: 20px;
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+  width: 100%;
+  padding: 10px 15px;
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 20px;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .btn-signup:hover {
-    background-color: white;
-    color: black;
+  background-color: white;
+  color: black;
+}
+
+.required {
+  color: red;
+}
+
+.error {
+  color: red;
+  font-size: medium;
 }

@@ -101,6 +101,20 @@ public class JdbcShowRepository implements ShowRepository {
     }
 
     @Override
+    public List<Show> getShowsByArtistId(int artistId) {
+        String sql = """
+                SELECT *
+                FROM
+                    shows JOIN setlists ON shows.show_id = setlists.show_id
+                    JOIN artists ON setlists.artist_id = artists.artist_id
+                WHERE
+                    artists.artist_id = ?   
+                """;
+        List<Show> results = jdbcTemplate.query(sql, this::mapRowToShow, artistId);
+        return results;
+    }
+
+    @Override
     public int addShow(Show show) {
         String sql = "INSERT INTO shows (title, venue, show_date, start_time, duration) VALUES (?, ?, ?, ?, ?) RETURNING show_id";
         KeyHolder keyHolder = new GeneratedKeyHolder();
