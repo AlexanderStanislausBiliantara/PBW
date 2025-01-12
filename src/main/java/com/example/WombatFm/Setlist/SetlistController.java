@@ -188,7 +188,7 @@ public class SetlistController {
             Model model) {
         // int showId = Integer.parseInt(showIdStr);
 
-        session.setAttribute("user_id", "7");
+        // session.setAttribute("user_id", "7");
         String userId = (String) session.getAttribute("user_id");
 
         if (userId == null)
@@ -250,6 +250,7 @@ public class SetlistController {
                 return "Setlist";
             }
         }
+
     }
 
     @RequiredRole({ "*" })
@@ -266,7 +267,7 @@ public class SetlistController {
         // review.getSongs().size()));
         System.out.println("1 songs : " + review.getSongs());
         // System.out.println("song : " + songStr);
-        session.setAttribute("user_id", "7");
+        // session.setAttribute("user_id", "7");
         String userId = (String) session.getAttribute("user_id");
 
         if (userId == null)
@@ -274,19 +275,19 @@ public class SetlistController {
         else {
 
             if (bindingResult.hasErrors()) {
-                System.out.println("binding error" + bindingResult.toString());
+                // System.out.println("binding error" + bindingResult.toString());
+
                 Optional<Setlist> setlist = setlistService.getNewestSetlist(showId, artistId);
                 if (setlist.isPresent()) {
-                    Review curReview = new Review();
 
-                    curReview.setSetlistId(setlist.get().getSetlistId());
+                    review.setSetlistId(setlist.get().getSetlistId());
 
-                    curReview.setSongs(setlist.get().getSongs());
+                    review.setSongs(setlist.get().getSongs());
 
-                    curReview.setUserId(Integer.parseInt(userId));
+                    review.setUserId(Integer.parseInt(userId));
                     model.addAttribute("showId", showId);
                     model.addAttribute("artistId", artistId);
-                    model.addAttribute("review", curReview);
+                    model.addAttribute("review", review);
                     model.addAttribute("setlist", setlist.get());
                     model.addAttribute("songs", songService.getAllSongs());
                 }
@@ -299,17 +300,15 @@ public class SetlistController {
             } catch (Exception e) {
                 Optional<Setlist> setlist = setlistService.getNewestSetlist(showId, artistId);
                 if (setlist.isPresent()) {
-                    Review curReview = new Review();
+                    review.setSetlistId(setlist.get().getSetlistId());
 
-                    curReview.setSetlistId(setlist.get().getSetlistId());
+                    review.setSongs(setlist.get().getSongs());
 
-                    curReview.setSongs(setlist.get().getSongs());
-
-                    curReview.setUserId(Integer.parseInt(userId));
+                    review.setUserId(Integer.parseInt(userId));
 
                     model.addAttribute("showId", showId);
                     model.addAttribute("artistId", artistId);
-                    model.addAttribute("review", curReview);
+                    model.addAttribute("review", review);
                     model.addAttribute("setlist", setlist.get());
                     model.addAttribute("songs", songService.getAllSongs());
 
