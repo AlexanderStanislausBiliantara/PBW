@@ -40,7 +40,11 @@ public class ArtistController {
     private static String UPLOAD_DIR = "src/main/resources/static/uploads/src/main/resources/static/uploads/";
 
     @GetMapping
-    public String showArtistPage() {
+    public String showArtistPage(Model model) {
+        List<Artist> artists = artistService.getAllArtists();
+
+        System.out.println("Artists: " + artists);
+        model.addAttribute("artists", artists);
         return "Artist";
     }
 
