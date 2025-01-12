@@ -22,7 +22,10 @@ public class JdbcReviewRepository implements ReviewRepository {
 
     @Override
     public List<Review> getAllReviews() {
-        String sql = "SELECT review_id, user_id, setlist_id, comment, created_at FROM reviews ";
+        String sql = "SELECT r.review_id AS review_id, r.user_id AS user_id, u.username AS username" +
+                "r.setlist_id AS setlist_id, r.comment AS comment, r.created_at AS created_at " +
+                "FROM reviews r" +
+                "JOIN users u ON u.user_id = r.user_id ";
         List<Review> results = jdbcTemplate.query(sql, this::mapRowToReview);
 
         return results;
@@ -30,7 +33,11 @@ public class JdbcReviewRepository implements ReviewRepository {
 
     @Override
     public Optional<Review> getReviewById(int reviewId) {
-        String sql = "SELECT review_id, user_id, setlist_id, comment, created_at FROM reviews WHERE review_id = ?";
+        String sql = "SELECT r.review_id AS review_id, r.user_id AS user_id, u.username AS username" +
+                "r.setlist_id AS setlist_id, r.comment AS comment, r.created_at AS created_at " +
+                "FROM reviews r" +
+                "JOIN users u ON u.user_id = r.user_id " +
+                "WHERE review_id = ?";
         List<Review> results = jdbcTemplate.query(sql, this::mapRowToReview, reviewId);
         if (results.isEmpty()) {
             return Optional.empty();
@@ -44,12 +51,13 @@ public class JdbcReviewRepository implements ReviewRepository {
     public List<Review> getReviewsByShowIdAndArtistId(int showId, int artistId) {
         // TODO: Optimize n+1 query prob
 
-        String sql = "SELECT r.review_id AS review_id, r.user_id AS user_id, " +
+        String sql = "SELECT r.review_id AS review_id, r.user_id AS user_id, u.username AS username, " +
                 "r.setlist_id AS setlist_id, r.comment AS comment, r.created_at AS created_at " +
                 "FROM shows s " +
                 "JOIN setlists se ON s.show_id = se.show_id " +
                 "JOIN artists a ON se.artist_id = a.artist_id " +
                 "JOIN reviews r ON se.setlist_id = r.setlist_id " +
+                "JOIN users u ON u.user_id = r.user_id " +
                 "WHERE s.show_id = ? AND se.artist_id = ?";
         List<Review> reviews = jdbcTemplate.query(sql, this::mapRowToReview, showId, artistId);
 
@@ -132,11 +140,14 @@ public class JdbcReviewRepository implements ReviewRepository {
     }
 
     private Review mapRowToReview(ResultSet resultSet, int rowNum) throws SQLException {
-        return new Review(
+        Review row = new Review(
                 resultSet.getInt("review_id"),
                 resultSet.getInt("user_id"),
+                resultSet.getString("username"),
                 resultSet.getInt("setlist_id"),
                 resultSet.getString("comment"), resultSet.getDate("created_at"));
+
+        return row;
     }
 
     private Song mapRowToSong(ResultSet resultSet, int rowNum) throws SQLException {

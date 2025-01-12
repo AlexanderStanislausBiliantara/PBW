@@ -24,6 +24,9 @@ public class Review {
     private int userId;
 
     @Nonnull
+    private String username;
+
+    @Nonnull
     @Min(value = 1, message = "setlistId is required")
     private int setlistId;
 
