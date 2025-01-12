@@ -235,3 +235,13 @@ form {
 .add-comment button:hover{
     background-color: #15811e;
 }
+
+#username{
+    font-weight: bolder;
+    font-size: large;
+}
+
+#eachComment{
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
