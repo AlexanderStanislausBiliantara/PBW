@@ -106,7 +106,7 @@ public class SetlistController {
                 model.addAttribute("setlist", setlist.get());
                 model.addAttribute("artistId", artistId);
                 List<Review> reviews = reviewService.getReviewsByShowIdAndArtistId(showId, artistId);
-                model.addAttribute("review", reviews);
+                model.addAttribute("reviews", reviews);
                 model.addAttribute("showId", showId);
                 model.addAttribute("artistName", artistService.getArtistById(artistId).get().getName());
                 return "SetlistArtist"; // setlist detail

@@ -27,8 +27,27 @@
                     <span>Edit Setlist</span>
                 </a>
             </div>
+
+            <div class="comment">
+                <h4>Recent Comments:</h4>
+                <ul id="commentsList">
+                    <li th:each="review, iterStat : ${reviews}" th:text="${review.comment}" 
+                        th:classappend="${iterStat.index > 4} ? 'hidden' : ''"></li>
+                </ul>
+                <span id="seeMoreComments" class="seeMoreComments">See More</span>
+            </div>
+            
         </div>
     </div>
     <footer th:include="fragments/footer :: footer"></footer>
+
+    <script>
+        document.getElementById("seeMoreComments").addEventListener("click", function() {
+            const hiddenComments = document.querySelectorAll("#commentsList .hidden");
+            hiddenComments.forEach(comment => comment.classList.remove("hidden"));
+
+            this.style.display = "none";
+        });
+    </script>
   </body>
 </html>
