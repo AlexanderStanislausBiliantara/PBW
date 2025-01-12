@@ -11,14 +11,16 @@
 <body>
     <div th:include="fragments/Header :: Header" id="headerDiv"></div>
     <div class="container">
-        <div class="container-show-info">
-            <div class="show-info" th:each="show : ${allShow}">
-                <center><h2 th:text="${show.title}"></h2></center>
-                <p><strong>Location:</strong> <span th:text="${show.venue}"><span></p>
-                <p><strong>Date:</strong> <span th:text="${show.showDate}"><span></p>
-                <p><strong>Duration:</strong> <span th:text="${show.duration} + ' minutes'"><span></p>
-                <p><strong>Start Time:</strong> <span th:text="${show.startTime}"><span></p>
-            </div>
+        <div class="setlist-section">
+            <h2>
+                Song list for 
+                <span th:text="${artistName}"></span>
+            </h2>
+            <ol class="song">
+                <li class="eachSong" th:each="song : ${setlist.songs}">
+                    <span th:text="${song.getTitle()}"></span>
+                </li>
+            </ol>
         </div>
     </div>
     <footer th:include="fragments/footer :: footer"></footer>

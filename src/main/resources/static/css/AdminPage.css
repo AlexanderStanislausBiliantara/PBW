@@ -1,0 +1,181 @@
+/* Scroll-Bar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+  
+::-webkit-scrollbar-track {
+    background: #121212; 
+}
+   
+::-webkit-scrollbar-thumb {
+    background: #2a2a2a; 
+}
+  
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+/*Body*/
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+}
+
+.table-user{
+    display: flex;
+    height: auto;
+    width: 100vw;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h2{
+    color: white;
+}
+
+th,td{
+    color: white;
+    padding: 1rem;
+    border: 1px solid white;
+}
+
+table{
+    color: white;
+    border-collapse: collapse;
+    margin-left: 3rem;
+}
+
+td.save{
+    border: 0px;
+}
+
+.status-dropdown {
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+select{
+    padding: 0.5rem;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    background-color: rgb(154, 151, 151);
+}
+
+select:hover{
+    cursor: pointer;
+}
+
+option{
+    font-weight: bold;
+}
+
+.svimg{
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.page-number{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+ul, li, a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+}
+
+ul{
+    gap: 1rem;
+}
+
+li > a{
+    background-color: gray;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+li > a:hover{
+    background-color: rgb(81, 81, 81);
+    cursor: pointer;
+}
+
+.search-username{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+#userName{
+    width: 25%;
+    border-radius: 1rem;
+    background-color: rgb(86, 86, 86);
+    padding: 1rem;
+    color: white;
+}
+
+button{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background-color: lightgreen;
+}
+
+.svButton:hover{
+    cursor: pointer;
+    background-color: green;
+}
+
+.pagination-container {
+    display: flex; 
+    list-style: none; 
+    padding: 0; 
+    margin: 0; 
+    justify-content: center; 
+    gap: 10px; 
+}
+
+.pagination-container li {
+    display: inline-block; 
+}
+
+.pagination-container li a {
+    text-decoration: none; 
+    padding: 8px 12px; 
+    border: 1px solid #ddd; 
+    border-radius: 4px; 
+    color: #333; 
+    background-color: #f9f9f9; 
+    transition: background-color 0.3s ease;
+}
+
+.pagination-container li a:hover {
+    background-color: #007bff; 
+    color: white; 
+}
+
+.pagination-container li a.disabled {
+    pointer-events: none; 
+    background-color: #e9ecef; 
+    color: #6c757d; 
+}
+
+.pagination-container li a.active {
+    background-color: #007bff; 
+    color: white;
+    border-color: #007bff;
+}
+
+
+

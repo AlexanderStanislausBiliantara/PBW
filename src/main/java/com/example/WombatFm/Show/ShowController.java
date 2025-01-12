@@ -8,8 +8,10 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 
@@ -56,24 +58,25 @@ public class ShowController {
         List<Show> foundShows = this.showService.getShowsByTitle(query, page, size);
         int pageCount = this.showService.getPageCount(query, size);
 
-        model.addAttribute("currentPage", page);
-        model.addAttribute("pageCount", pageCount);
+        model.addAttribute("currentPageForUser", page);
+        model.addAttribute("userPageCount", pageCount);
         model.addAttribute("shows", foundShows);
         model.addAttribute("query", query);
         return "search_for_show";
     }
 
     @GetMapping("/filtered_search")
-    public String searchFilteredShow(@RequestParam("query") String query, @RequestParam("start_date") Date startDate,
-            @RequestParam("end_date") Date endDate,
+    public String searchFilteredShow(@RequestParam(name = "query") String query, @RequestParam(name = "start_date") Date startDate,
+            @RequestParam(name = "end_date") Date endDate,
             @RequestParam(name = "page", required = false, defaultValue = "1") int page,
             @RequestParam(name = "size", required = false, defaultValue = "8") int size, Model model) {
         List<Show> foundShows = this.showService.getFilteredShowWithPagination(query, startDate, endDate, page, size);
         int pageCount = this.showService.getFilteredPageCount(query, startDate, endDate, size);
 
-        model.addAttribute("currentPage", page);
-        model.addAttribute("pageCount", pageCount);
-        model.addAttribute("results", foundShows);
+        model.addAttribute("currentPageForUser", page);
+        model.addAttribute("userPageCount", pageCount);
+        model.addAttribute("shows", foundShows);
+        model.addAttribute("query", query);
         return "search_for_show";
     }
 

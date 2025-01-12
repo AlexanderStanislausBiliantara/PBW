@@ -5,14 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add New Setlist</title>
   <link rel="stylesheet" th:href="@{/css/AddSetlist.css}">
+  <link rel="stylesheet" th:href="@{/css/header.css}">
+  <link rel="stylesheet" th:href="@{/css/footer.css}">
   <script th:src="@{/js/script.js}" defer></script>
 </head>
 <body>
-  <header class="header">
-    <a th:href="@{/}">
-      <img id="logo" th:src="@{/Image Assets/Podcast_or_Radio_Logo-removebg-preview.png}">
-    </a>
-  </header>
+  <div th:include="fragments/Header :: Header"></div>
 
   <div id="container">
     <main class="form-container">
@@ -24,7 +22,7 @@
         <div class="form-group">
           <label for="show">Show</label>
           <div class="input-group">
-            <input type="text" id="tempShowTitle">
+            <input type="text" id="tempShowTitle" disabled>
             <input th:field="*{showId}" hidden th:value="*{showId}" type="text" id="show" name="show" placeholder="Search show" readonly required>
             <button type="button" class="search-button" id="search-show">Search</button>
           </div>
@@ -33,7 +31,7 @@
         <div class="form-group">
           <label for="artist">Artist</label>
           <div class="input-group">
-            <input type="text" id="tempArtistName">
+            <input type="text" id="tempArtistName" disabled>
             <input th:field="*{artistId}" hidden th:value="*{artistId}" type="text" id="artist" name="artist" placeholder="Search artist" readonly required>
             <button type="button" class="search-button" id="search-artist">Search</button>
           </div>
@@ -69,35 +67,6 @@
     </div>
     
   </div>
-  <footer>
-    <img th:src="@{/Image Assets/Podcast_or_Radio_Logo-removebg-preview.png}" alt="">
-    <p class="companydescription">Wombat.fm is a dynamic platform that connects music fans with setlists from concerts past and future. Dive into the live music experience by exploring the songs your favorite artists performed and stay in the loop for upcoming shows. Wombat.fm is where every concert memory comes alive and every future performance awaits!</p>
-    <hr>
-
-      <div class="footer-container">
-        <div class="address-container">
-          <h4>Address</h4>
-          <span class="alamat">Jl. Ciumbuleuit No.94,Hegarmanah, </span>
-          <span>Kec. Cidadap, Kota Bandung, Jawa Barat 40141</span>
-          <span class="telepon">(022) 203 2655; (022) 204 2004</span>
-        </div>
-
-        <div class="information">
-          <h4>Information</h4>
-          <a href="">About Us</a>
-        </div>
-
-        <div class="socialmedia">
-            <h4>Find us</h4>
-            <div class="image-container">
-                <a href="#"><img th:src="@{/Image Assets/icons8-instagram-32.png}" alt=""></a>
-                <a href="#"><img th:src="@{/Image Assets/icons8-facebook-32 (1).png}" alt=""></a>
-                <a href="#"><img th:src="@{/Image Assets/icons8-twitterx-32.png}" alt=""></a>
-            </div>
-          </div>
-    </div>
-
-      <p>© 2024 Property of Kelompok 2 Pemerograman Berbasis Web Kelas B</p>
-    </footer>
+  <footer th:include="fragments/footer :: footer"></footer>
 </body>
 </html>

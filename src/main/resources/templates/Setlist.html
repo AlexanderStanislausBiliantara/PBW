@@ -6,81 +6,24 @@
     <title>Setlist Page</title>
     <link rel="stylesheet" th:href="@{/css/Setlist.css}">
     <link rel="stylesheet" th:href="@{/css/header.css}">
-    <style>
-        #headerDiv{
-            height: 10vh;
-            display: flex;
-            padding: 20px;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
 </head>
 <body>
     <div th:include="fragments/Header :: Header" id="headerDiv"></div>
     <div class="container">
         <div class="song-section">
-            <h2 th:text="${title}"></h2>
-            <h2>Song List</h2>
-            <ol class="song-list" th:each="song, iterStat  : ${songs}">
-                <li>
-                    <a th:text="${iterStat.index+1} + '. ' + ${song.getTitle()}"><!-- song order -->
-                    </a>
+            <h2>
+                Artist list on show 
+                <span th:text="${showName}"></span>
+                at <span th:text="${showDate}"></span>
+            </h2>
+            <ol class="artist">
+                <li class="eachArtist" th:each="artist  : ${artists}">
+                    <a th:text="${artist.name}" th:href="@{/setlist/{id}?artist_id={artist}(id=${showId}, artist=${artist.artistId})}"></a>
                 </li>
             </ol>
         </div>
-        <div class="container-setlist-info">
-            <div class="setlist-info" th:each="setlist : ${topTenSetlists}">
-                <center><h2>Setlist Details</h2></center>
-                <p><strong>Location:</strong> <span th:text="${setlist.show.venue}"><span></p>
-                <p><strong>Date:</strong> <span th:text="${setlist.show.showDate}"><span></p>
-                <p><strong>Duration:</strong> <span th:text="${setlist.show.duration} + ' minutes'"><span></p>
-                <p><strong>Start Time:</strong> <span th:text="${setlist.show.startTime}"><span></p>
-            </div>
-        </div>
     </div>
-    <footer>
-      <img
-        th:src="@{/Image Assets/Podcast_or_Radio_Logo-removebg-preview.png}"
-        alt=""
-      />
-      <p class="companydescription">
-        Wombat.fm is a dynamic platform that connects music fans with setlists
-        from concerts past and future. Dive into the live music experience by
-        exploring the songs your favorite artists performed and stay in the loop
-        for upcoming shows. Wombat.fm is where every concert memory comes alive
-        and every future performance awaits!
-      </p>
-      <hr />
-
-      <div class="footer-container">
-        <div class="address-container">
-          <h4>Address</h4>
-          <span class="alamat">Jl. Ciumbuleuit No.94,Hegarmanah, </span>
-          <span>Kec. Cidadap, Kota Bandung, Jawa Barat 40141</span>
-          <span class="telepon">(022) 203 2655; (022) 204 2004</span>
-        </div>
-
-        <div class="information">
-          <h4>Information</h4>
-          <a href="">About Us</a>
-        </div>
-
-        <div class="socialmedia">
-          <h4>Find us</h4>
-          <div class="image-container">
-            <a href="#"
-              ><img th:src="@{/Image Assets/icons8-instagram-32.png}" alt=""
-            /></a>
-            <a href="#"
-              ><img th:src="@{/Image Assets/icons8-facebook-32 (1).png}" alt=""
-            /></a>
-            <a href="#"
-              ><img th:src="@{/Image Assets/icons8-twitterx-32.png}" alt=""
-            /></a>
-          </div>
-        </div>
-      </div>
-
-      <p>© 2024 Property of Kelompok 2 Pemerograman Berbasis Web Kelas B</p>
-    </footer>
+    <footer th:include="fragments/footer :: footer"></footer>
   </body>
 </html>

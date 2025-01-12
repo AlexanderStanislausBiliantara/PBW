@@ -40,7 +40,7 @@ public class SetlistService {
         setlistRepository.createSetlist(showId, artistId);
     }
 
-    public List<Setlist> getTopTenSetlists() {
-        return setlistRepository.getTopTenSetlists();
+    public List<Setlist> getTopSetlists(int limit) {
+        return setlistRepository.getTopSetlists(limit);
     }
 }
