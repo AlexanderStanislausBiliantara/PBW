@@ -189,7 +189,7 @@ public class SetlistController {
         // int showId = Integer.parseInt(showIdStr);
 
         // session.setAttribute("user_id", "7");
-        String userId = (String) session.getAttribute("user_id");
+        String userId = (String) session.getAttribute("user_id").toString();
 
         if (userId == null)
             return "redirect:/login";
