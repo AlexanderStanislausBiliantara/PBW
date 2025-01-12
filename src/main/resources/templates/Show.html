@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Setlist Page</title>
-    <link rel="stylesheet" th:href="@{/css/Setlist.css}">
+    <title>Show Page</title>
+    <link rel="stylesheet" th:href="@{/css/Show.css}">
     <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/footer.css}">
 </head>
@@ -17,12 +17,14 @@
             <button class="addshow">Add Show</button>
         </form>
             <div class="show-info" th:each="show : ${allShow}">
-                <center><h2 th:text="${show.title}"></h2></center>
-                <p><strong>Location:</strong> <span th:text="${show.venue}"><span></p>
-                <p><strong>Date:</strong> <span th:text="${show.showDate}"><span></p>
-                <p><strong>Duration:</strong> <span th:text="${show.duration} + ' minutes'"><span></p>
-                <p><strong>Start Time:</strong> <span th:text="${show.startTime}"><span></p>
-            </div>
+                <a th:href="@{/setlist/{showId}(showId=${show.showId})}">
+                  <h2 th:text="${show.title}"></h2>
+                  <p><strong>Location:</strong> <span th:text="${show.venue}"><span></p>
+                  <p><strong>Date:</strong> <span th:text="${show.showDate}"><span></p>
+                  <p><strong>Duration:</strong> <span th:text="${show.duration} + ' minutes'"><span></p>
+                  <p><strong>Start Time:</strong> <span th:text="${show.startTime}"><span></p>
+                </a>
+              </div>
         </div>
     </div>
     <footer th:include="fragments/footer :: footer"></footer>
