@@ -63,6 +63,7 @@ body {
 .edit-setlist a{
     text-decoration: none;
     color: white;
+    background-color: #1fc12c;
     text-decoration: none;
     font-size: 1.2rem;
     padding: 1rem;
@@ -131,7 +132,7 @@ form{
 
 .edit-setlist a:hover{
     cursor: pointer;
-    background-color: #282828;
+    background-color: rgb(31, 76, 26);
     border: 1px white solid;
 }
 
@@ -163,8 +164,31 @@ form{
     background-color: #333;
 }
 
-
 .eachSong{
     margin-top: 1rem;
 }
 
+.comment{
+    width: auto;
+    margin-top: 3rem;
+    background-color: #333;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.seeMoreComments{
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color:rgb(168, 97, 4);
+    color: black;
+    margin-bottom: 2rem;
+}
+
+.seeMoreComments:hover{
+    cursor: pointer;
+    background-color: rgb(131, 75, 2);
+}
+
+.hidden{
+    display: none;
+}
