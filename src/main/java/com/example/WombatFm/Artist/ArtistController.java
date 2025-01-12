@@ -44,7 +44,7 @@ public class ArtistController {
         List<Artist> artists = artistService.getAllArtists();
 
         System.out.println("Artists: " + artists);
-        model.addAttribute("artists", artists);
+        model.addAttribute("artists", artists.subList(0, 18));
         return "Artist";
     }
 
@@ -58,6 +58,7 @@ public class ArtistController {
             artist = foundArtist.get();
 
             model.addAttribute("artistphoto", artist.getPhotoUrl());
+            model.addAttribute("artistname", artist.getName());
             model.addAttribute("artistshows", artistShows);
             return "ArtistPage";
         }else{
