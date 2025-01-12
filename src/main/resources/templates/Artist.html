@@ -18,52 +18,11 @@
         </form>
         <div class="artist-grid">
 
-            <div class="artist-card">
-                <img th:src="@{/Image Assets/kanye west.webp}" alt="Kanye West">
-                <p class="artist-name">Kanye West</p>
-                <p class="artist-role">Artist</p>
-            </div>
-
-            <div class="artist-card">
-                <img th:src="@{/Image Assets/New_Jeans.width-500.format-webp.webp}" alt="New Jeans">
-                <p class="artist-name">New Jeans</p>
-                <p class="artist-role">Artist</p>
-            </div>
-
-            <div class="artist-card">
-                <img th:src="@{/Image Assets/aespa.jpg}" alt="aespa">
-                <p class="artist-name">aespa</p>
-                <p class="artist-role">Artist</p>
-            </div>
-
-            <div class="artist-card">
-                <img th:src="@{/Image Assets/michael buble.jpg}" alt="Michael Buble">
-                <p class="artist-name">Michael Buble</p>
-                <p class="artist-role">Artist</p>
-            </div>
-
-            <div class="artist-card">
-                <img th:src="@{/Image Assets/laufey.jpg}" alt="Laufey">
-                <p class="artist-name">Laufey</p>
-                <p class="artist-role">Artist</p>
-            </div>
-
-            <div class="artist-card">
-                <img th:src="@{/Image Assets/ed sheeran.webp}" alt="Ed Sheeran">
-                <p class="artist-name">Ed Sheeran</p>
-                <p class="artist-role">Artist</p>
-            </div>
-
-            <div class="artist-card">
-                <img th:src="@{/Image Assets/ed sheeran.webp}" alt="Ed Sheeran">
-                <p class="artist-name">Ed Sheeran</p>
-                <p class="artist-role">Artist</p>
-            </div>
-
-            <div class="artist-card">
-                <img th:src="@{/Image Assets/ed sheeran.webp}" alt="Ed Sheeran">
-                <p class="artist-name">Ed Sheeran</p>
-                <p class="artist-role">Artist</p>
+            <div class="artist-card" th:each="artists : ${artists}" href="/artist/page">
+                <a th:href="@{/artist/{id}(id=${artists.artistId})}">
+                    <img th:src="@{${artists.photoUrl}}" th:alt="${artists.name}">
+                    <p class="artist-name" th:text="${artists.name}">Artist Name</p>
+                </a>
             </div>
         </div>
     </div>

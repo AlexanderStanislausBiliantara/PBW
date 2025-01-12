@@ -15,10 +15,10 @@
         <div class="artist-header">
             <div class="artist-info">
                 <div class="artist-image-container">
-                    <img th:src="@{/Image Assets/New_Jeans.width-500.format-webp.webp}" alt="New Jeans" class="artist-image">
+                    <img th:src="@{${artist.get().photoUrl}}" th:alt="${artist.get().name}">
                 </div>
                 <div class="artist-details">
-                    <h1>New Jeans</h1>
+                    <h1 th:text="${artist.get().name}">New Jeans</h1>
                 </div>
             </div>
         </div>
@@ -31,9 +31,9 @@
                 <ul class="setlist">
                     <li>
                         <div class="date">
-                            <span class="month">NOV</span>
-                            <span class="day">23</span>
-                            <span class="year">2024</span>
+                            <span class="month" th:text="${show.getDateFormatted().split(' ')[1]}">NOV</span>
+                            <span class="day" th:text="${show.getDateFormatted().split(' ')[0]}">23</span>
+                            <span class="year" th:text="${show.getDateFormatted().split(' ')[2]}">2024</span>
                         </div>
                         <div class="info">
                             <a href="#" class="artist"><span>NewJeans</span>: <span>Lollapalooza</span></a>
@@ -43,7 +43,7 @@
                 </ul>
             </div>
 
-            <!-- Upcoming Event -->
+            <!-- Upcoming Event
             <div class="event-container">
                 <h2>Upcoming Events</h2>
                 <ul class="setlist">
@@ -59,7 +59,7 @@
                         </div>
                     </li>
                 </ul>
-            </div>
+            </div> -->
         </div>
     </div>
     <footer th:include="fragments/footer :: footer"></footer>
