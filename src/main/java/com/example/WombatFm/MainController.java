@@ -28,4 +28,9 @@ public class MainController {
     public String searchShow() {
         return "Main";
     }
+
+    @GetMapping("/about-us")
+    public String AboutUs() {
+        return "AboutUs";
+    }
 }

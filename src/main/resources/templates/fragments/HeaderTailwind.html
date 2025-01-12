@@ -3,12 +3,14 @@
     class="flex justify-between items-center py-4 px-8 bg-[#121212] text-white gap-4"
   >
     <div class="flex items-center gap-4">
-      <img
-        th:src="@{/Image Assets/Podcast_or_Radio_Logo-removebg-preview.png}"
-        alt="Logo"
-        class="w-12 h-12 mr-4"
-      />
-      <h3 class="text-white font-bold">Wombat.fm</h3>
+      <a href="/" class="flex items-center justify-center">
+        <img
+          th:src="@{/Image Assets/Podcast_or_Radio_Logo-removebg-preview.png}"
+          alt="Logo"
+          class="w-12 h-12 mr-4"
+        />
+        <h3 class="text-white font-bold">Wombat.fm</h3></a
+      >
       <div class="flex gap-4">
         <a
           th:href="@{/setlist}"
@@ -52,14 +54,35 @@
     </div>
     <div class="ml-auto flex justify-end items-center gap-4">
       <a
-        th:href="@{/setlist/add}"
-        class="bg-white text-black py-2 px-4 rounded-lg font-bold hover:bg-gray-300"
-        >+Add Setlist</a
+        th:if="${session.role == 'admin'}"
+        th:href="@{/admin}"
+        class="bg-white text-black py-3 px-4 rounded-2xl font-semibold hover:bg-gray-300"
+        >Admin Page</a
       >
       <a
+        th:if="${session.username != null}"
+        th:href="@{/setlist/add}"
+        class="bg-white text-black py-3 px-4 rounded-2xl font-semibold hover:bg-gray-300"
+        >+Add Setlist</a
+      >
+
+      <a
+        th:if="${session.username == null}"
         th:href="@{/login}"
-        class="bg-white text-black py-2 px-4 rounded-lg font-bold hover:bg-gray-300"
+        class="bg-white text-black py-3 px-4 rounded-2xl font-semibold hover:bg-gray-300"
         >Log in</a
+      >
+      <a
+        th:if="${session.username == null}"
+        th:href="@{/register}"
+        class="bg-white text-black py-3 px-4 rounded-2xl font-semibold hover:bg-gray-300"
+        >Register</a
+      >
+      <a
+        th:if="${session.username != null}"
+        th:href="@{/logout}"
+        class="bg-white text-black py-3 px-4 rounded-2xl font-semibold hover:bg-gray-300"
+        >Log out</a
       >
     </div>
   </div>

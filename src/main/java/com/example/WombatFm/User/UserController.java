@@ -27,6 +27,7 @@ public class UserController {
     @Autowired
     private ReviewService reviewService;
 
+    @RequiredRole("admin")
     @GetMapping("/admin")
     public String adminDashboard(@RequestParam(name = "page", required = false, defaultValue = "1") int page,
             @RequestParam(name = "size", required = false, defaultValue = "25") int size, Model model) {
@@ -48,10 +49,10 @@ public class UserController {
         return "Register";
     }
 
-    @PostMapping("/validate")
+    @PostMapping("/register")
     public String register(@Valid User user, BindingResult bindingResult) {
         if (!user.getConfirmPassword().equals(user.getPassword())) {
-            bindingResult.rejectValue("confirmpassword", "PasswordMismatch", "Passwords do not match");
+            bindingResult.rejectValue("confirmPassword", "PasswordMismatch", "Passwords doesn't match");
         }
 
         if (bindingResult.hasErrors()) {

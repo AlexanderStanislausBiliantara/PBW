@@ -106,7 +106,7 @@ public class SetlistController {
                 model.addAttribute("setlist", setlist.get());
                 model.addAttribute("artistId", artistId);
                 List<Review> reviews = reviewService.getReviewsByShowIdAndArtistId(showId, artistId);
-                model.addAttribute("review", reviews);
+                model.addAttribute("reviews", reviews);
                 model.addAttribute("showId", showId);
                 model.addAttribute("artistName", artistService.getArtistById(artistId).get().getName());
                 return "SetlistArtist"; // setlist detail
@@ -189,7 +189,7 @@ public class SetlistController {
         // int showId = Integer.parseInt(showIdStr);
 
         // session.setAttribute("user_id", "7");
-        String userId = (String) session.getAttribute("user_id");
+        String userId = (String) session.getAttribute("user_id").toString();
 
         if (userId == null)
             return "redirect:/login";

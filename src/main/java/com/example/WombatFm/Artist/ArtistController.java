@@ -22,8 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.WombatFm.RequiredRole;
-import com.example.WombatFm.Setlist.Setlist;
-import com.example.WombatFm.Setlist.SetlistService;
 import com.example.WombatFm.Show.Show;
 import com.example.WombatFm.Show.ShowService;
 
@@ -39,9 +37,6 @@ public class ArtistController {
     @Autowired
     private ShowService showService;
 
-    @Autowired
-    private SetlistService setlistService;
-
     private static String UPLOAD_DIR = "src/main/resources/static/uploads/src/main/resources/static/uploads/";
 
     @GetMapping
@@ -55,12 +50,20 @@ public class ArtistController {
 
     @GetMapping("/{id}")
     public String getArtist(@PathVariable int id, Model model) {
-        Optional<Artist> artist = artistService.getArtistById(id);
-        List<Setlist> setlists = setlistService.getTopSetlists(5); // Pastikan method ini ada di SetlistService
-        model.addAttribute("artist", artist);
-        model.addAttribute("setlists", setlistService);
-        model.addAttribute("shows", setlistService);
-        return "ArtistPage";
+        Optional<Artist> foundArtist = artistService.getArtistById(id);
+
+        if(foundArtist.isPresent()) {
+            List<Show> artistShows = showService.getShowsByArtistId(id);
+            Artist artist = new Artist();
+            artist = foundArtist.get();
+
+            model.addAttribute("artistphoto", artist.getPhotoUrl());
+            model.addAttribute("artistshows", artistShows);
+            return "ArtistPage";
+        }else{
+            model.addAttribute("error", "Setlist not found");
+            return "404";
+        }
     }
 
     @RequiredRole({ "*" })

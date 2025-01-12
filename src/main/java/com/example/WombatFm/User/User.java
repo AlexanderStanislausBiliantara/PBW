@@ -1,5 +1,6 @@
 package com.example.WombatFm.User;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -10,16 +11,13 @@ import lombok.Data;
 public class User {
     Integer userId;
 
-    @NotNull
-    @Size(min=4, max=30)
+    @Size(min = 4, max = 30, message = "Username must be at least 4 characters")
     String username;
 
-    @NotNull
-    @Size(min=4, max=60)
+    @Size(min = 4, max = 60, message = "Password must be at least 4 characters")
     String password;
 
-    @NotNull
-    @Size(min=4, max=60)
+    @NotBlank(message = "Confirm password must be filled")
     String confirmPassword;
 
     String role;
