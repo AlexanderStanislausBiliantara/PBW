@@ -24,8 +24,8 @@ body {
 }
 
 .container{
-    padding-left: 5rem;
-    padding-right: 5rem;
+    margin-left: 5rem;
+    margin-right: 5rem;
 }
 
 .artist{
@@ -67,6 +67,7 @@ body {
     text-decoration: none;
     font-size: 1.2rem;
     padding: 1rem;
+    border-radius: 1rem;
 }
 
 .setlist-artist-event > a:hover{
@@ -114,7 +115,6 @@ form{
 
 .container {
     padding: 20px;
-    display: flex;
 }
 
 .container-show-info{
@@ -191,4 +191,35 @@ form{
 
 .hidden{
     display: none;
+}
+
+.comment-section{
+    margin-left: auto;
+}
+
+.add-comment{
+    display: flex;
+    flex-direction: column;
+    margin-top: 3rem;
+    gap: 1rem;
+    background-color: #333;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+#comment{
+    background-color: #515151;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    color: white;
+}
+
+.add-comment button{
+    background-color: #1fc12c;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+}
+
+.add-comment button:hover{
+    background-color: #15811e;
 }
