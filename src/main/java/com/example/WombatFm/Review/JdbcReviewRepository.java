@@ -85,8 +85,8 @@ public class JdbcReviewRepository implements ReviewRepository {
         }, keyHolder);
 
         int reviewId = keyHolder.getKey().intValue();
-        ;
-        if (review.getSongs() != null && review.getSongs().size() > 0) {
+
+        if (review.getSongs() != null) {
 
             String sqlSetlistVersion = "INSERT INTO setlist_version " +
                     "(setlist_id, review_id) VALUES (?, ?) RETURNING version_id";
@@ -113,8 +113,8 @@ public class JdbcReviewRepository implements ReviewRepository {
     @Override
     public List<ReviewData> getReviewsPerDay() {
         String sql = """
-                SELECT DATE(created_at) AS day, COUNT(*) AS reviewCount 
-                FROM reviews 
+                SELECT DATE(created_at) AS day, COUNT(*) AS reviewCount
+                FROM reviews
                 GROUP BY DATE(created_at)
                 ORDER BY day DESC
                 """;
@@ -150,7 +150,7 @@ public class JdbcReviewRepository implements ReviewRepository {
 
     private ReviewData mapRowToReviewData(ResultSet resultSet, int rowNum) throws SQLException {
         return new ReviewData(
-            resultSet.getDate("day"), 
-            resultSet.getInt("reviewcount"));
+                resultSet.getDate("day"),
+                resultSet.getInt("reviewcount"));
     }
 }
