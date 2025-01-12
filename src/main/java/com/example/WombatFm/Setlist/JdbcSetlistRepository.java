@@ -65,16 +65,16 @@ public class JdbcSetlistRepository implements SetlistRepository {
     }
 
     @Override
-    public List<Setlist> getTopTenSetlists() {
+    public List<Setlist> getTopSetlists(int limit) {
         String sql = """
                 SELECT setlists.setlist_id, artists.name, artists.artist_id, artists.artist_photo_url,
                 shows.title, shows.venue, shows.show_id, shows.show_date,
                 shows.start_time, shows.duration
                 FROM setlists JOIN shows ON setlists.show_id = shows.show_id
                 JOIN artists ON setlists.artist_id = artists.artist_id
-                ORDER BY setlist_id DESC FETCH FIRST 10 ROWS ONLY
+                ORDER BY setlist_id DESC FETCH FIRST ? ROWS ONLY
                 """;
-        return jdbcTemplate.query(sql, this::mapRowToSetlist);
+        return jdbcTemplate.query(sql, this::mapRowToSetlist, limit);
     }
 
     @Override

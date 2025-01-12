@@ -141,7 +141,7 @@ public class SetlistController {
 
     @GetMapping("")
     public String showSetlist(Model model) {
-        List<Setlist> topTenSetlists = this.setlistService.getTopTenSetlists();
+        List<Setlist> topTenSetlists = this.setlistService.getTopSetlists(10);
         model.addAttribute("topTenSetlists", topTenSetlists);
         return "TopSetlists";
     }

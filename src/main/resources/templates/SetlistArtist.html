@@ -17,7 +17,7 @@
                 <span th:text="${artistName}"></span>
             </h2>
             <ol class="song">
-                <li class="eachSong" th:each="song  : ${setlist.songs}">
+                <li class="eachSong" th:each="song : ${setlist.songs}">
                     <span th:text="${song.getTitle()}"></span>
                 </li>
             </ol>
