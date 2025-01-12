@@ -1,31 +1,76 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/Login.css}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/css/Login.css}" />
     <title>Register - Wombat.fm</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="login-container">
-        <div class="login-header">
-            <img th:src="@{/Image Assets/Podcast_or_Radio_Logo-removebg-preview.png}" alt="Wombat.fm Logo">
+      <div class="login-header">
+        <img
+          th:src="@{/Image Assets/Podcast_or_Radio_Logo-removebg-preview.png}"
+          alt="Wombat.fm Logo"
+        />
+      </div>
+      <h2>Register to Wombat.fm</h2>
+      <form th:action="@{/validate}" th:object="${user}" method="POST">
+        <div class="form-group">
+          <label for="username">Username <span class="required">*</span></label>
+          <input
+            required
+            name="username"
+            type="text"
+            id="username"
+            placeholder="Username"
+            th:field="*{username}"
+          />
+          <div
+            th:if="${#fields.hasErrors('username')}"
+            th:errors="*{username}"
+            class="error"
+          ></div>
         </div>
-        <h2>Register to Wombat.fm</h2>
-        <form th:action="@{/validate}" th:object="${user}" method="POST">
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input name="username" type="text" id="username" placeholder="Username" />
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input name="password" type="password" class="password" placeholder="Password" />
-            </div>
-            <div class="form-group">
-                <label for="password">Confirm Password</label>
-                <input name="confirmPassword" type="password" class="password" placeholder="Confirm Password" />
-            </div>
-            <button type="submit" class="btn-signup">Sign up for Wombat.fm</button>
-        </form>
+        <div class="form-group">
+          <label for="password">Password <span class="required">*</span></label>
+          <input
+            required
+            type="password"
+            name="password"
+            class="password"
+            placeholder="Password"
+            th:field="*{password}"
+          />
+          <div
+            th:if="${#fields.hasErrors('password')}"
+            th:errors="*{password}"
+            class="error"
+          ></div>
+        </div>
+        <div class="form-group">
+          <label for="password"
+            >Confirm Password <span class="required">*</span></label
+          >
+          <input
+            required
+            type="password"
+            name="confirmPassword"
+            class="password"
+            placeholder="Confirm Password"
+            th:field="*{confirmPassword}"
+          />
+          <div
+            th:if="${#fields.hasErrors('confirmPassword')}"
+            th:errors="*{confirmPassword}"
+            class="error"
+          ></div>
+        </div>
+        <button type="submit" class="btn-signup">Sign up for Wombat.fm</button>
+      </form>
+      <p>Already have an account?</p>
+      <a th:href="@{/login}"
+        ><button type="button" class="btn-login">Login</button></a
+      >
     </div>
-</body>
+  </body>
 </html>

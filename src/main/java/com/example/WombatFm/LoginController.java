@@ -12,6 +12,7 @@ import com.example.WombatFm.User.User;
 import com.example.WombatFm.User.UserService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 public class LoginController {
@@ -19,7 +20,7 @@ public class LoginController {
     private UserService userService;
 
     @GetMapping("/login")
-    public String showHomepage(User user, HttpSession session) {
+    public String loginPage(LoginForm loginForm, HttpSession session) {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             return "Login";
@@ -28,7 +29,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute("loginForm") LoginForm loginForm, BindingResult bindingResult,
+    public String login(@Valid LoginForm loginForm, BindingResult bindingResult,
             HttpSession session) {
         if (bindingResult.hasErrors()) {
             return "Login";
