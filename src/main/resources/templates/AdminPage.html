@@ -5,13 +5,14 @@
     <link rel="stylesheet" th:href="@{/css/AdminPage.css}" />
     <title>Wombat FM</title>
     <link rel="stylesheet" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/footer.css}" />
     <script th:src="@{/js/admin.js}" defer></script>
     <style>
-      #headerDiv {
+      /* #headerDiv {
         height: 15vh;
         display: flex;
         padding: 20px;
-      }
+      } */
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -19,7 +20,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   </head>
   <body>
-    <div th:include="fragments/Header :: Header" id="headerDiv"></div>
+    <div
+      th:include="fragments/HeaderTailwind :: Header"
+      id="headerDiv"
+      class="p-5"
+    ></div>
 
     <div class="chart-dashboard py-6 px-32">
       <h2 class="font-semibold text-3xl text-center">Review Chart</h2>

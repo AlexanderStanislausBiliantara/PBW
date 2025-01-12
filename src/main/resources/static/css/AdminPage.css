@@ -556,3 +556,47 @@ li > a:hover {
   cursor: pointer;
   background-color: green;
 }
+.svButton:hover {
+  cursor: pointer;
+  background-color: green;
+}
+
+.pagination-container {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pagination-container li {
+  display: inline-block;
+}
+
+.pagination-container li a {
+  text-decoration: none;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #333;
+  background-color: #f9f9f9;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-container li a:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.pagination-container li a.disabled {
+  pointer-events: none;
+  background-color: #e9ecef;
+  color: #6c757d;
+}
+
+.pagination-container li a.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}

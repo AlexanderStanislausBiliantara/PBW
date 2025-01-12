@@ -29,7 +29,7 @@ public class ArtistController {
     @Autowired
     private ArtistService artistService;
 
-    private static String UPLOAD_DIR = "src/main/resources/static/uploads/";
+    private static String UPLOAD_DIR = "src/main/resources/static/uploads/src/main/resources/static/uploads/";
 
     @GetMapping
     public String showArtistPage() {

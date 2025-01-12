@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Show {
-    @Min(value = 1)
+
     private int showId;
 
     @NotBlank
@@ -51,7 +51,7 @@ public class Show {
     }
 
     public String getDateFormatted() {
-        SimpleDateFormat formatter = new SimpleDateFormat("d MMMM yyyy", Locale.ENGLISH);
+        SimpleDateFormat formatter = new SimpleDateFormat("d MMM yyyy", Locale.ENGLISH);
         return formatter.format(showDate);
     }
 }

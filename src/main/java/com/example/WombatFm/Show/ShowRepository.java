@@ -11,13 +11,15 @@ public interface ShowRepository {
 
     Optional<Show> getShowById(int showId);
 
-    List<Show> getShowsByTitle(String showTitle);
+    List<Show> getShowsByTitle(String showTitle, int limit, int offset);
 
     List<Show> getFilteredShows(String showTitle, Date startDate, Date endDate, int limit, int offset);
 
     List<Artist> getShowArtists(int showId);
 
-    int countShows(String showTitle, Date startDate, Date endDate);
+    int countFilteredShows(String showTitle, Date startDate, Date endDate);
+
+    int countShows(String showTitle);
 
     int addShow(Show show);
 }

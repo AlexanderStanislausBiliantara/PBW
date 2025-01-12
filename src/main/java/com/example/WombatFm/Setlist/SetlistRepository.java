@@ -12,5 +12,5 @@ public interface SetlistRepository {
 
     void createSetlist(int showId, int artistId);
 
-    List<Setlist> getTopTenSetlists();
+    List<Setlist> getTopSetlists(int limit);
 }

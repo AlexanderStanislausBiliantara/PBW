@@ -4,7 +4,7 @@
       <!-- Previous Button -->
       <!-- <li>
                 <a
-                    th:href="@{/showUsers(page=${currentPageForUser} - 1)}"
+                    th:href="@{/admin(page=${currentPageForUser} - 1)}"
                     aria-label="Previous"
                     th:class="${currentPageForUser} == 1 ? 'disabled' : null"
                 >
@@ -14,7 +14,7 @@
 
       <!-- Page Numbers -->
       <li th:if="${currentPageForUser >= 3}">
-        <a th:href="@{/showUsers#manage-user(page=1)}">1</a>
+        <a th:href="@{/admin#manage-user(page=1)}">1</a>
       </li>
       <span th:if="${currentPageForUser > 3}">...</span>
 
@@ -24,7 +24,7 @@
                                 T(java.lang.Math).min(userPageCount, currentPageForUser + 1))}"
       >
         <a
-          th:href="@{/showUsers#manage-user(page=${i})}"
+          th:href="@{/admin#manage-user(page=${i})}"
           th:text="${i}"
           th:class="${currentPageForUser} == ${i} ? 'bg-white text-black' : null"
         ></a>
@@ -33,7 +33,7 @@
       <span th:if="${currentPageForUser} < ${userPageCount - 2}">...</span>
       <li th:if="${currentPageForUser} <= ${userPageCount - 2}">
         <a
-          th:href="@{/showUsers#manage-user(page=${userPageCount})}"
+          th:href="@{/admin#manage-user(page=${userPageCount})}"
           th:text="${userPageCount}"
         ></a>
       </li>
@@ -41,7 +41,7 @@
       <!-- Next Button -->
       <!-- <li>
                 <a
-                    th:href="@{/showUsers(page=${currentPageForUser} + 1)}"
+                    th:href="@{/admin(page=${currentPageForUser} + 1)}"
                     aria-label="Next"
                     th:class="${currentPageForUser} == ${userPageCount} ? 'disabled' : null"
                 >

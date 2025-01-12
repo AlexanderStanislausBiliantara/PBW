@@ -1,31 +1,64 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/search_for_show.css}">
-    <title>Document</title>
-</head>
-<body>
-    <header class="header-section">
-        <div class="left-section">
-            <img src="Image Assets/Podcast_or_Radio_Logo-removebg-preview.png" alt="Logo" class="logo">
-            <h3>Wombat.fm</h3>
-            <a th:href="@{/setlist}">Setlist</a>
-            <a th:href="@{/artist}">Artist</a>
-            <a th:href="@{/event}">Event</a>
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" th:href="@{/css/search_for_show.css}">
+        <link rel="stylesheet" th:href="@{/css/header.css}">
+        <link rel="stylesheet" th:href="@{/css/footer.css}">
+        <title>Search Results</title>
+    </head>
+    <body>
+        
+        <div th:include="fragments/Header :: Header" id="headerDiv"></div>
+        
+        <div class="body-section">
+            <form th:action="@{/show/filtered_search}" method="get">
+                <div class="filter-container">
+                    <input name="query" type="hidden" th:value="${query}">
+                    <label for="start-date">Start Date:</label>
+                    <input name="start_date" type="date" id="start-date" placeholder="mm/dd/yyyy" required>
+                    <label for="end-date">End Date:</label>
+                    <input name="end_date" type="date" id="end-date" placeholder="mm/dd/yyyy" required>
+                    <button type="submit">Apply Filter</button>
+                </div>
+            </form>
+                <div class="show-container">
+                    <h2>Search Results For "<span th:text="${query}"></span>"</h2>
+                    <ul class="show">
+                        <li class="eachShow" th:each="show : ${shows}">
+                            <a th:href="@{/setlist/{id}(id=${show.showId})}">
+                                <div class="title">
+                                    <h3 th:text="${show.title}"></h3>
+                                </div>
+                                <div class="date">
+                                    <span>
+                                        Concert date: 
+                                        <span class="show-date" th:text="${show.getDateFormatted()}"></span>
+                                    </span>
+                                </div>
+                                <div class="info">
+                                    <p>
+                                        Starts at: 
+                                        <span class="show-startTime" th:text="${show.startTime}"></span>
+                                    </p>
+                                    <p>
+                                        Location: 
+                                        <span class="show-venue" th:text="${show.venue}"></span>
+                                    </p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
         </div>
-        <div class="search-section">
-            <div class="search-bar">
-                <form th:action="@{/show/search}" method="GET">
-                    <input type="text" name="query" th:value="${query}" placeholder="What do you want to play?">
-                    <button type="submit" class="search-bar-submit-button">
-                        <img src="Image Assets/icons8-search-50.png" class="search-icon">
-                    </button>
-                </form>
-            </div>
-        </div>
-        <div class="right-section">
-            <a href="#" class="addSetlist">+Add Setlist</a>
-            <a href="#" class="login">Log in</a>
-        </div>
-    </header>
+
+        <div class="page-number">
+            <div th:include="fragments/paginationSearch :: pagination"></div>
+        </div> 
+
+    
+        <footer th:include="fragments/footer :: footer"></footer>
+    </body>
+    </html>

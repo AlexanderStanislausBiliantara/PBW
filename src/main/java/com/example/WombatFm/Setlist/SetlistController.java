@@ -107,7 +107,9 @@ public class SetlistController {
                 List<Review> reviews = reviewService.getReviewsByShowIdAndArtistId(showId, artistId);
                 model.addAttribute("reviews", reviews);
 
-                return "Setlist"; // setlist detail
+                model.addAttribute("artistName", artistService.getArtistById(artistId).get().getName());
+
+                return "SetlistArtist"; // setlist detail
 
             } else {
                 // Setlist not found
@@ -117,6 +119,10 @@ public class SetlistController {
         } else {
             // artist on Setlist
             List<Artist> artists = showService.getShowArtists(showId);
+            Show getShow = showService.getShowById(showId).get();
+            model.addAttribute("showName", getShow.getTitle());
+            model.addAttribute("showDate", getShow.getDateFormatted().toString());
+            model.addAttribute("showId", showId);
             model.addAttribute("artists", artists);
             return "Setlist"; // show artist
         }
@@ -133,11 +139,11 @@ public class SetlistController {
         return "AddSetlist";
     }
 
-    @GetMapping
+    @GetMapping("")
     public String showSetlist(Model model) {
-        List<Setlist> topTenSetlists = this.setlistService.getTopTenSetlists();
+        List<Setlist> topTenSetlists = this.setlistService.getTopSetlists(10);
         model.addAttribute("topTenSetlists", topTenSetlists);
-        return "Setlist";
+        return "TopSetlists";
     }
 
     @RequiredRole({ "*" })
