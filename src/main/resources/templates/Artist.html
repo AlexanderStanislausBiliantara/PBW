@@ -12,7 +12,10 @@
     <div th:include="fragments/Header :: Header" id="headerDiv"></div>
 
     <div class="artist-menu">
-        <h2>Artists</h2>
+        <form th:action="@{/artist/add}" method="get">
+            <h2>Artists</h2>
+            <button class="addartist">Add Artist</button>
+        </form>
         <div class="artist-grid">
 
             <div class="artist-card">
