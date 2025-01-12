@@ -3,16 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/EditSetlist.css">
+    <link rel="stylesheet" th:href="@{/css/EditSetlist.css}">
     <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/footer.css}">
     <title>Edit Setlist</title>
   </head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
   <body>
     <div class="body-section">
       <div th:include="fragments/Header :: Header" id="headerDiv"></div>
       <div class="container">
-          <h1>Edit Setlist <span th:text="${setlist.getSetlistId()}"></span></h1>
+          <h1>Edit Setlist <span th:text="${setlist.show.title}"></span></h1>
           <form
           action="#"
           method="post"
@@ -44,7 +45,7 @@
           </div>
 
           <div>
-              <label for="comment">Comment:</label>
+              <label for="comment"><span class="comment-required">*</span>Comment:</label>
               <input
               type="text"
               id="comment"
@@ -59,15 +60,15 @@
           </div>
 
           <div>
-              <label for="songs">Song:</label>
-              <select id="songs" name="songs">
+            <label for="songs">Song:</label>
+            <select id="songs" name="songs">
               <option
-                  th:each="song : ${songs}"
-                  th:value="${song.songId}"
-                  th:text="${song.title}"
+                th:each="song : ${songs}"
+                th:value="${song.songId}"
+                th:text="${song.title}"
               ></option>
-              </select>
-              <button type="button" onclick="addSong(event)">Add Song</button>
+            </select>
+              <button class="buttonAddSong" type="button" onclick="addSong(event)"><span>Add Song</span></button>
               <div th:if="${#fields.hasErrors('songs')}" th:errors="*{songs}"></div>
           </div>
 
@@ -76,7 +77,7 @@
               <ol id="songList"></ol>
           </div>
 
-          <div>
+          <div class="prev-setlist">
               <div
               th:if="${review.getSongs() != null && review.getSongs().size() > 0}"
               >
@@ -89,18 +90,19 @@
               </ol>
               </div>
               <p
-              th:unless="${review.getSongs() != null && review.getSongs().size() > 0}"
+              th:unless="${review.getSongs() != null && review.songs.size() > 0}"
               >
               There's no song on current version
               </p>
           </div>
 
-          <button type="submit">Add Revision</button>
+          <button class="finalButton" type="submit">Add Revision</button>
           </form>
       </div>
   </div>
 
   <script th:inline="javascript">
+    
     const songList = /*[[${review.getSongs()}]]*/ [];
     console.log(songList);
     const songSelect = document.getElementById("songs");
@@ -143,6 +145,7 @@
 
         const removeButton = document.createElement("button");
         removeButton.textContent = "Remove";
+        removeButton.classList = "removeButton";
         removeButton.onclick = removeSong;
 
         li.appendChild(removeButton);

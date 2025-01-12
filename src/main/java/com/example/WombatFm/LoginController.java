@@ -21,23 +21,26 @@ public class LoginController {
     @GetMapping("/login")
     public String showHomepage(User user, HttpSession session) {
         String username = (String) session.getAttribute("username");
-        if(username == null) {
+        if (username == null) {
             return "Login";
         }
         return "redirect:";
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute("loginForm") LoginForm loginForm, BindingResult bindingResult ,HttpSession session) {
-        if(bindingResult.hasErrors()) {
+    public String login(@ModelAttribute("loginForm") LoginForm loginForm, BindingResult bindingResult,
+            HttpSession session) {
+        if (bindingResult.hasErrors()) {
             return "Login";
         }
-        
+
         User user = userService.login(loginForm.getUsername(), loginForm.getPassword());
-        if(user == null) {
+        if (user == null) {
             bindingResult.reject("userNotFound", "Please check username or password");
             return "Login";
         }
+
+        session.setAttribute("user_id", "" + user.getUserId());
 
         session.setAttribute("username", user.getUsername());
         session.setAttribute("role", user.getRole());

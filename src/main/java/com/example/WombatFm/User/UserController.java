@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.WombatFm.RequiredRole;
+import com.example.WombatFm.Review.Review;
+import com.example.WombatFm.Review.ReviewService;
 
 import jakarta.validation.Valid;
 
@@ -22,20 +24,24 @@ import jakarta.validation.Valid;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private ReviewService reviewService;
 
-    @GetMapping("/showUsers")
-    public String showUsers(@RequestParam(name = "page", required = false, defaultValue = "1") int page,
+    @GetMapping("/admin")
+    public String adminDashboard(@RequestParam(name = "page", required = false, defaultValue = "1") int page,
             @RequestParam(name = "size", required = false, defaultValue = "25") int size, Model model) {
         List<User> users = userService.getUsersWithPagination(page, size);
         int pageCount = this.userService.getUserPageCount(size);
 
+        List<Review> reviews = reviewService.getAllReviews();
+
         model.addAttribute("currentPageForUser", page);
         model.addAttribute("userPageCount", pageCount);
         model.addAttribute("foundUsers", users);
+
+        model.addAttribute("reviews", reviews);
         return "AdminPage";
-    } 
-
-
+    }
 
     @GetMapping("/register")
     public String registerView(User user) {
@@ -63,22 +69,23 @@ public class UserController {
 
     @RequiredRole({ "*" })
     @PostMapping("/saveUserRole")
-    public String saveUserRole(@RequestParam(name = "uid") int userId, @RequestParam(name = "user_role") String role, @RequestParam(name = "user_activity") boolean isActive) {
+    public String saveUserRole(@RequestParam(name = "uid") int userId, @RequestParam(name = "user_role") String role,
+            @RequestParam(name = "user_activity") boolean isActive) {
         this.userService.updateUserRow(userId, role, isActive);
         return "redirect:/showUsers";
     }
 
-
     // @PostMapping("/saveRoles")
-    // public String saveRoles(@RequestParam(name = "roles") Map<String, String> roles) {
-    //     Map<Integer, String> userRoles = new HashMap<>();
+    // public String saveRoles(@RequestParam(name = "roles") Map<String, String>
+    // roles) {
+    // Map<Integer, String> userRoles = new HashMap<>();
 
-    //     for(Map.Entry<String, String> entry : roles.entrySet()) {
-    //         int userId = Integer.parseInt(entry.getKey());
-    //         String role = entry.getValue();
-    //         userRoles.put(userId, role);
-    //     }
-    //     userService.updateMultipleUserRole(userRoles);
-    //     return "redirect:/showUsers";
+    // for(Map.Entry<String, String> entry : roles.entrySet()) {
+    // int userId = Integer.parseInt(entry.getKey());
+    // String role = entry.getValue();
+    // userRoles.put(userId, role);
+    // }
+    // userService.updateMultipleUserRole(userRoles);
+    // return "redirect:/showUsers";
     // }
 }
