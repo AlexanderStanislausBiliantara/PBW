@@ -4,49 +4,80 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Setlist Page</title>
-    <link rel="stylesheet" th:href="@{/css/Setlist.css}">
-    <link rel="stylesheet" th:href="@{/css/header.css}">
-    <link rel="stylesheet" th:href="@{/css/footer.css}">
-</head>
-<body>
+    <link rel="stylesheet" th:href="@{/css/Setlist.css}" />
+    <link rel="stylesheet" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/footer.css}" />
+  </head>
+  <body>
     <div th:include="fragments/Header :: Header" id="headerDiv"></div>
     <div class="container">
-        <div class="setlist-section">
-            <h2>
-                Song list for
-                <span th:text="${artistName}"></span>
-            </h2>
-            <ol class="song">
-                <li class="eachSong" th:each="song : ${setlist.songs}">
-                    <span th:text="${song.getTitle()}"></span>
-                </li>
-            </ol>
-
-            <div class="edit-setlist">
-                <a th:href="@{/setlist/edit?show_id={showId}&artist_id={artistId}(showId=${showId}, artistId=${artistId})}">
-                    <span>Edit Setlist</span>
-                </a>
-            </div>
-
-            <div class="comment">
-                <h4>Recent Comments:</h4>
-                <ul id="commentsList">
-                    <li th:each="review, iterStat : ${reviews}" th:text="${review.comment}" 
-                        th:classappend="${iterStat.index > 4} ? 'hidden' : ''"></li>
-                </ul>
-                <span id="seeMoreComments" class="seeMoreComments">See More</span>
-            </div>
-            
+      <div class="setlist-section">
+        <h2>
+          Song list for
+          <span th:text="${artistName}"></span>
+        </h2>
+        <ol th:if="${setlist.songs.size() > 0}" class="song">
+          <li class="eachSong" th:each="song : ${setlist.songs}">
+            <span th:text="${song.getTitle()}"></span>
+          </li>
+        </ol>
+        <div th:unless="${setlist.songs.size() > 0}" class="no-song">
+          <h3>
+            We don't have enough recent data about this artist to show an
+            average setlist.
+          </h3>
+          <div>
+            But you can still add the set times & let everyone know you'll be
+            there!
+          </div>
+          <div>
+            If you know the scheduled start time for this artist or the time the
+            venue's doors open, you could add set times.
+          </div>
+          <div>
+            Otherwise, just check back later to view, add or edit the setlist.
+          </div>
         </div>
+
+        <div class="edit-setlist">
+          <a
+            th:if="${session.username != null}"
+            th:href="@{/setlist/edit?show_id={showId}&artist_id={artistId}(showId=${showId}, artistId=${artistId})}"
+          >
+            <span>Edit Setlist</span>
+          </a>
+          <a th:unless="${session.username != null}" th:href="@{/login}">
+            <span>Edit Setlist</span>
+          </a>
+        </div>
+
+        <div class="comment">
+          <h4>Recent Comments:</h4>
+          <ul id="commentsList">
+            <li
+              th:each="review, iterStat : ${reviews}"
+              th:text="${review.comment}"
+              th:classappend="${iterStat.index > 4} ? 'hidden' : ''"
+            ></li>
+          </ul>
+          <span id="seeMoreComments" class="seeMoreComments">See More</span>
+        </div>
+      </div>
     </div>
     <footer th:include="fragments/footer :: footer"></footer>
 
     <script>
-        document.getElementById("seeMoreComments").addEventListener("click", function() {
-            const hiddenComments = document.querySelectorAll("#commentsList .hidden");
-            hiddenComments.forEach(comment => comment.classList.remove("hidden"));
+      document
+        .getElementById("seeMoreComments")
+        .addEventListener("click", function () {
+          const hiddenComments = document.querySelectorAll(
+            "#commentsList .hidden"
+          );
+          hiddenComments.forEach((comment) =>
+            comment.classList.remove("hidden")
+          );
 
-            this.style.display = "none";
+          this.style.display = "none";
         });
     </script>
   </body>
