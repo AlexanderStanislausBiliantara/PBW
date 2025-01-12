@@ -23,9 +23,9 @@ body {
   background: #555;
 }
 
-.container {
-  padding-left: 5rem;
-  padding-right: 5rem;
+.container{
+    margin-left: 5rem;
+    margin-right: 5rem;
 }
 
 .artist {
@@ -60,14 +60,14 @@ body {
   margin-bottom: 1rem;
 }
 
-.edit-setlist a {
-  text-decoration: none;
-  color: white;
-  background-color: #1fc12c;
-  text-decoration: none;
-  font-size: 1.2rem;
-  padding: 1rem;
-  border-radius: 20px;
+.edit-setlist a{
+    text-decoration: none;
+    color: white;
+    background-color: #1fc12c;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 1rem;
+    border-radius: 1rem;
 }
 
 .setlist-artist-event > a:hover {
@@ -114,8 +114,7 @@ form {
 }
 
 .container {
-  padding: 60px;
-  display: flex;
+    padding: 20px;
 }
 
 .container-show-info {
@@ -204,4 +203,45 @@ form {
 
 .hidden {
   display: none;
+}
+
+.comment-section{
+    margin-left: auto;
+}
+
+.add-comment{
+    display: flex;
+    flex-direction: column;
+    margin-top: 3rem;
+    gap: 1rem;
+    background-color: #333;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+#comment{
+    background-color: #515151;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    color: white;
+}
+
+.add-comment button{
+    background-color: #1fc12c;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+}
+
+.add-comment button:hover{
+    background-color: #15811e;
+}
+
+#username{
+    font-weight: bolder;
+    font-size: large;
+}
+
+#eachComment{
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }

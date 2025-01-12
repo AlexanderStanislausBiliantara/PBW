@@ -51,18 +51,72 @@
           </a>
         </div>
 
-        <div class="comment">
-          <h4>Recent Comments:</h4>
-          <ul id="commentsList">
-            <li
-              th:each="review, iterStat : ${reviews}"
-              th:text="${review.comment}"
-              th:classappend="${iterStat.index > 4} ? 'hidden' : ''"
-            ></li>
-          </ul>
-          <span id="seeMoreComments" class="seeMoreComments">See More</span>
+            <div class="add-comment">
+                <form
+                    action="#"
+                    method="post"
+                    th:action="@{/setlist/{showId}(showId=${showId}, artist_id=${artistId})}"
+                    th:object="${review}"
+                    >
+                    <div th:if="${#fields.hasGlobalErrors()}" class="error">
+                        <p th:text="${#fields.globalErrors()[0]}"></p>
+                    </div>
+
+                    <div>
+                        <input
+                        type="number"
+                        id="setlistId"
+                        name="setlistId"
+                        th:value="${setlist.getSetlistId()}"
+                        th:field="*{setlistId}"
+                        hidden
+                        />
+                        <input
+                        type="number"
+                        id="userId"
+                        name="userId"
+                        th:field="*{userId}"
+                        hidden
+                        />
+                    </div>
+
+                    <div>
+                        <label for="comment">Comment:</label>
+                        <input
+                        type="text"
+                        id="comment"
+                        name="comment"
+                        th:field="*{comment}"
+                        placeholder="Comment"
+                        />
+                        <div
+                        th:if="${#fields.hasErrors('comment')}"
+                        th:errors="*{comment}"
+                        ></div>
+                    </div>
+                    <button type="submit">Add Review</button>
+                </form>
+            </div>
         </div>
-      </div>
+        <div class="comment-section">
+            <div class="comment">
+                <h4>Recent Comments:</h4>
+                <ul id="commentsList">
+                    <li id="eachComment" th:each="review, iterStat : ${reviews}"  
+                        th:classappend="${iterStat.index > 4} ? 'hidden' : ''">
+                        <span id="username" th:text="${review.username}"></span>: 
+                        <span th:text="${review.comment}"></span><br>
+                        <span th:if="${review.getSongs().size()>0}">Changed songs:</span> 
+                        <ul th:each="song : ${review.getSongs()}">
+                            <li th:text="${song.getTitle()}">
+                            </li>
+                        </ul>
+                        <hr>
+                    </li>
+                </ul>
+                <span id="seeMoreComments" class="seeMoreComments">See More</span>
+            </div>
+        </div>
     </div>
     <footer th:include="fragments/footer :: footer"></footer>
 
