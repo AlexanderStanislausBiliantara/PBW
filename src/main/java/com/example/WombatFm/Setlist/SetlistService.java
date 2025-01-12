@@ -14,14 +14,14 @@ public class SetlistService {
     @Autowired
     private SetlistRepository setlistRepository;
 
-    public Optional<Setlist> getNewestSetlist(int showId, int artist_id) {
+    public Optional<Setlist> getNewestSetlist(int showId, int artistId) {
         // Optional<Show> showDetails = showRepository.getShowById(showId);
         // Optional<Artist> artistDetails = artistRepository.getArtistById(artist_id);
 
-        Optional<Setlist> setlistDetails = setlistRepository.getSetlistByShowIdAndArtistId(showId, artist_id);
+        Optional<Setlist> setlistDetails = setlistRepository.getSetlistByShowIdAndArtistId(showId, artistId);
         // if (showDetails.isPresent() && artistDetails.isPresent()) {
         if (setlistDetails.isPresent()) {
-            List<Song> songs = setlistRepository.getNewestSetlist(showId);
+            List<Song> songs = setlistRepository.getNewestSetlist(showId, artistId);
             // Setlist setlist = new Setlist(0, showDetails.get(), artistDetails.get(),
             // songs);
             Setlist setlist = setlistDetails.get();
